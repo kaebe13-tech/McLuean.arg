@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Sailor Piece Wiki — The community guide to fruits, swords & seas</title>
+  <meta name="description" content="The community-curated guide to Sailor Piece. Browse Devil Fruits, swords, fighting styles, races, islands, and bosses with interactive details and search." />
+  <meta name="theme-color" content="#04091a" />
+  <meta property="og:title" content="Sailor Piece Wiki" />
+  <meta property="og:description" content="Community-curated guide to fruits, swords, islands and bosses of Sailor Piece." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='28' fill='%23f5c542'/><text x='50%25' y='56%25' text-anchor='middle' font-family='Georgia' font-weight='700' font-size='28' fill='%231a1206'>SP</text></svg>" />
+</head>
+<body data-page="home">
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div>
+          <span class="eyebrow">Community Codex · Fan-made</span>
+          <h1>Chart your course through the <span class="accent">Sailor Piece</span> seas.</h1>
+          <p class="lead">The unofficial wiki for fruits, blades, fighting styles, islands, and the bosses guarding their drops. Open data. Edit anything on GitHub.</p>
+          <div class="hero-cta">
+            <a href="fruits.html" class="btn btn-primary">Explore Devil Fruits →</a>
+            <button class="btn btn-ghost" id="hero-search">Press <kbd style="font-family:var(--font-mono);padding:2px 6px;border-radius:4px;background:rgba(255,255,255,0.06);font-size:0.78rem;margin:0 4px">/</kbd> to search</button>
+          </div>
+          <div class="stats">
+            <div class="stat"><div class="num" id="stat-fruits">—</div><div class="label">Fruits</div></div>
+            <div class="stat"><div class="num" id="stat-swords">—</div><div class="label">Swords</div></div>
+            <div class="stat"><div class="num" id="stat-bosses">—</div><div class="label">Bosses</div></div>
+            <div class="stat"><div class="num" id="stat-islands">—</div><div class="label">Islands</div></div>
+          </div>
+        </div>
+        <div class="hero-art">
+          <div class="compass">
+            <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="100" cy="100" r="92"/>
+              <circle cx="100" cy="100" r="68" stroke-opacity="0.5"/>
+              <circle cx="100" cy="100" r="48" stroke-opacity="0.4"/>
+              <circle cx="100" cy="100" r="6" fill="currentColor"/>
+              <path d="M100 18 L108 100 L100 182 L92 100 Z" fill="currentColor" fill-opacity="0.85"/>
+              <path d="M18 100 L100 108 L182 100 L100 92 Z" fill="currentColor" fill-opacity="0.4"/>
+              <text x="100" y="14" text-anchor="middle" font-family="Cinzel" font-size="11" fill="currentColor" stroke="none">N</text>
+              <text x="100" y="194" text-anchor="middle" font-family="Cinzel" font-size="11" fill="currentColor" stroke="none">S</text>
+              <text x="14" y="104" text-anchor="middle" font-family="Cinzel" font-size="11" fill="currentColor" stroke="none">W</text>
+              <text x="186" y="104" text-anchor="middle" font-family="Cinzel" font-size="11" fill="currentColor" stroke="none">E</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Featured Fruits</span>
+            <h2>The fruits everyone's hunting</h2>
+          </div>
+          <a href="fruits.html" class="btn btn-ghost">Browse all fruits →</a>
+        </div>
+        <div class="grid grid-3" id="home-fruits"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">World Bosses</span>
+            <h2>Drops worth chasing</h2>
+          </div>
+          <a href="bosses.html" class="btn btn-ghost">Full boss list →</a>
+        </div>
+        <div class="grid grid-3" id="home-bosses"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Where to go</span>
+            <h2>Pick your next port</h2>
+          </div>
+        </div>
+        <div class="grid">
+          <a class="card" href="fruits.html"><div class="card-head"><div class="card-icon" style="color:var(--coral)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 2c1 4 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 1-5 0 0 2 1 4 5"/></svg></div><div class="card-head-text"><div class="card-title">Devil Fruits</div><div class="card-sub">12 entries · Logia / Paramecia / Zoan</div></div></div><p class="card-desc">Movesets, awakenings, prices, and combo tips for every fruit in the seas.</p></a>
+          <a class="card" href="swords.html"><div class="card-head"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 17.5 3 6V3h3l11.5 11.5M13 19l3-3M16 16l4 4"/></svg></div><div class="card-head-text"><div class="card-title">Swords</div><div class="card-sub">8 entries · Common → Mythical</div></div></div><p class="card-desc">Acquisition, drop chances, and signature moves for every blade worth carrying.</p></a>
+          <a class="card" href="styles.html"><div class="card-head"><div class="card-icon" style="color:var(--cyan)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11V8a2 2 0 0 1 4 0v3M9 11V6a2 2 0 0 1 4 0v5M13 11V7a2 2 0 0 1 4 0v6c0 4-2 7-6 7H8c-2 0-3-1-3-3v-3"/></svg></div><div class="card-head-text"><div class="card-title">Fighting Styles</div><div class="card-sub">6 entries · Including Haki</div></div></div><p class="card-desc">Where to learn each style, the cost, and the moves you'll get for the price.</p></a>
+          <a class="card" href="races.html"><div class="card-head"><div class="card-icon" style="color:var(--teal)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="7" r="3"/><path d="M5 21c0-4 3-7 7-7s7 3 7 7"/></svg></div><div class="card-head-text"><div class="card-title">Races</div><div class="card-sub">6 entries · Common → Mythical</div></div></div><p class="card-desc">Spawn rates, passives, V2/V3 awakenings, and which fruits to pair with each race.</p></a>
+          <a class="card" href="locations.html"><div class="card-head"><div class="card-icon" style="color:var(--teal)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18c2-1 4-1 6 0s4 1 6 0 4-1 6 0M12 16V6M12 6l4 3M12 6l-4 3"/></svg></div><div class="card-head-text"><div class="card-title">Islands</div><div class="card-sub">8 entries · Three Seas</div></div></div><p class="card-desc">Level ranges, NPC spawns, notable drops, and how to travel between them.</p></a>
+          <a class="card" href="updates.html"><div class="card-head"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h12v14a3 3 0 0 0 3 3H7a3 3 0 0 1-3-3V4z"/><path d="M8 9h6M8 13h6"/></svg></div><div class="card-head-text"><div class="card-title">Update Log</div><div class="card-sub">Latest patch notes</div></div></div><p class="card-desc">Every patch, the buffs and the nerfs, with quick filtering by type.</p></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module">
+    import { renderHomeFeatured } from './assets/js/data.js';
+    document.addEventListener('DOMContentLoaded', () => {
+      renderHomeFeatured();
+      document.getElementById('hero-search')?.addEventListener('click', () => {
+        document.getElementById('search-btn')?.click();
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+[
+  {
+    "id": "captain-vega",
+    "name": "Captain Vega",
+    "rarity": "Common",
+    "level": 145,
+    "hp": 25000,
+    "location": "Marine Fortress",
+    "respawn": "10 minutes",
+    "difficulty": "Easy",
+    "recommendedLevel": 130,
+    "featured": false,
+    "description": "Marine Captain leading the fortress garrison. The first real boss most players face.",
+    "drops": [
+      { "name": "Marine Saber", "chance": "30%" },
+      { "name": "Officer Coat (cosmetic)", "chance": "5%" },
+      { "name": "Beli Pouch (5K)", "chance": "100%" }
+    ],
+    "strategy": "Stay mobile during his charge. He has long startup on the overhead — punish with M1s, then disengage."
+  },
+  {
+    "id": "tomb-guardian",
+    "name": "Tomb Guardian",
+    "rarity": "Rare",
+    "level": 400,
+    "hp": 80000,
+    "location": "Desert Kingdom",
+    "respawn": "20 minutes",
+    "difficulty": "Medium",
+    "recommendedLevel": 380,
+    "featured": false,
+    "description": "Stone construct of the desert tombs. Slow but punishing — one hit can delete careless players.",
+    "drops": [
+      { "name": "Sand Fruit", "chance": "3%" },
+      { "name": "Tomb Crystal", "chance": "70%" },
+      { "name": "Ancient Scroll", "chance": "15%" }
+    ],
+    "strategy": "Bait its slam attack, then circle behind. Sea Blade trivializes the fight."
+  },
+  {
+    "id": "storm-lord",
+    "name": "Storm Lord",
+    "rarity": "Legendary",
+    "level": 1000,
+    "hp": 380000,
+    "location": "Skylands",
+    "respawn": "30 minutes",
+    "difficulty": "Hard",
+    "recommendedLevel": 950,
+    "featured": true,
+    "description": "Master of skyborne lightning. The gatekeeper between the Second and Third Sea.",
+    "drops": [
+      { "name": "Rumble Fruit", "chance": "1%" },
+      { "name": "Storm Crown", "chance": "8%" },
+      { "name": "Sky Sphere (mat)", "chance": "100%" }
+    ],
+    "strategy": "Phase 2 begins at 50%. Avoid open ground — his global lightning targets the highest elevation."
+  },
+  {
+    "id": "glacier-tyrant",
+    "name": "Glacier Tyrant",
+    "rarity": "Legendary",
+    "level": 1200,
+    "hp": 480000,
+    "location": "Frozen Fjord",
+    "respawn": "45 minutes",
+    "difficulty": "Hard",
+    "recommendedLevel": 1150,
+    "featured": false,
+    "description": "Ancient ice beast that froze its own kingdom. Drops the Ice Fruit awakening trigger.",
+    "drops": [
+      { "name": "Ice Fruit", "chance": "2%" },
+      { "name": "Frozen Heart", "chance": "12%" },
+      { "name": "Glacial Crown", "chance": "5%" }
+    ],
+    "strategy": "Stack on its left flank — its primary breath cone covers the right side."
+  },
+  {
+    "id": "cursed-captain",
+    "name": "Cursed Captain",
+    "rarity": "Mythical",
+    "level": 1800,
+    "hp": 720000,
+    "location": "Phantom Isle",
+    "respawn": "60 minutes",
+    "difficulty": "Insane",
+    "recommendedLevel": 1750,
+    "featured": true,
+    "description": "Bound to the cursed deck of his ship for centuries. Drops the Cursed Saber.",
+    "drops": [
+      { "name": "Cursed Saber", "chance": "2%" },
+      { "name": "Captain's Coat", "chance": "5%" },
+      { "name": "Soul Shard", "chance": "100%" }
+    ],
+    "strategy": "His phantom adds heal him — kill them before pressing the boss. Armament Haki is mandatory in P2."
+  },
+  {
+    "id": "saber-expert",
+    "name": "Saber Expert",
+    "rarity": "Mythical",
+    "level": 1700,
+    "hp": 650000,
+    "location": "Wandering raid (Third Sea)",
+    "respawn": "World event — 2 hours",
+    "difficulty": "Insane",
+    "recommendedLevel": 1650,
+    "featured": true,
+    "description": "Drops the legendary Shisui. Spawns randomly across the Third Sea — chase the announcement.",
+    "drops": [
+      { "name": "Shisui", "chance": "5%" },
+      { "name": "Master's Belt", "chance": "8%" },
+      { "name": "Honed Edge (mat)", "chance": "100%" }
+    ],
+    "strategy": "Parry-heavy fight. Bring a teammate with CC — solo kills require sub-2000 ms reactions."
+  },
+  {
+    "id": "ocean-tyrant",
+    "name": "Ocean Tyrant",
+    "rarity": "Mythical",
+    "level": 2300,
+    "hp": 1500000,
+    "location": "World's End — raid",
+    "respawn": "Daily reset",
+    "difficulty": "Endgame",
+    "recommendedLevel": 2200,
+    "featured": false,
+    "description": "Endgame raid boss. Six-player encounter with three phases and an enrage at 10%.",
+    "drops": [
+      { "name": "Tyrant Trident", "chance": "3%" },
+      { "name": "Sea King Heart", "chance": "10%" },
+      { "name": "Raid Token", "chance": "100%" }
+    ],
+    "strategy": "Phase 1: dodge the wave. Phase 2: split the raid into two pillars. Phase 3: stack and burn — enrage hits at 10% HP."
+  },
+  {
+    "id": "fallen-admiral",
+    "name": "Fallen Admiral",
+    "rarity": "Mythical",
+    "level": 2500,
+    "hp": 1800000,
+    "location": "World's End — raid",
+    "respawn": "Weekly reset",
+    "difficulty": "Endgame",
+    "recommendedLevel": 2400,
+    "featured": false,
+    "description": "Once a marine admiral, now a fallen monster. The raid's hardest hitter.",
+    "drops": [
+      { "name": "Admiral's Coat", "chance": "5%" },
+      { "name": "Light Fruit (chest event)", "chance": "—" },
+      { "name": "Raid Token", "chance": "100%" }
+    ],
+    "strategy": "The Admiral's hitscan is the highest in the game. Line-of-sight breaks save lives."
+  }
+]
