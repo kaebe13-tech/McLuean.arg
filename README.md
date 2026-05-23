@@ -9,19 +9,31 @@ A browser-based **incremental/idle game** inspired by the Roblox game **Sailor P
 Click "STRIKE" (or press Space) to defeat mobs. Earn Beli, level up, unlock new islands, hire idle crewmates, buy Devil Fruits and swords, and chase boss drops. Save is automatic to `localStorage` with offline progress (capped at 4 hours).
 
 **Core loop**
-- **Strike** mobs → earn Beli + XP per kill (boosted by your current Island).
+- **Strike** mobs (or press `Space`) → earn Beli + XP per kill (boosted by your current Island).
+- **Z / X / C / V** trigger your equipped Devil Fruit's 4 active abilities. Each is a damage burst (5× / 14× / 28× / 80× your strike) on its own cooldown — visible as a fillable overlay on the ability bar below the strike button.
 - **Hire crew** (Cabin Boy → Sailor → Navigator → Captain → Yonko → Sea King) for passive Beli/sec.
-- **Equip a Devil Fruit** for a strike-damage multiplier and passive income.
+- **Equip a Devil Fruit** for a strike-damage multiplier and passive income. 20 fruits total — buy from the shop or pull the **🎰 Devil Fruit Box** for 1.5M Beli (random fruit weighted by rarity, duplicates refund 40%).
 - **Equip a sword** and **learn a fighting style** for flat damage.
 - **Roll a race** on first launch (rates: 50% Common, 22% Uncommon, 16% Rare, 8% Legendary, 4% Mythical) for a permanent passive.
 - **Sail to new islands** (unlock at higher levels) for stronger mobs and bigger rewards.
+- **Elite mobs** spawn 8% of the time (level 3+) — 5× HP and 12× rewards.
 - **Summon bosses** for big drops — including a chance at their unique fruit/sword.
-- **Awaken (prestige)** at level 30+ to reset progress for permanent Reputation: +50% strike and +10% Beli/sec per stack. Owned fruits, swords, styles, race, and bosses-defeated are kept.
+- **Awaken (prestige)** at level 30+ to reset progress for permanent **Reputation**: +50% strike and +10% Beli/sec per stack. Owned fruits, swords, styles, race, and bosses-defeated are kept.
 
 **Controls**
-- Click the STRIKE button or press `Space` to attack.
+- Click STRIKE or press `Space` to attack.
+- Press `Z`, `X`, `C`, `V` to use fruit abilities.
+- Press `~` (tilde) or click the floating **Admin** button to open the dev console.
 - Press `/` anywhere to search the wiki.
-- All buttons in the shop are buy/equip toggles.
+
+## Admin Panel
+
+The floating purple wrench (bottom-left) opens the admin panel. Four tabs:
+
+- **💎 Cheats** — add Beli (1K → ∞), add XP, set level, toggle God Mode, toggle Auto-Strike, set Beli multiplier (1× → 10000×), override strike power.
+- **🎒 Inventory** — unlock all fruits/swords/styles in one click, equip a random Mythical, set race, add bulk crew, run free gacha pulls.
+- **🌍 World** — teleport to any island, spawn any boss, reset boss cooldown, force prestige with custom Reputation gain.
+- **📊 State** — live JSON view of game state, export/import save (JSON), clipboard copy, hard reset, keyboard shortcut reference.
 
 **Saving**
 - Auto-saves every 5 seconds and on tab close.

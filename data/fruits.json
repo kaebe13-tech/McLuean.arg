@@ -4,7 +4,7 @@
     "name": "Flame Fruit",
     "type": "Logia",
     "rarity": "Legendary",
-    "price": 1500000,
+    "price": 2200000,
     "color": "#ef4444",
     "icon": "flame",
     "element": "Fire",
@@ -15,8 +15,7 @@
       { "key": "Z", "name": "Fire Fist", "desc": "Hurl a piercing column of flame in a straight line.", "cooldown": 4 },
       { "key": "X", "name": "Flame Pillar", "desc": "Erupt a tall pillar of fire at your cursor that lingers and burns.", "cooldown": 8 },
       { "key": "C", "name": "Phoenix Dash", "desc": "Stream forward as living flame, dealing tick damage on contact.", "cooldown": 12 },
-      { "key": "V", "name": "Hell's Crucible", "desc": "Detonate a wide explosion around you. Best opener after a stun.", "cooldown": 22 },
-      { "key": "F", "name": "Flight (Awakened)", "desc": "Glide on flame currents while above 50% energy.", "cooldown": 0 }
+      { "key": "V", "name": "Hell's Crucible", "desc": "Detonate a wide explosion around you. Best opener after a stun.", "cooldown": 22 }
     ],
     "tips": [
       "Open fights with X to zone, then Z while target is locked in the pillar.",
@@ -29,7 +28,7 @@
     "name": "Ice Fruit",
     "type": "Logia",
     "rarity": "Legendary",
-    "price": 1450000,
+    "price": 2100000,
     "color": "#7dd3fc",
     "icon": "ice",
     "element": "Ice",
@@ -52,7 +51,7 @@
     "name": "Magma Fruit",
     "type": "Logia",
     "rarity": "Legendary",
-    "price": 1600000,
+    "price": 2400000,
     "color": "#f97316",
     "icon": "magma",
     "element": "Magma",
@@ -74,7 +73,7 @@
     "name": "Light Fruit",
     "type": "Logia",
     "rarity": "Mythical",
-    "price": 2400000,
+    "price": 4500000,
     "color": "#facc15",
     "icon": "light",
     "element": "Light",
@@ -92,7 +91,7 @@
     "name": "Dark Fruit",
     "type": "Logia",
     "rarity": "Mythical",
-    "price": 2300000,
+    "price": 4400000,
     "color": "#a78bfa",
     "icon": "dark",
     "element": "Darkness",
@@ -113,7 +112,7 @@
     "name": "Rubber Fruit",
     "type": "Paramecia",
     "rarity": "Rare",
-    "price": 750000,
+    "price": 1100000,
     "color": "#fb7185",
     "icon": "rubber",
     "element": "—",
@@ -132,7 +131,7 @@
     "name": "String Fruit",
     "type": "Paramecia",
     "rarity": "Mythical",
-    "price": 2200000,
+    "price": 4200000,
     "color": "#f472b6",
     "icon": "string",
     "element": "—",
@@ -150,7 +149,7 @@
     "name": "Sand Fruit",
     "type": "Logia",
     "rarity": "Rare",
-    "price": 850000,
+    "price": 1300000,
     "color": "#eab308",
     "icon": "sand",
     "element": "Sand",
@@ -159,7 +158,8 @@
     "abilities": [
       { "key": "Z", "name": "Desert Spear", "desc": "Compressed sand spear thrown forward.", "cooldown": 4 },
       { "key": "X", "name": "Sandstorm", "desc": "Channel a tornado at your cursor.", "cooldown": 11 },
-      { "key": "C", "name": "Quicksand", "desc": "Convert ground into sand — slows enemies.", "cooldown": 13 }
+      { "key": "C", "name": "Quicksand", "desc": "Convert ground into sand — slows enemies.", "cooldown": 13 },
+      { "key": "V", "name": "Desert Sun", "desc": "Burst of compressed sand that desiccates targets.", "cooldown": 25 }
     ]
   },
   {
@@ -167,7 +167,7 @@
     "name": "Rumble Fruit",
     "type": "Logia",
     "rarity": "Mythical",
-    "price": 2500000,
+    "price": 4800000,
     "color": "#60a5fa",
     "icon": "lightning",
     "element": "Lightning",
@@ -185,7 +185,7 @@
     "name": "Smoke Fruit",
     "type": "Logia",
     "rarity": "Uncommon",
-    "price": 350000,
+    "price": 500000,
     "color": "#94a3b8",
     "icon": "smoke",
     "element": "Smoke",
@@ -194,7 +194,8 @@
     "abilities": [
       { "key": "Z", "name": "White Out", "desc": "Cone of smoke that briefly blinds.", "cooldown": 3 },
       { "key": "X", "name": "Smoke Drag", "desc": "Tendril yanks one target toward you.", "cooldown": 7 },
-      { "key": "C", "name": "Smoke Glide", "desc": "Hover-dash on a smoke trail.", "cooldown": 9 }
+      { "key": "C", "name": "Smoke Glide", "desc": "Hover-dash on a smoke trail.", "cooldown": 9 },
+      { "key": "V", "name": "Smoke Cyclone", "desc": "Spin a tornado of smoke around you.", "cooldown": 20 }
     ]
   },
   {
@@ -202,7 +203,7 @@
     "name": "Phoenix Fruit",
     "type": "Mythical Zoan",
     "rarity": "Mythical",
-    "price": 2800000,
+    "price": 5200000,
     "color": "#fb923c",
     "icon": "beast",
     "element": "Blue Flame",
@@ -220,7 +221,7 @@
     "name": "Buddha Fruit",
     "type": "Mythical Zoan",
     "rarity": "Mythical",
-    "price": 2700000,
+    "price": 4900000,
     "color": "#fde68a",
     "icon": "beast",
     "element": "—",
@@ -229,7 +230,162 @@
     "abilities": [
       { "key": "Z", "name": "Palm Strike", "desc": "Wide-arc shockwave palm.", "cooldown": 5 },
       { "key": "X", "name": "Giant Form", "desc": "Grow huge for 10s — armor + damage.", "cooldown": 35 },
-      { "key": "C", "name": "Holy Lance", "desc": "Project a lance of light.", "cooldown": 9 }
+      { "key": "C", "name": "Holy Lance", "desc": "Project a lance of light.", "cooldown": 9 },
+      { "key": "V", "name": "Heaven's Judgment", "desc": "Slam down with both palms — quake shockwave.", "cooldown": 28 }
+    ]
+  },
+  {
+    "id": "quake",
+    "name": "Quake Fruit",
+    "type": "Paramecia",
+    "rarity": "Mythical",
+    "price": 6500000,
+    "color": "#cbd5e1",
+    "icon": "earth",
+    "element": "Vibration",
+    "awakening": true,
+    "featured": true,
+    "description": "Considered the strongest Paramecia in existence. Every punch sends out world-cracking shockwaves that bypass guard.",
+    "abilities": [
+      { "key": "Z", "name": "Quake Punch", "desc": "Single shockwave that pierces through everything in a line.", "cooldown": 5 },
+      { "key": "X", "name": "Sea Quake", "desc": "Slam the ground — radial shockwave knocks all nearby foes back.", "cooldown": 12 },
+      { "key": "C", "name": "Air Tremor", "desc": "Crack the air itself, launching a delayed mid-air explosion.", "cooldown": 16 },
+      { "key": "V", "name": "Continental Shatter", "desc": "Channel for 1s, then unleash an unblockable city-wide quake.", "cooldown": 40 }
+    ],
+    "tips": [
+      "Z is the most reliable single-target shockwave in the game — spam it on bosses.",
+      "V is a guaranteed kill on most non-mythical mobs."
+    ]
+  },
+  {
+    "id": "gravity",
+    "name": "Gravity Fruit",
+    "type": "Paramecia",
+    "rarity": "Mythical",
+    "price": 5800000,
+    "color": "#818cf8",
+    "icon": "gravity",
+    "element": "Gravity",
+    "awakening": true,
+    "description": "Bend gravity itself. Pin enemies to the ground, drop meteors, or float yourself out of every danger zone.",
+    "abilities": [
+      { "key": "Z", "name": "Gravity Push", "desc": "Cone-shaped shove that flings light foes far back.", "cooldown": 4 },
+      { "key": "X", "name": "Crush", "desc": "Slam a single target into the ground for heavy damage.", "cooldown": 9 },
+      { "key": "C", "name": "Float", "desc": "Levitate for 6s — immune to ground-based attacks.", "cooldown": 18 },
+      { "key": "V", "name": "Meteor Shower", "desc": "Pull six meteors down on the cursor area over 3s.", "cooldown": 36 }
+    ]
+  },
+  {
+    "id": "soul",
+    "name": "Soul Fruit",
+    "type": "Paramecia",
+    "rarity": "Mythical",
+    "price": 5600000,
+    "color": "#f472b6",
+    "icon": "soul",
+    "element": "Soul",
+    "awakening": true,
+    "description": "Steal life force directly. Drain HP from enemies on hit and reanimate fallen mobs as temporary allies.",
+    "abilities": [
+      { "key": "Z", "name": "Soul Pocus", "desc": "Strike that drains 25% of your damage as healing.", "cooldown": 4 },
+      { "key": "X", "name": "Animate", "desc": "Reanimate the last killed mob to fight for 8s.", "cooldown": 16 },
+      { "key": "C", "name": "Lifeline", "desc": "Channel — heal yourself rapidly while immobile.", "cooldown": 22 },
+      { "key": "V", "name": "Soul Reaping", "desc": "Mass drain — strip HP from every enemy in range.", "cooldown": 38 }
+    ],
+    "tips": [
+      "Soul mains never die in extended fights. Pair with Cyborg race for limit-break sustain."
+    ]
+  },
+  {
+    "id": "operation",
+    "name": "Operation Fruit",
+    "type": "Paramecia",
+    "rarity": "Legendary",
+    "price": 2800000,
+    "color": "#fb7185",
+    "icon": "operation",
+    "element": "—",
+    "awakening": true,
+    "description": "Surgeon's domain. Inside your operating room you control space — swap places, slice through cover, and stitch wounds.",
+    "abilities": [
+      { "key": "Z", "name": "Scalpel", "desc": "Quick clean cut with bonus crit chance inside ROOM.", "cooldown": 3 },
+      { "key": "X", "name": "Shambles", "desc": "Swap positions with the highest-HP enemy in range.", "cooldown": 10 },
+      { "key": "C", "name": "Counter Shock", "desc": "Touch a target — burst damage and brief stun.", "cooldown": 12 },
+      { "key": "V", "name": "Gamma Knife", "desc": "Surgical strike that ignores 50% of enemy defense.", "cooldown": 26 }
+    ],
+    "tips": [
+      "X is great for repositioning yourself out of danger while bringing the boss in close."
+    ]
+  },
+  {
+    "id": "spider",
+    "name": "Spider Fruit",
+    "type": "Mythical Zoan",
+    "rarity": "Mythical",
+    "price": 5400000,
+    "color": "#1f2937",
+    "icon": "spider",
+    "element": "Web",
+    "awakening": true,
+    "description": "Mythical Zoan — eight-legged ambush form. Webs slow, restrict, and detonate.",
+    "abilities": [
+      { "key": "Z", "name": "Web Shot", "desc": "Sticky projectile that roots target in place.", "cooldown": 5 },
+      { "key": "X", "name": "Crawl", "desc": "Stick to walls and ceilings for 8s.", "cooldown": 14 },
+      { "key": "C", "name": "Venom Bite", "desc": "Chunk damage + 5s poison stack.", "cooldown": 11 },
+      { "key": "V", "name": "Web Trap", "desc": "Lay a web that detonates when triggered.", "cooldown": 28 }
+    ]
+  },
+  {
+    "id": "dough",
+    "name": "Dough Fruit",
+    "type": "Paramecia",
+    "rarity": "Mythical",
+    "price": 6000000,
+    "color": "#fbbf24",
+    "icon": "rubber",
+    "element": "Dough",
+    "awakening": true,
+    "featured": true,
+    "description": "Sticky, stretchy, and impossibly resilient. Weaponize confectionary into massive fists.",
+    "abilities": [
+      { "key": "Z", "name": "Mochi Pistol", "desc": "Stretchy fist with insane reach.", "cooldown": 4 },
+      { "key": "X", "name": "Power Mochi", "desc": "Become temporarily invulnerable for 4s.", "cooldown": 30 },
+      { "key": "C", "name": "Sticky Trap", "desc": "Drop a mochi pool that slows enemies stepping on it.", "cooldown": 12 },
+      { "key": "V", "name": "Sweet Punch", "desc": "Wind up a colossal fist — biggest single hit in the game.", "cooldown": 38 }
+    ]
+  },
+  {
+    "id": "venom",
+    "name": "Venom Fruit",
+    "type": "Paramecia",
+    "rarity": "Rare",
+    "price": 950000,
+    "color": "#84cc16",
+    "icon": "smoke",
+    "element": "Poison",
+    "awakening": false,
+    "description": "Generate and control poisonous gas. Damage-over-time specialist that thrives in long fights.",
+    "abilities": [
+      { "key": "Z", "name": "Poison Spit", "desc": "Quick poison projectile that applies a 6s DoT.", "cooldown": 3 },
+      { "key": "X", "name": "Toxic Cloud", "desc": "Place a lingering poison fog at cursor.", "cooldown": 10 },
+      { "key": "C", "name": "Hydra", "desc": "Three-headed poison snake strikes outward.", "cooldown": 14 }
+    ]
+  },
+  {
+    "id": "shadow",
+    "name": "Shadow Fruit",
+    "type": "Paramecia",
+    "rarity": "Legendary",
+    "price": 2600000,
+    "color": "#475569",
+    "icon": "dark",
+    "element": "Shadow",
+    "awakening": true,
+    "description": "Steal shadows to summon ghost copies. Loved by solo grinders for the autonomous shadow soldiers.",
+    "abilities": [
+      { "key": "Z", "name": "Shadow Bullet", "desc": "Compressed shadow shot.", "cooldown": 3 },
+      { "key": "X", "name": "Shadow Steal", "desc": "Steal an enemy's shadow — they lose 20% damage for 8s.", "cooldown": 14 },
+      { "key": "C", "name": "Doppelganger", "desc": "Spawn a shadow clone that mimics your strikes for 6s.", "cooldown": 22 }
     ]
   }
 ]
