@@ -1,5 +1,21 @@
 [
   {
+    "id": "almighty-axe",
+    "name": "ALMIGHT 7 HANDED AXE OF DIVINE GENRAL LIVENBRON",
+    "rarity": "Divine",
+    "tier": "??? Tier",
+    "obtain": "Defeat the Final Sea raid 7 times. Forged from the marrow of fallen gods.",
+    "dropChance": "0.7%",
+    "requiredLevel": 250,
+    "description": "A weapon outside the laws of swordsmanship. Seven handles, one blade, no peer. Said to part the seas themselves when wielded by one whose name has been recorded by the Council of Stars.",
+    "moves": [
+      { "key": "Z", "name": "Heaven-Cleaver", "desc": "Single arc that slices the sky open in a straight line.", "cooldown": 4 },
+      { "key": "X", "name": "Seven Echoes", "desc": "Each handle strikes once over 0.7s — seven hits in a heartbeat.", "cooldown": 9 },
+      { "key": "C", "name": "Verdict of Livenbron", "desc": "Mark a target — your next attack against them is unblockable and crits.", "cooldown": 14 },
+      { "key": "V", "name": "Divine General's Wrath", "desc": "Channel for 1.5s. Release a city-block-wide devastation. Kills any non-mythical mob in one hit.", "cooldown": 60 }
+    ]
+  },
+  {
     "id": "shisui",
     "name": "Shisui",
     "rarity": "Mythical",

@@ -50,6 +50,9 @@ export const Icons = {
   spider: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M9 11L4 7M15 11l5-4M9 13l-5 4M15 13l5 4M11 9V4M13 9V4M11 15v5M13 15v5"/></svg>',
   wrench: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0 5 5l-9.4 9.4a2.83 2.83 0 1 1-4-4z"/></svg>',
   dice: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1" fill="currentColor"/><circle cx="16" cy="16" r="1" fill="currentColor"/><circle cx="16" cy="8" r="1" fill="currentColor"/><circle cx="8" cy="16" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>',
+  axe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l4 4M14 3l-4 4M10 7l-7 7 4 4 7-7M14 11l5 5M19 16l2 2M9 14l-3 3"/></svg>',
+  trophy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v5a5 5 0 0 1-10 0V4zM7 7H4v2a3 3 0 0 0 3 3M17 7h3v2a3 3 0 0 1-3 3M9 18h6M12 14v4"/></svg>',
+  bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>',
 };
 
 /* ------- Header / Nav / Footer injection ------- */
@@ -249,10 +252,14 @@ export function escapeHtml(str) {
   ));
 }
 export function fmtNum(n) {
-  if (n == null) return '—';
-  if (n >= 1_000_000) return (n/1_000_000).toFixed(n % 1_000_000 === 0 ? 0 : 1) + 'M';
-  if (n >= 1_000) return (n/1_000).toFixed(n % 1_000 === 0 ? 0 : 1) + 'K';
-  return String(n);
+  if (n == null || isNaN(n)) return '—';
+  const abs = Math.abs(n);
+  if (abs >= 1e15) return (n/1e15).toFixed(1).replace(/\.0$/, '') + 'Q';
+  if (abs >= 1e12) return (n/1e12).toFixed(1).replace(/\.0$/, '') + 'T';
+  if (abs >= 1e9)  return (n/1e9).toFixed(1).replace(/\.0$/, '') + 'B';
+  if (abs >= 1e6)  return (n/1e6).toFixed(n % 1e6 === 0 ? 0 : 1).replace(/\.0$/, '') + 'M';
+  if (abs >= 1e3)  return (n/1e3).toFixed(n % 1e3 === 0 ? 0 : 1).replace(/\.0$/, '') + 'K';
+  return String(Math.floor(n));
 }
 
 /* ------- Boot ------- */

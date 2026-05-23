@@ -387,5 +387,96 @@
       { "key": "X", "name": "Shadow Steal", "desc": "Steal an enemy's shadow — they lose 20% damage for 8s.", "cooldown": 14 },
       { "key": "C", "name": "Doppelganger", "desc": "Spawn a shadow clone that mimics your strikes for 6s.", "cooldown": 22 }
     ]
+  },
+  {
+    "id": "ice-storm",
+    "name": "Storm Fruit",
+    "type": "Logia",
+    "rarity": "Legendary",
+    "price": 3200000,
+    "color": "#0ea5e9",
+    "icon": "wind",
+    "element": "Storm",
+    "awakening": true,
+    "description": "Command the cyclones of the Grand Line. Better at clearing groups than singletons.",
+    "abilities": [
+      { "key": "Z", "name": "Gale Burst", "desc": "Sharp gust that pushes targets back.", "cooldown": 3 },
+      { "key": "X", "name": "Funnel Cloud", "desc": "Plant a tornado that drags mobs into it.", "cooldown": 11 },
+      { "key": "C", "name": "Ride the Wind", "desc": "Become wind for 4s — un-targetable.", "cooldown": 18 },
+      { "key": "V", "name": "Hurricane", "desc": "Massive cyclone — wipes weak mobs across half the screen.", "cooldown": 32 }
+    ]
+  },
+  {
+    "id": "barrier",
+    "name": "Barrier Fruit",
+    "type": "Paramecia",
+    "rarity": "Legendary",
+    "price": 3000000,
+    "color": "#a3e635",
+    "icon": "haki",
+    "element": "Barrier",
+    "awakening": true,
+    "description": "Project unbreakable walls. Annoying in PvP, broken in raids — your party never dies.",
+    "abilities": [
+      { "key": "Z", "name": "Barrier Slam", "desc": "Wall that slams forward like a piston.", "cooldown": 4 },
+      { "key": "X", "name": "Cage", "desc": "Trap a target in a 2s box.", "cooldown": 10 },
+      { "key": "C", "name": "Bunker", "desc": "Self-bubble — invulnerable for 3s.", "cooldown": 24 }
+    ]
+  },
+  {
+    "id": "time",
+    "name": "Time Fruit",
+    "type": "Mythical Paramecia",
+    "rarity": "Mythical",
+    "price": 8800000,
+    "color": "#22d3ee",
+    "icon": "operation",
+    "element": "Time",
+    "awakening": true,
+    "featured": true,
+    "description": "Bend the flow of time itself. Slow your enemies, rewind your wounds, freeze the world for one perfect strike.",
+    "abilities": [
+      { "key": "Z", "name": "Slow Field", "desc": "Cone-slows enemies by 50% for 4s.", "cooldown": 5 },
+      { "key": "X", "name": "Rewind", "desc": "Heal yourself back to your HP from 5s ago.", "cooldown": 16 },
+      { "key": "C", "name": "Stop", "desc": "Freeze the world for 1.2s — every strike during it is a guaranteed crit.", "cooldown": 24 },
+      { "key": "V", "name": "Chronoshatter", "desc": "Collapse time on a single target — a single guaranteed-lethal blow.", "cooldown": 50 }
+    ]
+  },
+  {
+    "id": "celestial-dragon",
+    "name": "Celestial Dragon Fruit",
+    "type": "Divine Zoan",
+    "rarity": "Divine",
+    "price": 50000000,
+    "color": "#fde047",
+    "icon": "beast",
+    "element": "Holy Lightning",
+    "awakening": true,
+    "featured": true,
+    "description": "The fruit said to be eaten only by gods. Once per millennium, the seas surrender one — and only one. Massive scaling, every stat raised, every enemy diminished.",
+    "abilities": [
+      { "key": "Z", "name": "Halo Strike", "desc": "Holy beam that ignores all defenses.", "cooldown": 3 },
+      { "key": "X", "name": "Divine Form", "desc": "Transform — every stat doubles for 12s.", "cooldown": 60 },
+      { "key": "C", "name": "Wrath of Stars", "desc": "Pull seven star-fragments down on cursor area.", "cooldown": 18 },
+      { "key": "V", "name": "Genesis", "desc": "Recreate the battlefield. Wipes everything in range and refunds half their HP as Beli.", "cooldown": 90 }
+    ]
+  },
+  {
+    "id": "void",
+    "name": "Void Fruit",
+    "type": "Divine Paramecia",
+    "rarity": "Divine",
+    "price": 80000000,
+    "color": "#1e1b4b",
+    "icon": "dark",
+    "element": "Nothingness",
+    "awakening": true,
+    "description": "Eat the void itself. Erase what should not be — even bosses, even time, even mistakes. Considered impossible to actually consume.",
+    "abilities": [
+      { "key": "Z", "name": "Erase", "desc": "Single-target deletion — bypasses 75% of HP scaling.", "cooldown": 4 },
+      { "key": "X", "name": "Negate", "desc": "Cancel the next enemy attack/cast within 6s.", "cooldown": 12 },
+      { "key": "C", "name": "Become Nothing", "desc": "Become unmistakeably absent. Untargetable for 5s.", "cooldown": 22 },
+      { "key": "V", "name": "Endpoint", "desc": "Channel — the world holds its breath for 2.5s. Then the target ceases. Always lethal.", "cooldown": 120 }
+    ]
   }
 ]

@@ -30,6 +30,7 @@
   --r-legendary: #fbbf24;
   --r-mythical: #f472b6;
   --r-event: #c084fc;
+  --r-divine: #fde047;
 
   /* Spacing */
   --radius: 12px;
@@ -410,6 +411,7 @@ main { min-height: calc(100vh - var(--header-h) - 220px); padding-bottom: 96px; 
 .badge-rarity[data-rarity="Legendary"] { color: var(--r-legendary); }
 .badge-rarity[data-rarity="Mythical"]  { color: var(--r-mythical); }
 .badge-rarity[data-rarity="Event"]     { color: var(--r-event); }
+.badge-rarity[data-rarity="Divine"]    { color: var(--r-divine); }
 .badge-type { color: var(--cyan); }
 .badge-tier { color: var(--gold); }
 
@@ -1974,3 +1976,43 @@ body.godmode::before {
   .ability-bar { max-width: 100%; }
   .ability-name { font-size: 0.66rem; }
 }
+
+
+
+/* =========================================================
+   v3 — Divine rarity, achievements, axe, events
+   ========================================================= */
+
+.shop-item.divine {
+  border-color: var(--r-divine) !important;
+  background: linear-gradient(180deg, rgba(253, 224, 71, 0.18), rgba(253, 224, 71, 0.04)) !important;
+  box-shadow: 0 0 0 1px rgba(253, 224, 71, 0.3), 0 0 22px -4px rgba(253, 224, 71, 0.4) !important;
+  animation: divinePulse 2.4s ease-in-out infinite;
+}
+@keyframes divinePulse {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(253, 224, 71, 0.3), 0 0 22px -4px rgba(253, 224, 71, 0.4); }
+  50%      { box-shadow: 0 0 0 1px rgba(253, 224, 71, 0.6), 0 0 36px -2px rgba(253, 224, 71, 0.7); }
+}
+.shop-item.divine .name {
+  background: linear-gradient(90deg, #fde047 0%, #fff 50%, #fde047 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.shop-item.divine .shop-icon {
+  background: linear-gradient(135deg, rgba(253, 224, 71, 0.5), rgba(253, 224, 71, 0.1)) !important;
+  border-color: rgba(253, 224, 71, 0.6) !important;
+}
+
+/* Achievements tab badge */
+.tab[data-tab="achievements"] {
+  font-size: 1rem !important;
+  padding: 8px 4px !important;
+}
+
+/* Toast variant for events */
+.toast.success { box-shadow: 0 10px 30px -10px rgba(52, 211, 153, 0.4); }
+
+/* Mob portrait (gold mob) — uses Elite styling automatically when isElite */

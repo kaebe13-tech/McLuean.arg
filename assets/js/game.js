@@ -11,7 +11,7 @@ import { Icons, openModal, closeModal, escapeHtml, fmtNum, registerSearch } from
 
 /* ========== Constants & Tables ========== */
 
-const SAVE_KEY = 'sp-idle-save-v2';
+const SAVE_KEY = 'sp-idle-save-v3';
 const TICK_MS = 100;
 const PASSIVE_TICK_MS = 1000;
 const SAVE_INTERVAL_MS = 5000;
@@ -19,8 +19,8 @@ const OFFLINE_CAP_HOURS = 4;
 const BOSS_WINDOW_MS = 30000;
 const BOSS_COOLDOWN_MS = 90000;
 
-const RARITY_CLICK_MULT = { Common: 1.10, Uncommon: 1.30, Rare: 1.7, Legendary: 2.5, Mythical: 4.5, Event: 3.0 };
-const RARITY_FLAT_DMG   = { Common: 1,    Uncommon: 2,    Rare: 5,   Legendary: 14,  Mythical: 38,  Event: 22  };
+const RARITY_CLICK_MULT = { Common: 1.10, Uncommon: 1.30, Rare: 1.7, Legendary: 2.5, Mythical: 4.5, Event: 3.0, Divine: 12.0 };
+const RARITY_FLAT_DMG   = { Common: 1,    Uncommon: 2,    Rare: 5,   Legendary: 14,  Mythical: 38,  Event: 22,  Divine: 250 };
 
 const ABILITY_DAMAGE_MULT = { Z: 5, X: 14, C: 28, V: 80 };
 
@@ -35,36 +35,39 @@ const RACE_PERKS = {
   ghoul:    { clickMult: 1.50, beliMult: 1.15, xpMult: 1.20, label: '+50% strike, +15% Beli, +20% XP' },
 };
 
-// HARDER: island Beli multipliers reduced; XP slightly more rewarding for sail rewards.
-// Unlock thresholds raised so the curve takes longer.
+// HARDER 100x: island Beli multipliers reduced; XP slightly more rewarding for sail rewards.
+// Unlock thresholds raised so the curve takes much longer.
 const ISLAND_GAME = {
   'starter-island':   { unlock: 1,   beliMult: 1.0,  xpMult: 1.0, color: '#38bdf8' },
-  'marine-fortress':  { unlock: 8,   beliMult: 1.8,  xpMult: 1.4, color: '#94a3b8' },
-  'desert-kingdom':   { unlock: 18,  beliMult: 3.5,  xpMult: 1.9, color: '#eab308' },
-  'skylands':         { unlock: 30,  beliMult: 7.0,  xpMult: 2.6, color: '#facc15' },
-  'frozen-fjord':     { unlock: 45,  beliMult: 15,   xpMult: 3.5, color: '#7dd3fc' },
-  'phantom-isle':     { unlock: 65,  beliMult: 30,   xpMult: 4.8, color: '#a78bfa' },
-  'great-tree':       { unlock: 90,  beliMult: 60,   xpMult: 6.5, color: '#34d399' },
-  'world-end':        { unlock: 130, beliMult: 120,  xpMult: 9.5, color: '#fb7185' },
+  'marine-fortress':  { unlock: 12,  beliMult: 1.6,  xpMult: 1.4, color: '#94a3b8' },
+  'desert-kingdom':   { unlock: 28,  beliMult: 3.0,  xpMult: 1.9, color: '#eab308' },
+  'skylands':         { unlock: 50,  beliMult: 6.0,  xpMult: 2.6, color: '#facc15' },
+  'frozen-fjord':     { unlock: 80,  beliMult: 13,   xpMult: 3.5, color: '#7dd3fc' },
+  'phantom-isle':     { unlock: 120, beliMult: 26,   xpMult: 4.8, color: '#a78bfa' },
+  'great-tree':       { unlock: 175, beliMult: 50,   xpMult: 6.5, color: '#34d399' },
+  'world-end':        { unlock: 250, beliMult: 100,  xpMult: 9.5, color: '#fb7185' },
 };
 
-// HARDER: cost growth from 1.15 -> 1.18; tier base costs increased a bit.
+// HARDER 100x: cost growth from 1.18 -> 1.22; tier base costs roughly 3x.
+// 2 new endgame crew tiers added.
 const CREW = [
-  { id: 'cabin_boy',  name: 'Cabin Boy',     unlock: 0,    baseCost: 75,         bps: 0.5,    icon: 'human'  },
-  { id: 'sailor',     name: 'Sailor',        unlock: 0,    baseCost: 600,        bps: 3,      icon: 'fist'   },
-  { id: 'navigator',  name: 'Navigator',     unlock: 5,    baseCost: 5000,       bps: 18,     icon: 'water'  },
-  { id: 'first_mate', name: 'First Mate',    unlock: 12,   baseCost: 40000,      bps: 110,    icon: 'sword'  },
-  { id: 'gunner',     name: 'Master Gunner', unlock: 22,   baseCost: 360000,     bps: 800,    icon: 'lightning' },
-  { id: 'captain',    name: 'Captain',       unlock: 35,   baseCost: 3200000,    bps: 5500,   icon: 'haki'   },
-  { id: 'admiral',    name: 'Fleet Admiral', unlock: 55,   baseCost: 28000000,   bps: 38000,  icon: 'star'   },
-  { id: 'yonko',      name: 'Yonko',         unlock: 80,   baseCost: 240000000,  bps: 260000, icon: 'beast'  },
-  { id: 'sea_king',   name: 'Sea King',      unlock: 115,  baseCost: 2200000000, bps: 1800000,icon: 'fish'   },
+  { id: 'cabin_boy',   name: 'Cabin Boy',     unlock: 0,    baseCost: 200,         bps: 0.5,    icon: 'human'  },
+  { id: 'sailor',      name: 'Sailor',        unlock: 0,    baseCost: 1800,        bps: 3,      icon: 'fist'   },
+  { id: 'navigator',   name: 'Navigator',     unlock: 8,    baseCost: 15000,       bps: 18,     icon: 'water'  },
+  { id: 'first_mate',  name: 'First Mate',    unlock: 18,   baseCost: 120000,      bps: 110,    icon: 'sword'  },
+  { id: 'gunner',      name: 'Master Gunner', unlock: 32,   baseCost: 1100000,     bps: 800,    icon: 'lightning' },
+  { id: 'captain',     name: 'Captain',       unlock: 50,   baseCost: 9500000,     bps: 5500,   icon: 'haki'   },
+  { id: 'admiral',     name: 'Fleet Admiral', unlock: 75,   baseCost: 80000000,    bps: 38000,  icon: 'star'   },
+  { id: 'yonko',       name: 'Yonko',         unlock: 110,  baseCost: 700000000,   bps: 260000, icon: 'beast'  },
+  { id: 'sea_king',    name: 'Sea King',      unlock: 160,  baseCost: 6500000000,  bps: 1800000,icon: 'fish'   },
+  { id: 'pirate_king', name: 'Pirate King',   unlock: 220,  baseCost: 60000000000, bps: 14000000, icon: 'trophy' },
+  { id: 'one_above',   name: 'The One Above', unlock: 300,  baseCost: 600000000000,bps: 120000000, icon: 'star' },
 ];
-const CREW_GROWTH = 1.18;
+const CREW_GROWTH = 1.22;
 
-// Gacha pool weights by rarity (must include rarities present in fruits.json)
-const GACHA_WEIGHTS = { Common: 35, Uncommon: 30, Rare: 20, Legendary: 12, Mythical: 3 };
-const GACHA_COST = 1500000;
+// Gacha: Divine added (extremely rare)
+const GACHA_WEIGHTS = { Common: 35, Uncommon: 30, Rare: 20, Legendary: 12, Mythical: 2.6, Divine: 0.4 };
+const GACHA_COST = 5000000;
 
 const QUESTS = [
   { id: 'q-clicks-100',  name: 'First Voyage',         desc: 'Strike 100 times.',                  goal: 100,  field: 'totalClicks',     reward: { beli: 800 } },
@@ -85,6 +88,39 @@ const QUESTS = [
   { id: 'q-boss-25',     name: 'Conqueror',            desc: 'Defeat 25 bosses.',                  goal: 25,   field: 'bossesKilled',    reward: { beli: 1500000 } },
   { id: 'q-prestige-1',  name: 'Reborn',               desc: 'Awaken once (prestige).',            goal: 1,    field: 'prestiges',       reward: { beli: 200000 } },
   { id: 'q-gacha-10',    name: 'Lucky Sailor',         desc: 'Pull from the Devil Fruit Box 10x.', goal: 10,   field: 'gachaPulls',      reward: { beli: 100000 } },
+  { id: 'q-elite-10',    name: 'Elite Hunter',         desc: 'Defeat 10 Elite mobs.',              goal: 10,   field: 'eliteKills',      reward: { beli: 500000 } },
+  { id: 'q-event-1',     name: 'Right Place, Right Time', desc: 'Trigger any random event once.', goal: 1,    field: 'eventsTriggered', reward: { beli: 50000 } },
+];
+
+const ACHIEVEMENTS = [
+  { id: 'a-first-strike',  name: 'First Strike',          desc: 'Land your very first hit.',                tier: 'Common',    field: 'totalClicks',    goal: 1 },
+  { id: 'a-rookie',        name: 'Rookie Pirate',         desc: 'Earn 1,000 Beli total.',                   tier: 'Common',    field: 'totalBeliEarned', goal: 1000 },
+  { id: 'a-millionaire',   name: 'Millionaire',           desc: 'Earn 1,000,000 Beli total.',               tier: 'Rare',      field: 'totalBeliEarned', goal: 1_000_000 },
+  { id: 'a-billionaire',   name: 'Billionaire',           desc: 'Earn 1,000,000,000 Beli total.',           tier: 'Legendary', field: 'totalBeliEarned', goal: 1_000_000_000 },
+  { id: 'a-trillionaire',  name: 'Trillionaire',          desc: 'Earn 1,000,000,000,000 Beli total.',       tier: 'Mythical',  field: 'totalBeliEarned', goal: 1_000_000_000_000 },
+  { id: 'a-hunter',        name: 'Hunter',                desc: 'Defeat 1,000 mobs.',                       tier: 'Rare',      field: 'totalKills',      goal: 1000 },
+  { id: 'a-warlord',       name: 'Warlord',               desc: 'Defeat 25 bosses.',                        tier: 'Legendary', field: 'bossesKilled',    goal: 25 },
+  { id: 'a-emperor',       name: 'Emperor of the Sea',    desc: 'Defeat 100 bosses.',                       tier: 'Mythical',  field: 'bossesKilled',    goal: 100 },
+  { id: 'a-master',        name: 'Fruit Master',          desc: 'Own every Devil Fruit.',                   tier: 'Mythical',  field: 'ownedFruitsCount',goal: 26 },
+  { id: 'a-blade-collect', name: 'Blade Collector',       desc: 'Own every sword.',                         tier: 'Mythical',  field: 'ownedSwordsCount',goal: 12 },
+  { id: 'a-divine',        name: 'Touched by the Divine', desc: 'Equip a Divine-rarity item.',              tier: 'Mythical',  field: 'divineEquipped',  goal: 1 },
+  { id: 'a-axe',           name: 'Wielder of the Almight',desc: 'Obtain ALMIGHT 7 HANDED AXE.',              tier: 'Mythical',  field: 'hasAxe',          goal: 1 },
+  { id: 'a-prestige-3',    name: 'Thrice Reborn',         desc: 'Awaken 3 times.',                          tier: 'Legendary', field: 'prestiges',       goal: 3 },
+  { id: 'a-prestige-10',   name: 'Eternal',               desc: 'Awaken 10 times.',                         tier: 'Mythical',  field: 'prestiges',       goal: 10 },
+  { id: 'a-final-sea',     name: 'Edge of the World',     desc: "Reach World's End island.",                tier: 'Legendary', field: 'reachedWorldEnd', goal: 1 },
+  { id: 'a-yonko',         name: 'A Yonko',               desc: 'Hire your first Yonko.',                   tier: 'Legendary', field: 'hasYonko',        goal: 1 },
+  { id: 'a-100k-clicks',   name: 'Iron Knuckles',         desc: 'Strike 100,000 times.',                    tier: 'Mythical',  field: 'totalClicks',     goal: 100_000 },
+  { id: 'a-event-25',      name: 'Lucky Streak',          desc: 'Trigger 25 random events.',                tier: 'Legendary', field: 'eventsTriggered', goal: 25 },
+];
+
+// Random events fire every ~60-90s, picked from this list
+const RANDOM_EVENTS = [
+  { id: 'beli-rain',  name: '🌧 Beli Rain',     desc: 'Beli rewards 3× for 30s.',           apply: () => { state.eventBeliBoost = Date.now() + 30000; } },
+  { id: 'xp-rush',    name: '✨ XP Rush',        desc: 'XP gains 3× for 30s.',               apply: () => { state.eventXpBoost   = Date.now() + 30000; } },
+  { id: 'elite-swarm',name: '⚠ Elite Swarm',    desc: 'Next 5 mobs guaranteed Elite.',      apply: () => { state.eventEliteCharges = (state.eventEliteCharges||0) + 5; } },
+  { id: 'lucky-day',  name: '🍀 Lucky Day',      desc: 'Crit chance doubled for 45s.',       apply: () => { state.eventCritBoost = Date.now() + 45000; } },
+  { id: 'shipment',   name: '📦 Shipment Found', desc: 'Instant Beli windfall.',             apply: () => { gainBeli(Math.max(1000, calcBeliPerSec() * 120)); } },
+  { id: 'gold-mob',   name: '💰 Golden Mob',     desc: 'A Treasure Pirate appears! 50× Beli on next kill.', apply: () => { state.eventGoldMob = true; if (state.mob) { state.mob.name = 'Treasure Pirate'; state.mob.isElite = true; } } },
 ];
 
 /* ========== State ========== */
@@ -97,6 +133,8 @@ const DEFAULT_STATE = () => ({
   totalKills: 0,
   totalBeliEarned: 0,
   bossesKilled: 0,
+  eliteKills: 0,
+  eventsTriggered: 0,
   prestiges: 0,
   reputation: 0,
   gachaPulls: 0,
@@ -110,11 +148,19 @@ const DEFAULT_STATE = () => ({
   ownedStyles: [],
   crew: {},
   questsClaimed: [],
+  achievementsClaimed: [],
   bossLog: [],
   mob: null,
   boss: null,
   bossNextAt: 0,
   abilityCooldowns: {},   // { Z: timestamp, X: ..., C: ..., V: ... }
+  // Random events
+  eventBeliBoost: 0,
+  eventXpBoost: 0,
+  eventCritBoost: 0,
+  eventEliteCharges: 0,
+  eventGoldMob: false,
+  eventNextAt: 0,
   // Admin / cheats
   godMode: false,
   autoStrike: false,
@@ -152,8 +198,8 @@ function load() {
 }
 
 function levelXpReq(level) {
-  // HARDER: faster XP curve
-  return Math.floor(25 * Math.pow(1.30, level - 1));
+  // HARDER 100x: even faster XP curve. Each level needs ~36% more than the last.
+  return Math.floor(40 * Math.pow(1.36, level - 1));
 }
 
 function rollRaceTemplate() {
@@ -180,11 +226,13 @@ function pickMobName(islandId) {
 
 function spawnMob() {
   const isle = ISLAND_GAME[state.islandId];
-  // HARDER: more HP per island; steeper level scaling
-  const baseHp = 6 * (isle?.beliMult || 1);
-  let hp = Math.max(3, Math.floor(baseHp * Math.pow(1.10, state.level - 1) * (0.85 + Math.random() * 0.3)));
-  // 8% chance to spawn an Elite (5x HP, 12x reward)
-  const isElite = Math.random() < 0.08 && state.level >= 3;
+  // HARDER 100x: more HP per island; much steeper level scaling
+  const baseHp = 12 * (isle?.beliMult || 1);
+  let hp = Math.max(5, Math.floor(baseHp * Math.pow(1.16, state.level - 1) * (0.85 + Math.random() * 0.3)));
+  // Random event "Elite Swarm" guarantees Elite spawns; otherwise 8% natural rate
+  let isElite = state.eventEliteCharges > 0;
+  if (!isElite) isElite = Math.random() < 0.08 && state.level >= 3;
+  if (state.eventEliteCharges > 0) state.eventEliteCharges--;
   if (isElite) hp *= 5;
   state.mob = {
     name: (isElite ? 'Elite ' : '') + pickMobName(state.islandId),
@@ -202,8 +250,8 @@ function spawnBoss() {
   if (!chosen) chosen = DATA.bosses.find(b => b.recommendedLevel <= state.level + 50) || DATA.bosses[0];
   if (!chosen) return;
   const isle = ISLAND_GAME[state.islandId];
-  // HARDER: bosses ~2x HP
-  const hp = Math.max(80, Math.floor((chosen.hp || 1000) * 0.10 * (isle?.beliMult || 1) * Math.pow(1.04, state.level)));
+  // HARDER 100x: bosses much beefier
+  const hp = Math.max(150, Math.floor((chosen.hp || 1000) * 0.20 * (isle?.beliMult || 1) * Math.pow(1.06, state.level)));
   state.boss = {
     id: chosen.id,
     name: chosen.name,
@@ -271,24 +319,26 @@ function calcBeliPerSec() {
 }
 
 function calcBeliPerKill(isBoss, isElite) {
-  // HARDER: lower base reward
-  let base = 2 + state.level * 0.6;
+  // HARDER 100x: much lower base reward
+  let base = 1 + state.level * 0.3;
   base *= ISLAND_GAME[state.islandId]?.beliMult || 1;
   base *= getRaceMult('beliMult');
   if (isElite) base *= 12;
-  if (isBoss)  base *= 25;
+  if (isBoss)  base *= 30;
   base *= 1 + state.reputation * 0.10;
   base *= state.beliMult || 1;
+  if (state.eventBeliBoost && state.eventBeliBoost > Date.now()) base *= 3;
   return Math.floor(base);
 }
 
 function calcXpPerKill(isBoss, isElite) {
-  // HARDER: slightly lower XP
-  let base = 2 + state.level * 0.4;
+  // HARDER 100x: lower XP gain
+  let base = 1 + state.level * 0.25;
   base *= ISLAND_GAME[state.islandId]?.xpMult || 1;
   base *= getRaceMult('xpMult');
   if (isElite) base *= 6;
   if (isBoss)  base *= 12;
+  if (state.eventXpBoost && state.eventXpBoost > Date.now()) base *= 3;
   return Math.floor(base);
 }
 
@@ -344,7 +394,9 @@ function strike() {
   if (!state.mob && !state.boss) spawnMob();
   state.totalClicks++;
   const power = calcClickPower();
-  const isCrit = Math.random() < 0.07;
+  let critChance = 0.07;
+  if (state.eventCritBoost && state.eventCritBoost > Date.now()) critChance = 0.14;
+  const isCrit = Math.random() < critChance;
   let dmg = Math.floor(power * (isCrit ? 2.5 : 1));
   if (state.godMode) dmg = 999999999;
   dealDamage(dmg, isCrit);
@@ -375,15 +427,19 @@ function useAbility(key) {
 
 function defeatMob() {
   const isElite = !!state.mob?.isElite;
-  const beli = calcBeliPerKill(false, isElite);
+  let beli = calcBeliPerKill(false, isElite);
+  // Golden mob bonus
+  if (state.eventGoldMob) { beli *= 50; state.eventGoldMob = false; }
   const xp = calcXpPerKill(false, isElite);
   gainBeli(beli);
   gainXp(xp);
   state.totalKills++;
+  if (isElite) state.eliteKills = (state.eliteKills || 0) + 1;
   spawnFloater('+' + fmtNum(beli) + ' Beli', false, true);
   if (isElite) toast({ title: 'Elite kill!', body: '+' + fmtNum(beli) + ' Beli', kind: 'success' });
   spawnMob();
   checkQuests();
+  checkAchievements();
 }
 
 function defeatBoss() {
@@ -422,6 +478,7 @@ function defeatBoss() {
   state.boss = null;
   state.bossNextAt = Date.now() + BOSS_COOLDOWN_MS;
   checkQuests();
+  checkAchievements();
 }
 
 function buyCrew(crewId) {
@@ -506,8 +563,8 @@ function travelTo(islandId) {
 }
 
 function swordPrice(sword) {
-  // HARDER: prices roughly doubled
-  const baseByRarity = { Common: 200, Uncommon: 8000, Rare: 120000, Legendary: 1500000, Mythical: 24000000 };
+  // HARDER 100x: prices roughly tripled, plus Divine tier
+  const baseByRarity = { Common: 600, Uncommon: 25000, Rare: 350000, Legendary: 4500000, Mythical: 70000000, Divine: 5000000000 };
   return baseByRarity[sword.rarity] || 1000;
 }
 
@@ -597,8 +654,42 @@ function questProgress(q) {
     case 'bossesKilled':  return state.bossesKilled;
     case 'prestiges':     return state.prestiges;
     case 'gachaPulls':    return state.gachaPulls;
+    case 'eliteKills':    return state.eliteKills || 0;
+    case 'eventsTriggered': return state.eventsTriggered || 0;
   }
   return 0;
+}
+
+function achievementProgress(a) {
+  switch (a.field) {
+    case 'totalClicks':       return state.totalClicks;
+    case 'totalBeliEarned':   return state.totalBeliEarned;
+    case 'totalKills':        return state.totalKills;
+    case 'bossesKilled':      return state.bossesKilled;
+    case 'ownedFruitsCount':  return state.ownedFruits.length;
+    case 'ownedSwordsCount':  return state.ownedSwords.length;
+    case 'divineEquipped':    {
+      const f = DATA.fruits.find(x => x.id === state.fruitId);
+      const s = DATA.swords.find(x => x.id === state.swordId);
+      return (f?.rarity === 'Divine' || s?.rarity === 'Divine') ? 1 : 0;
+    }
+    case 'hasAxe':            return state.ownedSwords.includes('almighty-axe') ? 1 : 0;
+    case 'prestiges':         return state.prestiges;
+    case 'reachedWorldEnd':   return state.islandId === 'world-end' ? 1 : 0;
+    case 'eventsTriggered':   return state.eventsTriggered || 0;
+    case 'hasYonko':          return (state.crew?.yonko || 0) >= 1 ? 1 : 0;
+  }
+  return 0;
+}
+
+function checkAchievements() {
+  for (const a of ACHIEVEMENTS) {
+    if (state.achievementsClaimed.includes(a.id)) continue;
+    if (achievementProgress(a) >= a.goal) {
+      state.achievementsClaimed.push(a.id);
+      toast({ title: '🏆 Achievement!', body: a.name, kind: 'success' });
+    }
+  }
 }
 
 function checkQuests() {
@@ -813,18 +904,21 @@ function renderFruitShop() {
 }
 
 function renderSwordShop() {
-  return DATA.swords.map(s => {
+  // Sort by price
+  const sorted = [...DATA.swords].sort((a, b) => swordPrice(a) - swordPrice(b));
+  return sorted.map(s => {
     const owned = state.ownedSwords.includes(s.id);
     const equipped = state.swordId === s.id;
     const cost = swordPrice(s);
     const lvLock = state.level < (s.requiredLevel || 1);
     const cant = lvLock || (!owned && state.beli < cost);
+    const icon = s.rarity === 'Divine' ? Icons.axe : Icons.sword;
     return `
-      <button class="shop-item ${equipped ? 'equipped' : ''} ${lvLock ? 'locked' : ''}" data-buy="${s.id}" ${cant ? 'disabled' : ''}>
-        <div class="shop-icon">${Icons.sword}</div>
+      <button class="shop-item ${equipped ? 'equipped' : ''} ${lvLock ? 'locked' : ''} ${s.rarity === 'Divine' ? 'divine' : ''}" data-buy="${s.id}" ${cant ? 'disabled' : ''}>
+        <div class="shop-icon" ${s.rarity === 'Divine' ? 'style="color:var(--r-divine)"' : ''}>${icon}</div>
         <div class="shop-info">
-          <div class="name">${escapeHtml(s.name)}</div>
-          <div class="meta">${s.rarity} · ${s.tier || ''}</div>
+          <div class="name" title="${escapeHtml(s.name)}">${escapeHtml(s.name)}</div>
+          <div class="meta">${s.rarity}${s.tier ? ' · ' + s.tier : ''}</div>
           <div class="perk">+${fmtNum((RARITY_FLAT_DMG[s.rarity] || 0) * 1.2)} flat dmg</div>
           ${lvLock ? `<div class="req">Requires Lvl ${s.requiredLevel}</div>` : ''}
         </div>
@@ -883,7 +977,23 @@ function renderInfo() {
   document.querySelectorAll('#info-panes .tab-pane').forEach(p => p.classList.toggle('active', p.id === 'pane-' + activeInfoTab));
   document.getElementById('pane-equip').innerHTML = renderEquip();
   document.getElementById('pane-quests').innerHTML = renderQuests();
+  document.getElementById('pane-achievements').innerHTML = renderAchievements();
   document.getElementById('pane-stats').innerHTML = renderStats();
+}
+
+function renderAchievements() {
+  return ACHIEVEMENTS.map(a => {
+    const claimed = state.achievementsClaimed.includes(a.id);
+    const cur = achievementProgress(a);
+    const pct = Math.min(100, (cur / a.goal) * 100);
+    return `
+      <div class="quest-card ${claimed ? 'done' : ''}">
+        <div class="name">${escapeHtml(a.name)}<span class="check">${claimed ? '🏆' : ''}</span></div>
+        <div class="desc">${escapeHtml(a.desc)}</div>
+        <div class="quest-progress"><div style="width:${pct}%"></div></div>
+        <div class="reward">${fmtNum(cur)} / ${fmtNum(a.goal)} · <span style="color:var(--r-${a.tier.toLowerCase()})">${a.tier}</span></div>
+      </div>`;
+  }).join('');
 }
 
 function renderEquip() {
@@ -932,7 +1042,10 @@ function renderStats() {
   const rows = [
     ['Total clicks', fmtNum(state.totalClicks)],
     ['Total kills',  fmtNum(state.totalKills)],
+    ['Elite kills',  fmtNum(state.eliteKills || 0)],
     ['Bosses defeated', fmtNum(state.bossesKilled)],
+    ['Random events', fmtNum(state.eventsTriggered || 0)],
+    ['Achievements', fmtNum(state.achievementsClaimed.length) + ' / ' + ACHIEVEMENTS.length],
     ['Total Beli earned', fmtNum(Math.floor(state.totalBeliEarned))],
     ['Gacha pulls', fmtNum(state.gachaPulls)],
     ['Awakenings', fmtNum(state.prestiges)],
@@ -1245,7 +1358,15 @@ function handleAdminAction(act, btn) {
     case 'addBeli':         gainBeli(parseFloat(amt)); break;
     case 'resetBeli':       state.beli = 0; break;
     case 'addXp':           gainXp(parseFloat(amt)); break;
-    case 'addLevel':        for (let i = 0; i < parseInt(amt); i++) { state.xp = levelXpReq(state.level); gainXp(0); state.level++; } break;
+    case 'addLevel': {
+      const n = parseInt(amt) || 1;
+      for (let i = 0; i < n; i++) {
+        state.xp = 0;
+        state.level++;
+        onLevelUp();
+      }
+      break;
+    }
     case 'setLevel':        state.level = Math.max(1, parseInt(amt) || 1); state.xp = 0; break;
     case 'setLevelInput': {
       const v = parseInt(document.getElementById('admin-level-input').value) || 1;
@@ -1279,12 +1400,16 @@ function handleAdminAction(act, btn) {
     case 'addCrew':         CREW.forEach(c => { state.crew[c.id] = (state.crew[c.id] || 0) + parseInt(amt); }); break;
     case 'clearCrew':       state.crew = {}; break;
     case 'freeGacha': {
-      for (let i = 0; i < parseInt(amt); i++) {
-        const tmpBeli = state.beli;
-        state.beli = GACHA_COST;
-        gachaPull();
-        state.beli = tmpBeli + (state.beli - 0); // gachaPull may refund
+      const n = parseInt(amt) || 1;
+      // Bypass cost entirely
+      const savedBeli = state.beli;
+      state.beli = GACHA_COST * n + 1;
+      for (let i = 0; i < n; i++) {
+        if (state.beli >= GACHA_COST) gachaPull();
       }
+      // Restore original Beli, but keep any duplicate refunds we picked up along the way
+      const refundsKept = Math.max(0, state.beli - 1);
+      state.beli = savedBeli + refundsKept;
       break;
     }
     case 'travel':          travelTo(id); break;
@@ -1349,9 +1474,25 @@ function tick() {
     state.bossNextAt = Date.now() + BOSS_COOLDOWN_MS / 2;
     renderArena();
   }
+  // Random events: fire on schedule
+  if (!state.eventNextAt) state.eventNextAt = Date.now() + 60000 + Math.random() * 30000;
+  if (Date.now() >= state.eventNextAt) {
+    triggerRandomEvent();
+    state.eventNextAt = Date.now() + 60000 + Math.random() * 60000;
+  }
   renderArenaQuick();
   // Auto-strike (admin)
   if (state.autoStrike) strike();
+}
+
+function triggerRandomEvent() {
+  const ev = RANDOM_EVENTS[Math.floor(Math.random() * RANDOM_EVENTS.length)];
+  if (!ev) return;
+  ev.apply();
+  state.eventsTriggered = (state.eventsTriggered || 0) + 1;
+  toast({ title: ev.name, body: ev.desc, kind: 'success' });
+  checkQuests();
+  checkAchievements();
 }
 
 function passiveTick() {
