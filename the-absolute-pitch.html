@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Absolute Pitch</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg-primary:#0d0d1a;--bg-secondary:#1a1a2e;--bg-card:#16213e;--bg-hover:#1f3460;--accent:#00f5a0;--accent-dim:#00c07a;--text-primary:#f0f0f0;--text-secondary:#a0a8b8;--text-muted:#6b7280;--border:#2a2a4a;--danger:#ff4757;--success:#00f5a0;--warning:#ffa502;--radius:12px;--radius-sm:8px;--shadow:0 4px 24px rgba(0,0,0,0.4)}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;background:var(--bg-primary);color:var(--text-primary);line-height:1.6;min-height:100vh;overflow-x:hidden}
+
+/* HEADER */
+.header{position:sticky;top:0;z-index:1000;background:rgba(13,13,26,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-size:1.4rem;font-weight:900;letter-spacing:3px;text-transform:uppercase;background:linear-gradient(135deg,var(--accent),#00d4aa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
+.ticker{flex:1;margin:0 2rem;overflow:hidden;position:relative;height:32px}
+.ticker-track{display:flex;align-items:center;height:100%;animation:scroll-ticker 40s linear infinite;white-space:nowrap;gap:3rem}
+.ticker-item{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--text-secondary)}
+.ticker-item .live-dot{width:6px;height:6px;border-radius:50%;background:var(--danger);animation:pulse-dot 1.5s infinite}
+.toggle-btn{background:var(--bg-card);border:1px solid var(--border);color:var(--text-primary);padding:0.4rem 1rem;border-radius:var(--radius-sm);cursor:pointer;font-size:0.8rem;transition:all 0.2s}
+.toggle-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+@keyframes scroll-ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:0.3}}
+
+/* GRID */
+.grid-container{display:grid;grid-template-columns:280px 1fr 340px;gap:1.5rem;padding:1.5rem 2rem;max-width:1600px;margin:0 auto;min-height:calc(100vh - 64px)}
+.grid-container.single-col{grid-template-columns:1fr}
+
+/* SIDEBAR LEFT */
+.sidebar-left{display:flex;flex-direction:column;gap:1.5rem}
+.panel{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;transition:border-color 0.2s}
+.panel:hover{border-color:var(--accent)}
+.panel-title{font-size:0.75rem;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:1rem;font-weight:700}
+.standings-table{width:100%;border-collapse:collapse;font-size:0.8rem}
+.standings-table th{text-align:left;color:var(--text-muted);font-weight:600;padding:0.4rem 0;border-bottom:1px solid var(--border)}
+.standings-table td{padding:0.4rem 0;color:var(--text-secondary)}
+.standings-table tr:first-child td{color:var(--accent);font-weight:700}
+.standings-table .pos{width:24px;color:var(--text-muted)}
+.standings-table .pts{text-align:right;font-weight:700;color:var(--text-primary)}
+.scorers-list{list-style:none;font-size:0.8rem}
+.scorers-list li{display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid rgba(42,42,74,0.5)}
+.scorers-list li:last-child{border-bottom:none}
+.scorers-list .goals{color:var(--accent);font-weight:700}
+
+/* MAIN FEED */
+.main-feed{display:flex;flex-direction:column;gap:1.5rem}
+.news-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem;transition:all 0.3s}
+.news-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,245,160,0.08)}
+.news-card .tag{display:inline-block;font-size:0.65rem;text-transform:uppercase;letter-spacing:1.5px;padding:0.25rem 0.75rem;border-radius:20px;margin-bottom:1rem;font-weight:700}
+.tag-worldcup{background:rgba(255,165,2,0.15);color:var(--warning)}
+.tag-league{background:rgba(0,245,160,0.12);color:var(--accent)}
+.tag-transfers{background:rgba(255,71,87,0.12);color:var(--danger)}
+.news-card h2{font-size:1.3rem;font-weight:800;line-height:1.3;margin-bottom:0.75rem;color:var(--text-primary)}
+.news-card p{color:var(--text-secondary);font-size:0.9rem;line-height:1.7}
+.news-card .meta{margin-top:1rem;font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px}
+
+/* GAME ZONE */
+.game-zone{display:flex;flex-direction:column;gap:1rem}
+.game-frame{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;position:relative;overflow:hidden}
+.game-frame::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(0,245,160,0.03) 0%,transparent 70%);pointer-events:none}
+.game-header{text-align:center;margin-bottom:1.25rem}
+.game-header h3{font-size:1.1rem;font-weight:800;color:var(--text-primary)}
+.game-header p{font-size:0.75rem;color:var(--text-muted);margin-top:0.25rem}
+.game-stats{display:flex;justify-content:space-between;margin-bottom:1.25rem;padding:0.75rem;background:var(--bg-secondary);border-radius:var(--radius-sm)}
+.stat-box{text-align:center}
+.stat-box .label{font-size:0.6rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted)}
+.stat-box .value{font-size:1.2rem;font-weight:800;color:var(--accent)}
+.stat-box .value.lives{color:var(--danger)}
+.hint-card{background:var(--bg-secondary);border-radius:var(--radius-sm);padding:1rem;margin-bottom:1rem}
+.hint-row{display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid rgba(42,42,74,0.4);font-size:0.8rem}
+.hint-row:last-child{border-bottom:none}
+.hint-row .hint-label{color:var(--text-muted);text-transform:uppercase;font-size:0.65rem;letter-spacing:1px}
+.hint-row .hint-value{color:var(--text-primary);font-weight:600}
+.hint-row .hint-value.hidden{color:var(--text-muted);font-style:italic}
+.btn-row{display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.btn{padding:0.5rem 0.9rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg-secondary);color:var(--text-secondary);font-size:0.72rem;cursor:pointer;transition:all 0.2s;font-weight:600}
+.btn:hover:not(:disabled){border-color:var(--accent);color:var(--accent);background:rgba(0,245,160,0.05)}
+.btn:disabled{opacity:0.4;cursor:not-allowed}
+.btn-primary{background:var(--accent);color:var(--bg-primary);border-color:var(--accent);font-weight:700}
+.btn-primary:hover{background:var(--accent-dim)}
+.input-group{position:relative;margin-bottom:1rem}
+.input-group input{width:100%;padding:0.7rem 1rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.85rem;outline:none;transition:border-color 0.2s}
+.input-group input:focus{border-color:var(--accent)}
+.autocomplete-list{position:absolute;top:100%;left:0;right:0;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);max-height:150px;overflow-y:auto;z-index:100;display:none}
+.autocomplete-list.show{display:block}
+.autocomplete-item{padding:0.5rem 1rem;font-size:0.8rem;cursor:pointer;color:var(--text-secondary);transition:background 0.15s}
+.autocomplete-item:hover,.autocomplete-item.active{background:var(--bg-hover);color:var(--accent)}
+.game-message{text-align:center;padding:1rem;border-radius:var(--radius-sm);font-weight:700;font-size:0.85rem;display:none}
+.game-message.success{display:block;background:rgba(0,245,160,0.1);color:var(--success);border:1px solid rgba(0,245,160,0.3);animation:glow-success 0.6s ease}
+.game-message.failure{display:block;background:rgba(255,71,87,0.1);color:var(--danger);border:1px solid rgba(255,71,87,0.3)}
+
+@keyframes glow-success{0%{box-shadow:0 0 0 rgba(0,245,160,0)}50%{box-shadow:0 0 30px rgba(0,245,160,0.3)}100%{box-shadow:0 0 0 rgba(0,245,160,0)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.shake{animation:shake 0.4s ease}
+
+/* MOBILE */
+@media(max-width:1024px){
+.grid-container{grid-template-columns:1fr;padding:1rem}
+.sidebar-left{order:2}
+.main-feed{order:1}
+.game-zone{order:0}
+.ticker{display:none}
+.header{padding:0 1rem}
+.logo{font-size:1.1rem}
+}
+</style>
+</head>
+<body>
+<header class="header">
+<div class="logo">THE ABSOLUTE PITCH</div>
+<div class="ticker">
+<div class="ticker-track" id="tickerTrack">
+<span class="ticker-item"><span class="live-dot"></span>Arsenal 2 - 1 Chelsea (FT)</span>
+<span class="ticker-item"><span class="live-dot"></span>Man City 0 - 0 Liverpool (HT)</span>
+<span class="ticker-item"><span class="live-dot"></span>Real Madrid 3 - 2 Barcelona (78')</span>
+<span class="ticker-item"><span class="live-dot"></span>Bayern Munich 1 - 0 Dortmund (65')</span>
+<span class="ticker-item"><span class="live-dot"></span>PSG 2 - 2 Marseille (FT)</span>
+<span class="ticker-item"><span class="live-dot"></span>Juventus 1 - 0 AC Milan (42')</span>
+<span class="ticker-item"><span class="live-dot"></span>Arsenal 2 - 1 Chelsea (FT)</span>
+<span class="ticker-item"><span class="live-dot"></span>Man City 0 - 0 Liverpool (HT)</span>
+<span class="ticker-item"><span class="live-dot"></span>Real Madrid 3 - 2 Barcelona (78')</span>
+<span class="ticker-item"><span class="live-dot"></span>Bayern Munich 1 - 0 Dortmund (65')</span>
+<span class="ticker-item"><span class="live-dot"></span>PSG 2 - 2 Marseille (FT)</span>
+<span class="ticker-item"><span class="live-dot"></span>Juventus 1 - 0 AC Milan (42')</span>
+</div>
+</div>
+<button class="toggle-btn" id="layoutToggle">Toggle Layout</button>
+</header>
+
+<main class="grid-container" id="gridContainer">
+<!-- LEFT SIDEBAR -->
+<aside class="sidebar-left">
+<div class="panel">
+<div class="panel-title">Premier League 2025/26 Final Standings</div>
+<table class="standings-table">
+<thead><tr><th class="pos">#</th><th>Club</th><th class="pts">Pts</th></tr></thead>
+<tbody>
+<tr><td class="pos">1</td><td>Arsenal</td><td class="pts">91</td></tr>
+<tr><td class="pos">2</td><td>Manchester City</td><td class="pts">88</td></tr>
+<tr><td class="pos">3</td><td>Liverpool</td><td class="pts">82</td></tr>
+<tr><td class="pos">4</td><td>Newcastle United</td><td class="pts">74</td></tr>
+<tr><td class="pos">5</td><td>Aston Villa</td><td class="pts">70</td></tr>
+<tr><td class="pos">6</td><td>Chelsea</td><td class="pts">67</td></tr>
+<tr><td class="pos">7</td><td>Tottenham</td><td class="pts">65</td></tr>
+<tr><td class="pos">8</td><td>Brighton</td><td class="pts">60</td></tr>
+</tbody>
+</table>
+</div>
+<div class="panel">
+<div class="panel-title">Top Scorers 2025/26</div>
+<ul class="scorers-list">
+<li><span>Erling Haaland</span><span class="goals">29</span></li>
+<li><span>Alexander Isak</span><span class="goals">24</span></li>
+<li><span>Bukayo Saka</span><span class="goals">21</span></li>
+<li><span>Mohamed Salah</span><span class="goals">20</span></li>
+<li><span>Ollie Watkins</span><span class="goals">18</span></li>
+<li><span>Cole Palmer</span><span class="goals">17</span></li>
+</ul>
+</div>
+</aside>
+
+<!-- MAIN FEED -->
+<section class="main-feed">
+<article class="news-card">
+<span class="tag tag-worldcup">FIFA World Cup 2026</span>
+<h2>Nations Lock In Final 26-Man Squads as World Cup 2026 Approaches</h2>
+<p>With the 2026 FIFA World Cup across the United States, Canada, and Mexico now just weeks away, federations are finalizing their tournament rosters. Thomas Tuchel has confirmed his 26-man England squad in a packed press conference at Wembley, balancing experienced campaigners with emerging talent from the Premier League's top sides. Meanwhile, the USMNT are preparing a high-profile roster reveal event in New York City, with head coach Mauricio Pochettino expected to lean heavily on his European-based contingent. The anticipation is building to a fever pitch as the biggest World Cup in history draws near.</p>
+<div class="meta">Published 2 hours ago &bull; World Football</div>
+</article>
+<article class="news-card">
+<span class="tag tag-league">Domestic Champions</span>
+<h2>Arsenal Crowned Premier League Champions as Raya Claims Third Golden Glove</h2>
+<p>Arsenal have officially been crowned 2025/26 Premier League champions after a dramatic final-day victory secured their place at the summit with 91 points, ending Manchester City's recent domestic dominance. Mikel Arteta's side combined defensive resilience with devastating attacking football throughout a grueling campaign. David Raya cemented his status as the league's premier goalkeeper by locking down his third consecutive Golden Glove award, keeping 21 clean sheets across the season. The Emirates faithful celebrated long into the night as north London turned red and white.</p>
+<div class="meta">Published 5 hours ago &bull; Premier League</div>
+</article>
+<article class="news-card">
+<span class="tag tag-transfers">Managerial Movement</span>
+<h2>Guardiola Departs City After Historic Decade; Liverpool Bolster Coaching Staff</h2>
+<p>The post-season managerial carousel is already spinning at full speed. Pep Guardiola has confirmed his historic decision to depart Manchester City after an incredible decade at the Etihad that yielded six Premier League titles, two Champions League trophies, and countless domestic cups. The Catalan leaves as the most decorated manager in English football history. Elsewhere, Liverpool are moving to strengthen Arne Slot's backroom team by negotiating a deal to bring Feyenoord assistant manager Etienne Reijnen into Anfield, reuniting the Dutch tactical duo that thrived in Rotterdam.</p>
+<div class="meta">Published 8 hours ago &bull; Transfers &amp; Appointments</div>
+</article>
+</section>
+
+<!-- RIGHT: GAME ZONE -->
+<aside class="game-zone">
+<div class="game-frame">
+<div class="game-header">
+<h3>Soccer Guesser</h3>
+<p>Guess the Player!</p>
+</div>
+<div class="game-stats">
+<div class="stat-box"><div class="label">Streak</div><div class="value" id="streakCount">0</div></div>
+<div class="stat-box"><div class="label">Lives</div><div class="value lives" id="livesCount">3</div></div>
+<div class="stat-box"><div class="label">Round</div><div class="value" id="roundCount">1</div></div>
+</div>
+<div class="hint-card" id="hintCard">
+<div class="hint-row"><span class="hint-label">Position</span><span class="hint-value" id="hintPosition">-</span></div>
+<div class="hint-row"><span class="hint-label">League</span><span class="hint-value" id="hintLeague">-</span></div>
+<div class="hint-row"><span class="hint-label">Nationality</span><span class="hint-value hidden" id="hintNationality">???</span></div>
+<div class="hint-row"><span class="hint-label">Special Trait</span><span class="hint-value hidden" id="hintTrait">???</span></div>
+</div>
+<div class="btn-row">
+<button class="btn" id="btnNationality">Reveal Nationality</button>
+<button class="btn" id="btnTrait">Reveal Special Trait</button>
+</div>
+<div class="input-group">
+<input type="text" id="guessInput" placeholder="Type player name..." autocomplete="off">
+<div class="autocomplete-list" id="autocompleteList"></div>
+</div>
+<div class="btn-row">
+<button class="btn btn-primary" id="btnSubmit">Submit Guess</button>
+<button class="btn" id="btnNext" style="display:none">Next Player</button>
+</div>
+<div class="game-message" id="gameMessage"></div>
+</div>
+</aside>
+</main>
+
+<script>
+// PLAYER DATABASE
+const players = [
+  { name: "Erling Haaland", position: "Forward", league: "Premier League", club: "Manchester City", nationality: "Norway", trait: "Scored back-to-back golden boots, hyper-physical striker." },
+  { name: "Kylian Mbappe", position: "Forward", league: "La Liga", club: "Real Madrid", nationality: "France", trait: "Fastest player in world football, record-breaking Paris departure." },
+  { name: "Jude Bellingham", position: "Midfielder", league: "La Liga", club: "Real Madrid", nationality: "England", trait: "Youngest English player to score in a Champions League final." },
+  { name: "Mohamed Salah", position: "Forward", league: "Premier League", club: "Liverpool", nationality: "Egypt", trait: "All-time Premier League top scorer for Liverpool, lethal left foot." },
+  { name: "Harry Kane", position: "Forward", league: "Bundesliga", club: "Bayern Munich", nationality: "England", trait: "England all-time top scorer, moved abroad after 19 years in London." },
+  { name: "Kevin De Bruyne", position: "Midfielder", league: "Premier League", club: "Manchester City", nationality: "Belgium", trait: "Premier League assist king, generational creative playmaker." }
+];
+
+// GAME STATE
+let currentPlayer = null;
+let streak = 0;
+let lives = 3;
+let round = 1;
+let nationalityRevealed = false;
+let traitRevealed = false;
+let gameOver = false;
+
+// DOM REFERENCES
+const streakEl = document.getElementById('streakCount');
+const livesEl = document.getElementById('livesCount');
+const roundEl = document.getElementById('roundCount');
+const hintPosition = document.getElementById('hintPosition');
+const hintLeague = document.getElementById('hintLeague');
+const hintNationality = document.getElementById('hintNationality');
+const hintTrait = document.getElementById('hintTrait');
+const btnNationality = document.getElementById('btnNationality');
+const btnTrait = document.getElementById('btnTrait');
+const guessInput = document.getElementById('guessInput');
+const autocompleteList = document.getElementById('autocompleteList');
+const btnSubmit = document.getElementById('btnSubmit');
+const btnNext = document.getElementById('btnNext');
+const gameMessage = document.getElementById('gameMessage');
+const layoutToggle = document.getElementById('layoutToggle');
+const gridContainer = document.getElementById('gridContainer');
+
+function pickRandomPlayer() {
+  const idx = Math.floor(Math.random() * players.length);
+  return players[idx];
+}
+
+function startRound() {
+  currentPlayer = pickRandomPlayer();
+  nationalityRevealed = false;
+  traitRevealed = false;
+  gameOver = false;
+  hintPosition.textContent = currentPlayer.position;
+  hintLeague.textContent = currentPlayer.league;
+  hintNationality.textContent = '???';
+  hintNationality.classList.add('hidden');
+  hintTrait.textContent = '???';
+  hintTrait.classList.add('hidden');
+  btnNationality.disabled = false;
+  btnTrait.disabled = false;
+  guessInput.value = '';
+  guessInput.disabled = false;
+  btnSubmit.style.display = 'inline-block';
+  btnNext.style.display = 'none';
+  gameMessage.className = 'game-message';
+  gameMessage.textContent = '';
+  roundEl.textContent = round;
+  autocompleteList.classList.remove('show');
+}
+
+btnNationality.addEventListener('click', () => {
+  if (!nationalityRevealed && !gameOver) {
+    hintNationality.textContent = currentPlayer.nationality;
+    hintNationality.classList.remove('hidden');
+    nationalityRevealed = true;
+    btnNationality.disabled = true;
+  }
+});
+
+btnTrait.addEventListener('click', () => {
+  if (!traitRevealed && !gameOver) {
+    hintTrait.textContent = currentPlayer.trait;
+    hintTrait.classList.remove('hidden');
+    traitRevealed = true;
+    btnTrait.disabled = true;
+  }
+});
+
+// AUTOCOMPLETE
+guessInput.addEventListener('input', () => {
+  const val = guessInput.value.trim().toLowerCase();
+  autocompleteList.innerHTML = '';
+  if (val.length < 2) { autocompleteList.classList.remove('show'); return; }
+  const matches = players.filter(p => p.name.toLowerCase().includes(val));
+  if (matches.length === 0) { autocompleteList.classList.remove('show'); return; }
+  matches.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'autocomplete-item';
+    div.textContent = p.name;
+    div.addEventListener('click', () => {
+      guessInput.value = p.name;
+      autocompleteList.classList.remove('show');
+    });
+    autocompleteList.appendChild(div);
+  });
+  autocompleteList.classList.add('show');
+});
+
+guessInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { btnSubmit.click(); }
+});
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.input-group')) autocompleteList.classList.remove('show');
+});
+
+// SUBMIT GUESS
+btnSubmit.addEventListener('click', () => {
+  if (gameOver) return;
+  const guess = guessInput.value.trim().toLowerCase();
+  if (!guess) return;
+  const correct = currentPlayer.name.toLowerCase();
+  if (guess === correct) {
+    // CORRECT
+    gameOver = true;
+    streak++;
+    streakEl.textContent = streak;
+    gameMessage.textContent = 'Correct! ' + currentPlayer.name + '!';
+    gameMessage.className = 'game-message success';
+    guessInput.disabled = true;
+    btnSubmit.style.display = 'none';
+    btnNext.style.display = 'inline-block';
+  } else {
+    // INCORRECT
+    lives--;
+    livesEl.textContent = lives;
+    guessInput.value = '';
+    guessInput.classList.add('shake');
+    setTimeout(() => guessInput.classList.remove('shake'), 400);
+    if (lives <= 0) {
+      gameOver = true;
+      streak = 0;
+      streakEl.textContent = streak;
+      gameMessage.textContent = 'Game Over! It was ' + currentPlayer.name + '.';
+      gameMessage.className = 'game-message failure';
+      guessInput.disabled = true;
+      btnSubmit.style.display = 'none';
+      btnNext.style.display = 'inline-block';
+    }
+  }
+});
+
+// NEXT ROUND
+btnNext.addEventListener('click', () => {
+  if (lives <= 0) { lives = 3; livesEl.textContent = lives; }
+  round++;
+  startRound();
+});
+
+// LAYOUT TOGGLE
+layoutToggle.addEventListener('click', () => {
+  gridContainer.classList.toggle('single-col');
+});
+
+// INIT
+startRound();
+</script>
+</body>
+</html>
