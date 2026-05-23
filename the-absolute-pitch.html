@@ -6,19 +6,30 @@
 <title>The Absolute Pitch</title>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--bg-primary:#0d0d1a;--bg-secondary:#1a1a2e;--bg-card:#16213e;--bg-hover:#1f3460;--accent:#00f5a0;--accent-dim:#00c07a;--text-primary:#f0f0f0;--text-secondary:#a0a8b8;--text-muted:#6b7280;--border:#2a2a4a;--danger:#ff4757;--success:#00f5a0;--warning:#ffa502;--radius:12px;--radius-sm:8px;--shadow:0 4px 24px rgba(0,0,0,0.4)}
+:root{--bg-primary:#0d0d1a;--bg-secondary:#1a1a2e;--bg-card:#16213e;--bg-hover:#1f3460;--accent-green:#00f5a0;--accent-blue:#00d4ff;--accent-pink:#ff2d75;--accent-gold:#ffd700;--accent-purple:#b347ff;--accent-orange:#ff6b35;--accent-dim:#00c07a;--text-primary:#f0f0f0;--text-secondary:#a0a8b8;--text-muted:#6b7280;--border:#2a2a4a;--danger:#ff4757;--success:#00f5a0;--warning:#ffa502;--radius:12px;--radius-sm:8px;--shadow:0 4px 24px rgba(0,0,0,0.4)}
 html{scroll-behavior:smooth}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;background:var(--bg-primary);color:var(--text-primary);line-height:1.6;min-height:100vh;overflow-x:hidden}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;background:var(--bg-primary);color:var(--text-primary);line-height:1.6;min-height:100vh;overflow-x:hidden;background-image:radial-gradient(ellipse at 20% 50%,rgba(0,212,255,0.04) 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(179,71,255,0.04) 0%,transparent 50%),radial-gradient(ellipse at 50% 80%,rgba(255,45,117,0.03) 0%,transparent 50%),radial-gradient(circle at 10% 90%,rgba(0,245,160,0.03) 0%,transparent 40%),radial-gradient(circle at 90% 70%,rgba(255,215,0,0.03) 0%,transparent 40%)}
 
 /* HEADER */
 .header{position:sticky;top:0;z-index:1000;background:rgba(13,13,26,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px}
-.logo{font-size:1.4rem;font-weight:900;letter-spacing:3px;text-transform:uppercase;background:linear-gradient(135deg,var(--accent),#00d4aa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
+.header::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent-green),var(--accent-blue),var(--accent-pink),var(--accent-gold),var(--accent-purple));opacity:0.7}
+.logo{font-size:1.6rem;font-weight:900;letter-spacing:3px;text-transform:uppercase;background:linear-gradient(135deg,var(--accent-green),var(--accent-blue),var(--accent-pink),var(--accent-gold));background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap;animation:logo-gradient 4s ease infinite;text-shadow:0 0 30px rgba(0,245,160,0.3)}
+@keyframes logo-gradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+.logo::after{content:"";display:block;height:2px;margin-top:2px;background:linear-gradient(90deg,transparent,var(--accent-blue),var(--accent-pink),transparent);background-size:200% 100%;animation:shimmer 3s linear infinite}
 .ticker{flex:1;margin:0 2rem;overflow:hidden;position:relative;height:32px}
 .ticker-track{display:flex;align-items:center;height:100%;animation:scroll-ticker 40s linear infinite;white-space:nowrap;gap:3rem}
 .ticker-item{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--text-secondary)}
-.ticker-item .live-dot{width:6px;height:6px;border-radius:50%;background:var(--danger);animation:pulse-dot 1.5s infinite}
-.toggle-btn{background:var(--bg-card);border:1px solid var(--border);color:var(--text-primary);padding:0.4rem 1rem;border-radius:var(--radius-sm);cursor:pointer;font-size:0.8rem;transition:all 0.2s}
-.toggle-btn:hover{border-color:var(--accent);color:var(--accent)}
+.ticker-item:nth-child(6n+1) .live-dot{background:var(--danger)}
+.ticker-item:nth-child(6n+2) .live-dot{background:var(--accent-blue)}
+.ticker-item:nth-child(6n+3) .live-dot{background:var(--accent-gold)}
+.ticker-item:nth-child(6n+4) .live-dot{background:var(--accent-purple)}
+.ticker-item:nth-child(6n+5) .live-dot{background:var(--accent-orange)}
+.ticker-item:nth-child(6n+6) .live-dot{background:var(--accent-pink)}
+.ticker-item .live-dot{width:6px;height:6px;border-radius:50%;animation:pulse-dot 1.5s infinite}
+.toggle-btn{background:linear-gradient(135deg,var(--bg-card),var(--bg-secondary));border:1px solid var(--border);color:var(--text-primary);padding:0.4rem 1rem;border-radius:var(--radius-sm);cursor:pointer;font-size:0.8rem;transition:all 0.3s;background-size:200% 200%;animation:btn-gradient 3s ease infinite}
+.toggle-btn:hover{border-color:var(--accent-blue);color:var(--accent-blue);box-shadow:0 0 15px rgba(0,212,255,0.2)}
+@keyframes btn-gradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
 @keyframes scroll-ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:0.3}}
@@ -29,68 +40,91 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 
 /* SIDEBAR LEFT */
 .sidebar-left{display:flex;flex-direction:column;gap:1.5rem}
-.panel{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;transition:border-color 0.2s}
-.panel:hover{border-color:var(--accent)}
-.panel-title{font-size:0.75rem;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:1rem;font-weight:700}
+.panel{background:linear-gradient(145deg,var(--bg-card),rgba(26,26,46,0.8));border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;transition:all 0.3s;position:relative;overflow:hidden}
+.panel::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent-purple),var(--accent-blue));opacity:0.6}
+.panel:hover{border-color:var(--accent-purple);box-shadow:0 4px 20px rgba(179,71,255,0.1)}
+.panel-title{font-size:0.75rem;text-transform:uppercase;letter-spacing:2px;color:var(--accent-blue);margin-bottom:1rem;font-weight:700}
 .standings-table{width:100%;border-collapse:collapse;font-size:0.8rem}
 .standings-table th{text-align:left;color:var(--text-muted);font-weight:600;padding:0.4rem 0;border-bottom:1px solid var(--border)}
 .standings-table td{padding:0.4rem 0;color:var(--text-secondary)}
-.standings-table tr:first-child td{color:var(--accent);font-weight:700}
-.standings-table .pos{width:24px;color:var(--text-muted)}
+.standings-table tr:nth-child(1) td{color:var(--accent-gold);font-weight:700}
+.standings-table tr:nth-child(1) td.pos{background:linear-gradient(135deg,rgba(255,215,0,0.2),rgba(255,215,0,0.05));border-radius:4px;text-align:center}
+.standings-table tr:nth-child(2) td{color:#c0c0c0;font-weight:700}
+.standings-table tr:nth-child(2) td.pos{background:linear-gradient(135deg,rgba(192,192,192,0.2),rgba(192,192,192,0.05));border-radius:4px;text-align:center}
+.standings-table tr:nth-child(3) td{color:#cd7f32;font-weight:600}
+.standings-table tr:nth-child(3) td.pos{background:linear-gradient(135deg,rgba(205,127,50,0.2),rgba(205,127,50,0.05));border-radius:4px;text-align:center}
+.standings-table .pos{width:28px;color:var(--text-muted)}
 .standings-table .pts{text-align:right;font-weight:700;color:var(--text-primary)}
 .scorers-list{list-style:none;font-size:0.8rem}
-.scorers-list li{display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid rgba(42,42,74,0.5)}
+.scorers-list li{display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid rgba(42,42,74,0.5);position:relative}
 .scorers-list li:last-child{border-bottom:none}
-.scorers-list .goals{color:var(--accent);font-weight:700}
+.scorers-list li:nth-child(1){background:linear-gradient(90deg,rgba(255,215,0,0.08),transparent);padding-left:0.5rem;border-radius:4px}
+.scorers-list li:nth-child(1) .goals{color:var(--accent-gold)}
+.scorers-list li:nth-child(2){background:linear-gradient(90deg,rgba(0,212,255,0.06),transparent);padding-left:0.5rem;border-radius:4px}
+.scorers-list li:nth-child(2) .goals{color:var(--accent-blue)}
+.scorers-list li:nth-child(3){background:linear-gradient(90deg,rgba(179,71,255,0.06),transparent);padding-left:0.5rem;border-radius:4px}
+.scorers-list li:nth-child(3) .goals{color:var(--accent-purple)}
+.scorers-list .goals{color:var(--accent-green);font-weight:700}
 
 /* MAIN FEED */
 .main-feed{display:flex;flex-direction:column;gap:1.5rem}
-.news-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem;transition:all 0.3s}
-.news-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,245,160,0.08)}
+.news-card{background:linear-gradient(145deg,var(--bg-card),rgba(22,33,62,0.9));border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem;transition:all 0.3s;position:relative;overflow:hidden}
+.news-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--radius) var(--radius) 0 0;opacity:0.8}
+.news-card:nth-child(1)::before{background:linear-gradient(90deg,var(--accent-gold),var(--accent-orange))}
+.news-card:nth-child(2)::before{background:linear-gradient(90deg,var(--accent-green),var(--accent-blue))}
+.news-card:nth-child(3)::before{background:linear-gradient(90deg,var(--accent-pink),var(--accent-purple))}
+.news-card:nth-child(1):hover{border-color:var(--accent-gold);transform:translateY(-3px);box-shadow:0 8px 32px rgba(255,215,0,0.12),0 0 60px rgba(255,107,53,0.05)}
+.news-card:nth-child(2):hover{border-color:var(--accent-green);transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,245,160,0.12),0 0 60px rgba(0,212,255,0.05)}
+.news-card:nth-child(3):hover{border-color:var(--accent-pink);transform:translateY(-3px);box-shadow:0 8px 32px rgba(255,45,117,0.12),0 0 60px rgba(179,71,255,0.05)}
 .news-card .tag{display:inline-block;font-size:0.65rem;text-transform:uppercase;letter-spacing:1.5px;padding:0.25rem 0.75rem;border-radius:20px;margin-bottom:1rem;font-weight:700}
-.tag-worldcup{background:rgba(255,165,2,0.15);color:var(--warning)}
-.tag-league{background:rgba(0,245,160,0.12);color:var(--accent)}
-.tag-transfers{background:rgba(255,71,87,0.12);color:var(--danger)}
-.news-card h2{font-size:1.3rem;font-weight:800;line-height:1.3;margin-bottom:0.75rem;color:var(--text-primary)}
+.tag-worldcup{background:linear-gradient(135deg,rgba(255,165,2,0.2),rgba(255,107,53,0.15));color:var(--accent-gold);border:1px solid rgba(255,215,0,0.2)}
+.tag-league{background:linear-gradient(135deg,rgba(0,245,160,0.15),rgba(0,212,255,0.1));color:var(--accent-green);border:1px solid rgba(0,245,160,0.2)}
+.tag-transfers{background:linear-gradient(135deg,rgba(255,45,117,0.15),rgba(179,71,255,0.1));color:var(--accent-pink);border:1px solid rgba(255,45,117,0.2)}
+.news-card h2{font-size:1.4rem;font-weight:800;line-height:1.3;margin-bottom:0.75rem;background:linear-gradient(135deg,var(--text-primary),var(--text-secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.news-card:nth-child(1) h2{background:linear-gradient(135deg,#ffffff,var(--accent-gold));-webkit-background-clip:text;background-clip:text}
+.news-card:nth-child(2) h2{background:linear-gradient(135deg,#ffffff,var(--accent-green));-webkit-background-clip:text;background-clip:text}
+.news-card:nth-child(3) h2{background:linear-gradient(135deg,#ffffff,var(--accent-pink));-webkit-background-clip:text;background-clip:text}
 .news-card p{color:var(--text-secondary);font-size:0.9rem;line-height:1.7}
 .news-card .meta{margin-top:1rem;font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px}
 
 /* GAME ZONE */
 .game-zone{display:flex;flex-direction:column;gap:1rem}
-.game-frame{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;position:relative;overflow:hidden}
-.game-frame::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(0,245,160,0.03) 0%,transparent 70%);pointer-events:none}
+.game-frame{background:linear-gradient(160deg,var(--bg-card),rgba(26,26,46,0.9));border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;position:relative;overflow:hidden;animation:game-border-pulse 3s ease-in-out infinite}
+@keyframes game-border-pulse{0%,100%{border-color:var(--border);box-shadow:0 0 0 rgba(0,212,255,0)}50%{border-color:rgba(0,212,255,0.4);box-shadow:0 0 20px rgba(0,212,255,0.08)}}
+.game-frame::before{content:"";position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(0,212,255,0.04) 0%,transparent 40%),radial-gradient(circle at 80% 80%,rgba(179,71,255,0.03) 0%,transparent 40%);pointer-events:none}
 .game-header{text-align:center;margin-bottom:1.25rem}
-.game-header h3{font-size:1.1rem;font-weight:800;color:var(--text-primary)}
+.game-header h3{font-size:1.2rem;font-weight:800;background:linear-gradient(135deg,var(--accent-blue),var(--accent-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .game-header p{font-size:0.75rem;color:var(--text-muted);margin-top:0.25rem}
-.game-stats{display:flex;justify-content:space-between;margin-bottom:1.25rem;padding:0.75rem;background:var(--bg-secondary);border-radius:var(--radius-sm)}
+.game-stats{display:flex;justify-content:space-between;margin-bottom:1.25rem;padding:0.75rem;background:linear-gradient(135deg,var(--bg-secondary),rgba(22,33,62,0.6));border-radius:var(--radius-sm);border:1px solid rgba(0,212,255,0.1)}
 .stat-box{text-align:center}
 .stat-box .label{font-size:0.6rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted)}
-.stat-box .value{font-size:1.2rem;font-weight:800;color:var(--accent)}
+.stat-box .value{font-size:1.2rem;font-weight:800;color:var(--accent-blue)}
 .stat-box .value.lives{color:var(--danger)}
-.hint-card{background:var(--bg-secondary);border-radius:var(--radius-sm);padding:1rem;margin-bottom:1rem}
+.hint-card{background:linear-gradient(135deg,var(--bg-secondary),rgba(22,33,62,0.5));border-radius:var(--radius-sm);padding:1rem;margin-bottom:1rem;border:1px solid rgba(179,71,255,0.1)}
 .hint-row{display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid rgba(42,42,74,0.4);font-size:0.8rem}
 .hint-row:last-child{border-bottom:none}
 .hint-row .hint-label{color:var(--text-muted);text-transform:uppercase;font-size:0.65rem;letter-spacing:1px}
 .hint-row .hint-value{color:var(--text-primary);font-weight:600}
 .hint-row .hint-value.hidden{color:var(--text-muted);font-style:italic}
 .btn-row{display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap}
-.btn{padding:0.5rem 0.9rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg-secondary);color:var(--text-secondary);font-size:0.72rem;cursor:pointer;transition:all 0.2s;font-weight:600}
-.btn:hover:not(:disabled){border-color:var(--accent);color:var(--accent);background:rgba(0,245,160,0.05)}
+.btn{padding:0.5rem 0.9rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--bg-secondary),var(--bg-card));color:var(--text-secondary);font-size:0.72rem;cursor:pointer;transition:all 0.3s;font-weight:600}
+.btn:hover:not(:disabled){border-color:var(--accent-purple);color:var(--accent-purple);background:linear-gradient(135deg,rgba(179,71,255,0.08),rgba(0,212,255,0.05));box-shadow:0 0 12px rgba(179,71,255,0.15)}
 .btn:disabled{opacity:0.4;cursor:not-allowed}
-.btn-primary{background:var(--accent);color:var(--bg-primary);border-color:var(--accent);font-weight:700}
-.btn-primary:hover{background:var(--accent-dim)}
+.btn-primary{background:linear-gradient(135deg,var(--accent-green),var(--accent-blue));color:var(--bg-primary);border-color:transparent;font-weight:700;background-size:200% 200%;animation:btn-gradient 3s ease infinite}
+.btn-primary:hover{box-shadow:0 0 20px rgba(0,245,160,0.3);transform:translateY(-1px)}
 .input-group{position:relative;margin-bottom:1rem}
-.input-group input{width:100%;padding:0.7rem 1rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.85rem;outline:none;transition:border-color 0.2s}
-.input-group input:focus{border-color:var(--accent)}
+.input-group input{width:100%;padding:0.7rem 1rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s}
+.input-group input:focus{border-color:var(--accent-blue);box-shadow:0 0 12px rgba(0,212,255,0.15)}
 .autocomplete-list{position:absolute;top:100%;left:0;right:0;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);max-height:150px;overflow-y:auto;z-index:100;display:none}
 .autocomplete-list.show{display:block}
-.autocomplete-item{padding:0.5rem 1rem;font-size:0.8rem;cursor:pointer;color:var(--text-secondary);transition:background 0.15s}
-.autocomplete-item:hover,.autocomplete-item.active{background:var(--bg-hover);color:var(--accent)}
+.autocomplete-item{padding:0.5rem 1rem;font-size:0.8rem;cursor:pointer;color:var(--text-secondary);transition:all 0.15s}
+.autocomplete-item:hover,.autocomplete-item.active{background:var(--bg-hover);color:var(--accent-blue)}
 .game-message{text-align:center;padding:1rem;border-radius:var(--radius-sm);font-weight:700;font-size:0.85rem;display:none}
-.game-message.success{display:block;background:rgba(0,245,160,0.1);color:var(--success);border:1px solid rgba(0,245,160,0.3);animation:glow-success 0.6s ease}
-.game-message.failure{display:block;background:rgba(255,71,87,0.1);color:var(--danger);border:1px solid rgba(255,71,87,0.3)}
+.game-message.success{display:block;background:linear-gradient(135deg,rgba(0,245,160,0.1),rgba(0,212,255,0.08));color:var(--success);border:1px solid rgba(0,245,160,0.3);animation:glow-success 0.6s ease}
+.game-message.failure{display:block;background:linear-gradient(135deg,rgba(255,71,87,0.1),rgba(255,45,117,0.08));color:var(--danger);border:1px solid rgba(255,71,87,0.3);animation:glow-failure 0.6s ease}
 
-@keyframes glow-success{0%{box-shadow:0 0 0 rgba(0,245,160,0)}50%{box-shadow:0 0 30px rgba(0,245,160,0.3)}100%{box-shadow:0 0 0 rgba(0,245,160,0)}}
+@keyframes glow-success{0%{box-shadow:0 0 0 rgba(0,245,160,0)}50%{box-shadow:0 0 40px rgba(0,245,160,0.4)}100%{box-shadow:0 0 0 rgba(0,245,160,0)}}
+@keyframes glow-failure{0%{box-shadow:0 0 0 rgba(255,45,117,0)}50%{box-shadow:0 0 40px rgba(255,45,117,0.3)}100%{box-shadow:0 0 0 rgba(255,45,117,0)}}
 @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
 .shake{animation:shake 0.4s ease}
 
@@ -216,7 +250,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 </div>
 </aside>
 </main>
-
 <script>
 // PLAYER DATABASE
 const players = [
@@ -238,22 +271,22 @@ let traitRevealed = false;
 let gameOver = false;
 
 // DOM REFERENCES
-const streakEl = document.getElementById('streakCount');
-const livesEl = document.getElementById('livesCount');
-const roundEl = document.getElementById('roundCount');
-const hintPosition = document.getElementById('hintPosition');
-const hintLeague = document.getElementById('hintLeague');
-const hintNationality = document.getElementById('hintNationality');
-const hintTrait = document.getElementById('hintTrait');
-const btnNationality = document.getElementById('btnNationality');
-const btnTrait = document.getElementById('btnTrait');
-const guessInput = document.getElementById('guessInput');
-const autocompleteList = document.getElementById('autocompleteList');
-const btnSubmit = document.getElementById('btnSubmit');
-const btnNext = document.getElementById('btnNext');
-const gameMessage = document.getElementById('gameMessage');
-const layoutToggle = document.getElementById('layoutToggle');
-const gridContainer = document.getElementById('gridContainer');
+const streakEl = document.getElementById("streakCount");
+const livesEl = document.getElementById("livesCount");
+const roundEl = document.getElementById("roundCount");
+const hintPosition = document.getElementById("hintPosition");
+const hintLeague = document.getElementById("hintLeague");
+const hintNationality = document.getElementById("hintNationality");
+const hintTrait = document.getElementById("hintTrait");
+const btnNationality = document.getElementById("btnNationality");
+const btnTrait = document.getElementById("btnTrait");
+const guessInput = document.getElementById("guessInput");
+const autocompleteList = document.getElementById("autocompleteList");
+const btnSubmit = document.getElementById("btnSubmit");
+const btnNext = document.getElementById("btnNext");
+const gameMessage = document.getElementById("gameMessage");
+const layoutToggle = document.getElementById("layoutToggle");
+const gridContainer = document.getElementById("gridContainer");
 
 function pickRandomPlayer() {
   const idx = Math.floor(Math.random() * players.length);
@@ -267,70 +300,70 @@ function startRound() {
   gameOver = false;
   hintPosition.textContent = currentPlayer.position;
   hintLeague.textContent = currentPlayer.league;
-  hintNationality.textContent = '???';
-  hintNationality.classList.add('hidden');
-  hintTrait.textContent = '???';
-  hintTrait.classList.add('hidden');
+  hintNationality.textContent = "???";
+  hintNationality.classList.add("hidden");
+  hintTrait.textContent = "???";
+  hintTrait.classList.add("hidden");
   btnNationality.disabled = false;
   btnTrait.disabled = false;
-  guessInput.value = '';
+  guessInput.value = "";
   guessInput.disabled = false;
-  btnSubmit.style.display = 'inline-block';
-  btnNext.style.display = 'none';
-  gameMessage.className = 'game-message';
-  gameMessage.textContent = '';
+  btnSubmit.style.display = "inline-block";
+  btnNext.style.display = "none";
+  gameMessage.className = "game-message";
+  gameMessage.textContent = "";
   roundEl.textContent = round;
-  autocompleteList.classList.remove('show');
+  autocompleteList.classList.remove("show");
 }
 
-btnNationality.addEventListener('click', () => {
+btnNationality.addEventListener("click", () => {
   if (!nationalityRevealed && !gameOver) {
     hintNationality.textContent = currentPlayer.nationality;
-    hintNationality.classList.remove('hidden');
+    hintNationality.classList.remove("hidden");
     nationalityRevealed = true;
     btnNationality.disabled = true;
   }
 });
 
-btnTrait.addEventListener('click', () => {
+btnTrait.addEventListener("click", () => {
   if (!traitRevealed && !gameOver) {
     hintTrait.textContent = currentPlayer.trait;
-    hintTrait.classList.remove('hidden');
+    hintTrait.classList.remove("hidden");
     traitRevealed = true;
     btnTrait.disabled = true;
   }
 });
 
 // AUTOCOMPLETE
-guessInput.addEventListener('input', () => {
+guessInput.addEventListener("input", () => {
   const val = guessInput.value.trim().toLowerCase();
-  autocompleteList.innerHTML = '';
-  if (val.length < 2) { autocompleteList.classList.remove('show'); return; }
+  autocompleteList.innerHTML = "";
+  if (val.length < 2) { autocompleteList.classList.remove("show"); return; }
   const matches = players.filter(p => p.name.toLowerCase().includes(val));
-  if (matches.length === 0) { autocompleteList.classList.remove('show'); return; }
+  if (matches.length === 0) { autocompleteList.classList.remove("show"); return; }
   matches.forEach(p => {
-    const div = document.createElement('div');
-    div.className = 'autocomplete-item';
+    const div = document.createElement("div");
+    div.className = "autocomplete-item";
     div.textContent = p.name;
-    div.addEventListener('click', () => {
+    div.addEventListener("click", () => {
       guessInput.value = p.name;
-      autocompleteList.classList.remove('show');
+      autocompleteList.classList.remove("show");
     });
     autocompleteList.appendChild(div);
   });
-  autocompleteList.classList.add('show');
+  autocompleteList.classList.add("show");
 });
 
-guessInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') { btnSubmit.click(); }
+guessInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") { btnSubmit.click(); }
 });
 
-document.addEventListener('click', (e) => {
-  if (!e.target.closest('.input-group')) autocompleteList.classList.remove('show');
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".input-group")) autocompleteList.classList.remove("show");
 });
 
 // SUBMIT GUESS
-btnSubmit.addEventListener('click', () => {
+btnSubmit.addEventListener("click", () => {
   if (gameOver) return;
   const guess = guessInput.value.trim().toLowerCase();
   if (!guess) return;
@@ -340,41 +373,41 @@ btnSubmit.addEventListener('click', () => {
     gameOver = true;
     streak++;
     streakEl.textContent = streak;
-    gameMessage.textContent = 'Correct! ' + currentPlayer.name + '!';
-    gameMessage.className = 'game-message success';
+    gameMessage.textContent = "Correct! " + currentPlayer.name + "!";
+    gameMessage.className = "game-message success";
     guessInput.disabled = true;
-    btnSubmit.style.display = 'none';
-    btnNext.style.display = 'inline-block';
+    btnSubmit.style.display = "none";
+    btnNext.style.display = "inline-block";
   } else {
     // INCORRECT
     lives--;
     livesEl.textContent = lives;
-    guessInput.value = '';
-    guessInput.classList.add('shake');
-    setTimeout(() => guessInput.classList.remove('shake'), 400);
+    guessInput.value = "";
+    guessInput.classList.add("shake");
+    setTimeout(() => guessInput.classList.remove("shake"), 400);
     if (lives <= 0) {
       gameOver = true;
       streak = 0;
       streakEl.textContent = streak;
-      gameMessage.textContent = 'Game Over! It was ' + currentPlayer.name + '.';
-      gameMessage.className = 'game-message failure';
+      gameMessage.textContent = "Game Over! It was " + currentPlayer.name + ".";
+      gameMessage.className = "game-message failure";
       guessInput.disabled = true;
-      btnSubmit.style.display = 'none';
-      btnNext.style.display = 'inline-block';
+      btnSubmit.style.display = "none";
+      btnNext.style.display = "inline-block";
     }
   }
 });
 
 // NEXT ROUND
-btnNext.addEventListener('click', () => {
+btnNext.addEventListener("click", () => {
   if (lives <= 0) { lives = 3; livesEl.textContent = lives; }
   round++;
   startRound();
 });
 
 // LAYOUT TOGGLE
-layoutToggle.addEventListener('click', () => {
-  gridContainer.classList.toggle('single-col');
+layoutToggle.addEventListener("click", () => {
+  gridContainer.classList.toggle("single-col");
 });
 
 // INIT
