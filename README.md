@@ -1,8 +1,31 @@
-# Sailor Piece Wiki
+# Sailor Piece Idle (+ Wiki)
 
-A community-curated fan wiki for the Roblox game **Sailor Piece**. Static site, JSON-driven content, deployable to GitHub Pages with one push.
+A browser-based **incremental/idle game** inspired by the Roblox game **Sailor Piece**, with a built-in fan wiki for reference. Static site, JSON-driven, no build step, deploys to GitHub Pages with one push.
 
 > **Fan project.** Not affiliated with the game's developers. All content is community-sourced — submit corrections via PR.
+
+## The game (`index.html`)
+
+Click "STRIKE" (or press Space) to defeat mobs. Earn Beli, level up, unlock new islands, hire idle crewmates, buy Devil Fruits and swords, and chase boss drops. Save is automatic to `localStorage` with offline progress (capped at 4 hours).
+
+**Core loop**
+- **Strike** mobs → earn Beli + XP per kill (boosted by your current Island).
+- **Hire crew** (Cabin Boy → Sailor → Navigator → Captain → Yonko → Sea King) for passive Beli/sec.
+- **Equip a Devil Fruit** for a strike-damage multiplier and passive income.
+- **Equip a sword** and **learn a fighting style** for flat damage.
+- **Roll a race** on first launch (rates: 50% Common, 22% Uncommon, 16% Rare, 8% Legendary, 4% Mythical) for a permanent passive.
+- **Sail to new islands** (unlock at higher levels) for stronger mobs and bigger rewards.
+- **Summon bosses** for big drops — including a chance at their unique fruit/sword.
+- **Awaken (prestige)** at level 30+ to reset progress for permanent Reputation: +50% strike and +10% Beli/sec per stack. Owned fruits, swords, styles, race, and bosses-defeated are kept.
+
+**Controls**
+- Click the STRIKE button or press `Space` to attack.
+- Press `/` anywhere to search the wiki.
+- All buttons in the shop are buy/equip toggles.
+
+**Saving**
+- Auto-saves every 5 seconds and on tab close.
+- "Hard reset" clears the save and re-rolls your race.
 
 ## Features
 
