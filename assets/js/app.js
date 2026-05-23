@@ -3,7 +3,7 @@
    ========================================================= */
 
 const NAV_LINKS = [
-  { href: 'index.html',     label: 'Home',      key: 'home' },
+  { href: 'index.html',     label: 'Play',      key: 'home' },
   { href: 'fruits.html',    label: 'Fruits',    key: 'fruits' },
   { href: 'swords.html',    label: 'Swords',    key: 'swords' },
   { href: 'styles.html',    label: 'Styles',    key: 'styles' },
