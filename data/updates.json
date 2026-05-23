@@ -1,0 +1,73 @@
+[
+  {
+    "date": "2026-05-20",
+    "title": "Update 4.7 — Echoes of the Hawk",
+    "tag": "Major",
+    "summary": "Tournament event introducing Yoru's Echo, leaderboards, and global cosmetics.",
+    "changes": [
+      "New event: Hawk's Tournament — top 10 placements receive Yoru's Echo.",
+      "Added a global leaderboard system with weekly resets.",
+      "Buffed Sea Blade — Drown CD reduced from 22s to 18s.",
+      "Nerfed Light Fruit — Sacred Yata channel reduced from 3s to 2s."
+    ]
+  },
+  {
+    "date": "2026-04-12",
+    "title": "Update 4.6 — Phantom Tides",
+    "tag": "Content",
+    "summary": "Phantom Isle expansion with the Cursed Saber and ghoul race awakening.",
+    "changes": [
+      "New island: Phantom Isle (Third Sea, levels 1500–1800).",
+      "New mythical sword: Cursed Saber (drop from Cursed Captain).",
+      "Ghoul race V3 unlocked: Devour finisher.",
+      "Improved underwater rendering on low-end devices."
+    ]
+  },
+  {
+    "date": "2026-03-01",
+    "title": "Update 4.5 — Sky High",
+    "tag": "Balance",
+    "summary": "Skylands rebalanced. Storm Lord made fairer for solo players.",
+    "changes": [
+      "Storm Lord HP reduced from 480k → 380k.",
+      "Storm Lord global lightning now telegraphs 0.5s longer.",
+      "Skypiean V3 added: Sky Dash mid-air teleport.",
+      "Fixed quest 'Cloud Trial' getting stuck after server restart."
+    ]
+  },
+  {
+    "date": "2026-02-08",
+    "title": "Update 4.4 — Quality Pass",
+    "tag": "QoL",
+    "summary": "Hundreds of quality-of-life changes based on community feedback.",
+    "changes": [
+      "Inventory now sorts by rarity by default.",
+      "Added a fruit re-roll button at the Mirror Shrine.",
+      "Reduced sailing fuel costs by 20%.",
+      "Added shoulder-mount tracking for boss raids on the world map."
+    ]
+  },
+  {
+    "date": "2025-12-15",
+    "title": "Update 4.3 — Frozen Realms",
+    "tag": "Major",
+    "summary": "The Frozen Fjord opens. Ice Fruit awakening unlocked.",
+    "changes": [
+      "New island: Frozen Fjord.",
+      "New boss: Glacier Tyrant.",
+      "Ice Fruit awakening: gains permanent flight in awakened form.",
+      "New cosmetic set: Frostbreaker."
+    ]
+  },
+  {
+    "date": "2025-10-30",
+    "title": "Update 4.2 — Hallowed Seas",
+    "tag": "Event",
+    "summary": "Limited-time spooky event with cosmetic rewards and the Ghoul race rate doubled.",
+    "changes": [
+      "Ghoul spawn rate temporarily doubled.",
+      "Pumpkin cosmetic chest available from any boss.",
+      "Halloween-themed ship sails added."
+    ]
+  }
+]

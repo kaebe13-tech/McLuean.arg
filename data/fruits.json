@@ -1,0 +1,235 @@
+[
+  {
+    "id": "flame",
+    "name": "Flame Fruit",
+    "type": "Logia",
+    "rarity": "Legendary",
+    "price": 1500000,
+    "color": "#ef4444",
+    "icon": "flame",
+    "element": "Fire",
+    "awakening": true,
+    "featured": true,
+    "description": "Transforms the user into living flame. Devastating AoE clears and a long-range fireball, balanced by mediocre sword combos.",
+    "abilities": [
+      { "key": "Z", "name": "Fire Fist", "desc": "Hurl a piercing column of flame in a straight line.", "cooldown": 4 },
+      { "key": "X", "name": "Flame Pillar", "desc": "Erupt a tall pillar of fire at your cursor that lingers and burns.", "cooldown": 8 },
+      { "key": "C", "name": "Phoenix Dash", "desc": "Stream forward as living flame, dealing tick damage on contact.", "cooldown": 12 },
+      { "key": "V", "name": "Hell's Crucible", "desc": "Detonate a wide explosion around you. Best opener after a stun.", "cooldown": 22 },
+      { "key": "F", "name": "Flight (Awakened)", "desc": "Glide on flame currents while above 50% energy.", "cooldown": 0 }
+    ],
+    "tips": [
+      "Open fights with X to zone, then Z while target is locked in the pillar.",
+      "Avoid using V at low energy — the cast time leaves you exposed.",
+      "Pair with Electro for the burn-shock ramp combo."
+    ]
+  },
+  {
+    "id": "ice",
+    "name": "Ice Fruit",
+    "type": "Logia",
+    "rarity": "Legendary",
+    "price": 1450000,
+    "color": "#7dd3fc",
+    "icon": "ice",
+    "element": "Ice",
+    "awakening": true,
+    "featured": true,
+    "description": "Freeze the air, the sea, and your enemies. Strong crowd control with a defensive ice wall.",
+    "abilities": [
+      { "key": "Z", "name": "Ice Lance", "desc": "Fire a quick freezing spear that briefly slows on hit.", "cooldown": 3 },
+      { "key": "X", "name": "Frozen Path", "desc": "Skate on a path of ice — high mobility, low damage.", "cooldown": 9 },
+      { "key": "C", "name": "Glacial Wall", "desc": "Raise a wall of ice in front of you. Blocks projectiles.", "cooldown": 15 },
+      { "key": "V", "name": "Absolute Zero", "desc": "Freeze every target in a wide radius for 1.5s.", "cooldown": 26 }
+    ],
+    "tips": [
+      "Use C to body-block ranged DPS while your team closes the gap.",
+      "V is a guaranteed setup for sword finishers."
+    ]
+  },
+  {
+    "id": "magma",
+    "name": "Magma Fruit",
+    "type": "Logia",
+    "rarity": "Legendary",
+    "price": 1600000,
+    "color": "#f97316",
+    "icon": "magma",
+    "element": "Magma",
+    "awakening": true,
+    "featured": true,
+    "description": "Slow but absurdly heavy DPS. Magma applies a long burn that ticks through most defensive abilities.",
+    "abilities": [
+      { "key": "Z", "name": "Magma Fist", "desc": "Lob a slow molten orb that explodes on impact.", "cooldown": 5 },
+      { "key": "X", "name": "Eruption", "desc": "Pillars of magma rise across a small zone.", "cooldown": 10 },
+      { "key": "C", "name": "Hound's Howl", "desc": "Charge forward as a magma hound, burning targets through.", "cooldown": 14 },
+      { "key": "V", "name": "Meteor", "desc": "Call a meteor down on your cursor. Massive splash.", "cooldown": 28 }
+    ],
+    "tips": [
+      "Counter to Flame Fruit — magma burns through fire intangibility."
+    ]
+  },
+  {
+    "id": "light",
+    "name": "Light Fruit",
+    "type": "Logia",
+    "rarity": "Mythical",
+    "price": 2400000,
+    "color": "#facc15",
+    "icon": "light",
+    "element": "Light",
+    "awakening": true,
+    "description": "Move at the speed of light. Hyper-mobile assassin with hitscan beams.",
+    "abilities": [
+      { "key": "Z", "name": "Light Beam", "desc": "Hitscan laser. Cannot be dodged at close range.", "cooldown": 4 },
+      { "key": "X", "name": "Yasakani", "desc": "Spray a cone of light bolts.", "cooldown": 9 },
+      { "key": "C", "name": "Lightspeed Kick", "desc": "Teleport-dash to your cursor and strike.", "cooldown": 11 },
+      { "key": "V", "name": "Sacred Yata", "desc": "Channel a wide laser sweep for 2s.", "cooldown": 30 }
+    ]
+  },
+  {
+    "id": "dark",
+    "name": "Dark Fruit",
+    "type": "Logia",
+    "rarity": "Mythical",
+    "price": 2300000,
+    "color": "#a78bfa",
+    "icon": "dark",
+    "element": "Darkness",
+    "awakening": true,
+    "description": "Suppresses enemy fruits on contact. The hard-counter to Logia spam.",
+    "abilities": [
+      { "key": "Z", "name": "Black Hole", "desc": "Pull enemies in a cone toward you.", "cooldown": 7 },
+      { "key": "X", "name": "Liberation", "desc": "Release stored matter as a damaging blast.", "cooldown": 13 },
+      { "key": "C", "name": "Grip", "desc": "Latch onto a target — disables their fruit briefly.", "cooldown": 18 },
+      { "key": "V", "name": "Annihilate", "desc": "Collapse a sphere of darkness around your cursor.", "cooldown": 32 }
+    ],
+    "tips": [
+      "C cancels enemy ultimates if you land it during their cast."
+    ]
+  },
+  {
+    "id": "rubber",
+    "name": "Rubber Fruit",
+    "type": "Paramecia",
+    "rarity": "Rare",
+    "price": 750000,
+    "color": "#fb7185",
+    "icon": "rubber",
+    "element": "—",
+    "awakening": true,
+    "featured": false,
+    "description": "Stretchy, bouncy combos. Low ceiling but excellent for new players learning M1 spacing.",
+    "abilities": [
+      { "key": "Z", "name": "Pistol", "desc": "Quick punch with extended reach.", "cooldown": 3 },
+      { "key": "X", "name": "Bazooka", "desc": "Two-handed launch that knocks targets back.", "cooldown": 6 },
+      { "key": "C", "name": "Gum Rocket", "desc": "Slingshot yourself to a wall or enemy.", "cooldown": 10 },
+      { "key": "V", "name": "Gear Surge", "desc": "Buff M1 damage and speed for 8s.", "cooldown": 24 }
+    ]
+  },
+  {
+    "id": "string",
+    "name": "String Fruit",
+    "type": "Paramecia",
+    "rarity": "Mythical",
+    "price": 2200000,
+    "color": "#f472b6",
+    "icon": "string",
+    "element": "—",
+    "awakening": true,
+    "description": "Puppet-master kit: pull, slice, and lock down with razor strings.",
+    "abilities": [
+      { "key": "Z", "name": "Slash Threads", "desc": "Whip strings outward in a wide arc.", "cooldown": 5 },
+      { "key": "X", "name": "Puppet", "desc": "Hook a target and reposition them toward you.", "cooldown": 9 },
+      { "key": "C", "name": "Cage", "desc": "Trap targets in a string box for 2s.", "cooldown": 14 },
+      { "key": "V", "name": "Birdcage", "desc": "Encircle the area in slowly contracting strings.", "cooldown": 30 }
+    ]
+  },
+  {
+    "id": "sand",
+    "name": "Sand Fruit",
+    "type": "Logia",
+    "rarity": "Rare",
+    "price": 850000,
+    "color": "#eab308",
+    "icon": "sand",
+    "element": "Sand",
+    "awakening": false,
+    "description": "Drains stamina and bleeds water from anything you touch. Strong sustain on desert maps.",
+    "abilities": [
+      { "key": "Z", "name": "Desert Spear", "desc": "Compressed sand spear thrown forward.", "cooldown": 4 },
+      { "key": "X", "name": "Sandstorm", "desc": "Channel a tornado at your cursor.", "cooldown": 11 },
+      { "key": "C", "name": "Quicksand", "desc": "Convert ground into sand — slows enemies.", "cooldown": 13 }
+    ]
+  },
+  {
+    "id": "rumble",
+    "name": "Rumble Fruit",
+    "type": "Logia",
+    "rarity": "Mythical",
+    "price": 2500000,
+    "color": "#60a5fa",
+    "icon": "lightning",
+    "element": "Lightning",
+    "awakening": true,
+    "description": "Hitscan thunder strikes and a global ult. Mid-tier solo, top-tier in raids.",
+    "abilities": [
+      { "key": "Z", "name": "Thunder Bolt", "desc": "Strike a single target with lightning.", "cooldown": 4 },
+      { "key": "X", "name": "Storm Cloud", "desc": "Place a cloud that drops chained bolts.", "cooldown": 10 },
+      { "key": "C", "name": "Volt Step", "desc": "Teleport-dash a short distance.", "cooldown": 8 },
+      { "key": "V", "name": "200 Million Volt", "desc": "Concentrated beam from above. Deals true damage.", "cooldown": 35 }
+    ]
+  },
+  {
+    "id": "smoke",
+    "name": "Smoke Fruit",
+    "type": "Logia",
+    "rarity": "Uncommon",
+    "price": 350000,
+    "color": "#94a3b8",
+    "icon": "smoke",
+    "element": "Smoke",
+    "awakening": false,
+    "description": "Beginner-friendly Logia. Easy intangibility and a long-range pull.",
+    "abilities": [
+      { "key": "Z", "name": "White Out", "desc": "Cone of smoke that briefly blinds.", "cooldown": 3 },
+      { "key": "X", "name": "Smoke Drag", "desc": "Tendril yanks one target toward you.", "cooldown": 7 },
+      { "key": "C", "name": "Smoke Glide", "desc": "Hover-dash on a smoke trail.", "cooldown": 9 }
+    ]
+  },
+  {
+    "id": "phoenix",
+    "name": "Phoenix Fruit",
+    "type": "Mythical Zoan",
+    "rarity": "Mythical",
+    "price": 2800000,
+    "color": "#fb923c",
+    "icon": "beast",
+    "element": "Blue Flame",
+    "awakening": true,
+    "description": "Hybrid healer/duelist. Flight, AoE healing flames, sustained DPS — rare and expensive.",
+    "abilities": [
+      { "key": "Z", "name": "Talon", "desc": "Diving slash that closes distance.", "cooldown": 5 },
+      { "key": "X", "name": "Healing Flame", "desc": "Pulse blue fire that heals allies.", "cooldown": 14 },
+      { "key": "C", "name": "Wing Storm", "desc": "Flap to launch wide feather blades.", "cooldown": 10 },
+      { "key": "V", "name": "Resurrection", "desc": "Revive once on death within 12s.", "cooldown": 180 }
+    ]
+  },
+  {
+    "id": "buddha",
+    "name": "Buddha Fruit",
+    "type": "Mythical Zoan",
+    "rarity": "Mythical",
+    "price": 2700000,
+    "color": "#fde68a",
+    "icon": "beast",
+    "element": "—",
+    "awakening": true,
+    "description": "Massive HP scaling and giant golden form. Walking siege piece.",
+    "abilities": [
+      { "key": "Z", "name": "Palm Strike", "desc": "Wide-arc shockwave palm.", "cooldown": 5 },
+      { "key": "X", "name": "Giant Form", "desc": "Grow huge for 10s — armor + damage.", "cooldown": 35 },
+      { "key": "C", "name": "Holy Lance", "desc": "Project a lance of light.", "cooldown": 9 }
+    ]
+  }
+]

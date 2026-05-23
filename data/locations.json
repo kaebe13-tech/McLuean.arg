@@ -1,0 +1,90 @@
+[
+  {
+    "id": "starter-island",
+    "name": "Starter Island",
+    "sea": "First Sea",
+    "levelRange": "1-50",
+    "climate": "Temperate",
+    "travelFrom": "Spawn",
+    "description": "Where every sailor is shipwrecked. Calm beaches, weak bandits, and the first boat you'll lose.",
+    "npcs": ["Beach Bandit (Lvl 5)", "Sea Pirate (Lvl 12)", "Tavern Brawler (Lvl 25)"],
+    "notable": ["First quest line: 'Set Sail'", "Free Iron Longsword from the dock vendor"]
+  },
+  {
+    "id": "marine-fortress",
+    "name": "Marine Fortress",
+    "sea": "First Sea",
+    "levelRange": "60-150",
+    "climate": "Coastal",
+    "travelFrom": "Starter Island (south sail)",
+    "description": "Strict marine outpost. High-density mob spawns and the first true mini-boss.",
+    "npcs": ["Marine Recruit (Lvl 60)", "Sergeant (Lvl 110)", "Captain Vega (Lvl 145, mini-boss)"],
+    "notable": ["Marine quest reputation gates", "Tonfa drops"]
+  },
+  {
+    "id": "desert-kingdom",
+    "name": "Desert Kingdom",
+    "sea": "First Sea",
+    "levelRange": "200-400",
+    "climate": "Arid",
+    "travelFrom": "Marine Fortress (east sail)",
+    "description": "Endless dunes hide ancient tombs and a Logia hunter with a price on every fruit.",
+    "npcs": ["Tomb Raider (Lvl 220)", "Sand Wraith (Lvl 310)", "Tomb Guardian (Lvl 400, boss)"],
+    "notable": ["Sand Fruit drop chance", "Quest: 'Buried Wisdom'"]
+  },
+  {
+    "id": "skylands",
+    "name": "Skylands",
+    "sea": "Second Sea",
+    "levelRange": "700-1000",
+    "climate": "High-altitude",
+    "travelFrom": "Knock-Up Stream (Second Sea entry)",
+    "description": "Floating islands above the clouds. Home of Skypieans, lightning trials, and the Electro mentor.",
+    "npcs": ["Cloud Warrior (Lvl 720)", "Sky Priest (Lvl 880)", "Storm Lord (Lvl 1000, boss)"],
+    "notable": ["Electro fighting style", "Rumble Fruit (rare drop)"]
+  },
+  {
+    "id": "frozen-fjord",
+    "name": "Frozen Fjord",
+    "sea": "Second Sea",
+    "levelRange": "950-1200",
+    "climate": "Glacial",
+    "travelFrom": "Skylands (north sail)",
+    "description": "Endless ice and frostbitten beasts. The Ice Fruit awakens here for those who survive.",
+    "npcs": ["Frostbite Wolf (Lvl 960)", "Ice Phantom (Lvl 1080)", "Glacier Tyrant (Lvl 1200, boss)"],
+    "notable": ["Ice Fruit awakening trial", "Glacier Tyrant drops"]
+  },
+  {
+    "id": "phantom-isle",
+    "name": "Phantom Isle",
+    "sea": "Third Sea",
+    "levelRange": "1500-1800",
+    "climate": "Eternal night",
+    "travelFrom": "Third Sea entry portal",
+    "description": "Cursed island shrouded in fog. Ghouls roam, and the Cursed Saber can be claimed from its captain.",
+    "npcs": ["Restless Soul (Lvl 1500)", "Cursed Crew (Lvl 1700)", "Cursed Captain (Lvl 1800, boss)"],
+    "notable": ["Cursed Saber drop", "Ghoul race awakening trial"]
+  },
+  {
+    "id": "great-tree",
+    "name": "Great Tree",
+    "sea": "Third Sea",
+    "levelRange": "1800-2100",
+    "climate": "Jungle",
+    "travelFrom": "Phantom Isle (west sail)",
+    "description": "A tree the size of a city. Dragon Claw is taught at its summit — if you can reach it.",
+    "npcs": ["Canopy Hunter (Lvl 1820)", "Forest Dragon (Lvl 2050, mini-boss)", "Reclusive Sage (NPC)"],
+    "notable": ["Dragon Claw fighting style", "Phoenix Fruit chest event"]
+  },
+  {
+    "id": "world-end",
+    "name": "World's End",
+    "sea": "Third Sea",
+    "levelRange": "2200+",
+    "climate": "Storms",
+    "travelFrom": "Great Tree (sail past the cliffs)",
+    "description": "The final coast. Every endgame raid spawns here. Bring friends.",
+    "npcs": ["Endgame Raid: Ocean Tyrant", "Endgame Raid: Fallen Admiral"],
+    "notable": ["Yoru's Echo (event drop)", "World Boss Tournament weekly"]
+  }
+]

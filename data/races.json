@@ -1,0 +1,97 @@
+[
+  {
+    "id": "human",
+    "name": "Human",
+    "rarity": "Common",
+    "color": "#94a3b8",
+    "icon": "human",
+    "spawnRate": "Default",
+    "passive": "+10% melee damage at full HP",
+    "strengths": ["Balanced", "No swim penalty"],
+    "weaknesses": ["No standout trait"],
+    "description": "The default race. Balanced stats, no surprises. Can re-roll at the Mirror Shrine.",
+    "upgrades": [
+      "V2: +5% movement speed and stamina regen.",
+      "V3: Unlocks limit-break — once per life, ignore one CC effect."
+    ]
+  },
+  {
+    "id": "fishman",
+    "name": "Fishman",
+    "rarity": "Uncommon",
+    "color": "#38bdf8",
+    "icon": "fish",
+    "spawnRate": "1 in 6",
+    "passive": "Move at full speed underwater; +20% HP regen near sea",
+    "strengths": ["Sea exploration", "Synergy with Fishman Karate"],
+    "weaknesses": ["No bonus on land combat"],
+    "description": "Born of the ocean. Fishmen breathe underwater and gain stat boosts at sea.",
+    "upgrades": [
+      "V2: Underwater attack speed +20%.",
+      "V3: Tidal Aura — allies near you regen HP."
+    ]
+  },
+  {
+    "id": "skypiean",
+    "name": "Skypiean",
+    "rarity": "Uncommon",
+    "color": "#facc15",
+    "icon": "sky",
+    "spawnRate": "1 in 6",
+    "passive": "+25% air time on jumps; reduced fall damage",
+    "strengths": ["Sky islands", "Aerial combat"],
+    "weaknesses": ["No bonus underwater"],
+    "description": "Citizens of the sky. Lighter bodies and faster air movement.",
+    "upgrades": [
+      "V2: Glide hold-jump in mid-air.",
+      "V3: Sky Dash — once per fight, teleport upward 30 studs."
+    ]
+  },
+  {
+    "id": "mink",
+    "name": "Mink",
+    "rarity": "Rare",
+    "color": "#fb7185",
+    "icon": "beast",
+    "spawnRate": "1 in 12",
+    "passive": "Sprint 15% faster; melee crits restore stamina",
+    "strengths": ["Mobility", "Synergy with Electro"],
+    "weaknesses": ["Sea travel"],
+    "description": "Beast-folk of the Mokomo Highlands. Pair with Electro for the iconic combo.",
+    "upgrades": [
+      "V2: Sulong — under a full moon, +30% damage and HP."
+    ]
+  },
+  {
+    "id": "cyborg",
+    "name": "Cyborg",
+    "rarity": "Legendary",
+    "color": "#60a5fa",
+    "icon": "cyborg",
+    "spawnRate": "1 in 24",
+    "passive": "Energy never drops below 25%; +10% damage resist",
+    "strengths": ["PvE bossing", "Long fights"],
+    "weaknesses": ["Recovery items less effective"],
+    "description": "Augmented body. Trades organic recovery for raw consistency.",
+    "upgrades": [
+      "V2: Overdrive — 8s of +30% attack speed, once per battle.",
+      "V3: Reactor — unlocks built-in dash and ranged blast."
+    ]
+  },
+  {
+    "id": "ghoul",
+    "name": "Ghoul",
+    "rarity": "Mythical",
+    "color": "#a78bfa",
+    "icon": "skull",
+    "spawnRate": "1 in 60",
+    "passive": "Gain HP on takedowns; aura inflicts fear at low HP",
+    "strengths": ["1v1", "Snowball potential"],
+    "weaknesses": ["Healing items 25% less effective"],
+    "description": "A cursed bloodline. Strongest in chaos — weakest in peace.",
+    "upgrades": [
+      "V2: Shadow Step — short blink at <50% HP.",
+      "V3: Devour — finisher heals to full on kill (180s CD)."
+    ]
+  }
+]

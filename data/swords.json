@@ -1,0 +1,119 @@
+[
+  {
+    "id": "shisui",
+    "name": "Shisui",
+    "rarity": "Mythical",
+    "tier": "S-Tier",
+    "obtain": "Drop from Saber Expert (3rd Sea)",
+    "dropChance": "5% per kill",
+    "requiredLevel": 1500,
+    "description": "Black-bladed katana that ignores a portion of incoming guard. Top-tier PvP pick for sword mains.",
+    "moves": [
+      { "key": "Z", "name": "Wave Slice", "desc": "Cleave a blue wave forward.", "cooldown": 5 },
+      { "key": "X", "name": "Lunge", "desc": "Forward dash-stab with i-frames.", "cooldown": 9 },
+      { "key": "C", "name": "Twin Crescent", "desc": "Two arcing slashes that crit on the second hit.", "cooldown": 12 }
+    ]
+  },
+  {
+    "id": "wando",
+    "name": "Wando",
+    "rarity": "Legendary",
+    "tier": "A-Tier",
+    "obtain": "Quest reward: 'The Lost Edge' (2nd Sea)",
+    "dropChance": "Guaranteed",
+    "requiredLevel": 950,
+    "description": "Versatile straight blade with a strong neutral. Best entry-level legendary.",
+    "moves": [
+      { "key": "Z", "name": "Slash Storm", "desc": "Three-hit slash combo.", "cooldown": 4 },
+      { "key": "X", "name": "Rising Cut", "desc": "Upward arc that lifts targets.", "cooldown": 7 },
+      { "key": "C", "name": "Earth Splitter", "desc": "Slam down to crack the ground.", "cooldown": 10 }
+    ]
+  },
+  {
+    "id": "saber",
+    "name": "Cursed Saber",
+    "rarity": "Mythical",
+    "tier": "S-Tier",
+    "obtain": "Drop from Cursed Captain (Phantom Isle, 3rd Sea)",
+    "dropChance": "2% per kill",
+    "requiredLevel": 1700,
+    "description": "Drinks HP on hit. Trades raw damage for sustain in extended fights.",
+    "moves": [
+      { "key": "Z", "name": "Vampire Slash", "desc": "Heal for 30% of damage dealt.", "cooldown": 5 },
+      { "key": "X", "name": "Phantom Step", "desc": "Teleport behind cursor target.", "cooldown": 11 },
+      { "key": "C", "name": "Soul Reap", "desc": "Lock-on cleave; ignores armor.", "cooldown": 16 }
+    ]
+  },
+  {
+    "id": "longsword",
+    "name": "Iron Longsword",
+    "rarity": "Common",
+    "tier": "F-Tier",
+    "obtain": "Vendor (Starter Island) — 100 Beli",
+    "dropChance": "—",
+    "requiredLevel": 1,
+    "description": "The first sword every sailor swings. Costs nothing. Worth nothing. Memories included.",
+    "moves": [
+      { "key": "Z", "name": "Quick Slash", "desc": "Single forward slash.", "cooldown": 3 },
+      { "key": "X", "name": "Heavy Cleave", "desc": "Slow, hard-hitting overhead.", "cooldown": 7 }
+    ]
+  },
+  {
+    "id": "dual-katana",
+    "name": "Dual Katana",
+    "rarity": "Rare",
+    "tier": "B-Tier",
+    "obtain": "Quest reward: 'Twin Edge' (1st Sea)",
+    "dropChance": "Guaranteed",
+    "requiredLevel": 200,
+    "description": "Two blades, one stance. Increases M1 attack speed by 20%.",
+    "moves": [
+      { "key": "Z", "name": "Whirlwind", "desc": "Spin attack hitting all around you.", "cooldown": 5 },
+      { "key": "X", "name": "Cross Slash", "desc": "X-shaped projectile.", "cooldown": 8 }
+    ]
+  },
+  {
+    "id": "sea-blade",
+    "name": "Sea Blade",
+    "rarity": "Legendary",
+    "tier": "A-Tier",
+    "obtain": "Drop from Sea Beast (any sea, low chance)",
+    "dropChance": "1% per kill",
+    "requiredLevel": 700,
+    "description": "Forged from kairoseki. Disables Devil Fruit defenses on contact.",
+    "moves": [
+      { "key": "Z", "name": "Tide Slash", "desc": "A wave-like slash that strips fruit intangibility on hit.", "cooldown": 6 },
+      { "key": "X", "name": "Anchor Drop", "desc": "Slam targets toward the ground.", "cooldown": 10 },
+      { "key": "C", "name": "Drown", "desc": "Curse target — they can't use C/V for 4s.", "cooldown": 18 }
+    ]
+  },
+  {
+    "id": "yoru",
+    "name": "Yoru's Echo",
+    "rarity": "Mythical",
+    "tier": "S-Tier",
+    "obtain": "Event reward — 'Hawk's Tournament'",
+    "dropChance": "Top 10 placement",
+    "requiredLevel": 2000,
+    "description": "An echo of the world's strongest blade. Slashes carry on the wind.",
+    "moves": [
+      { "key": "Z", "name": "Black Wave", "desc": "Project an arcing dark slash that travels for blocks.", "cooldown": 6 },
+      { "key": "X", "name": "Sky Slice", "desc": "Vertical cleave that splits the horizon.", "cooldown": 12 },
+      { "key": "C", "name": "World's Edge", "desc": "Channel for 1s, release a city-block long slash.", "cooldown": 24 }
+    ]
+  },
+  {
+    "id": "tonfa",
+    "name": "Reinforced Tonfa",
+    "rarity": "Uncommon",
+    "tier": "C-Tier",
+    "obtain": "Marine Outpost Vendor — 50,000 Beli",
+    "dropChance": "—",
+    "requiredLevel": 80,
+    "description": "Not technically a sword, but it counts. Tonfa-style stance with parry.",
+    "moves": [
+      { "key": "Z", "name": "Combo Strike", "desc": "Three-hit blunt combo.", "cooldown": 3 },
+      { "key": "X", "name": "Parry", "desc": "Block one melee hit and counter.", "cooldown": 12 }
+    ]
+  }
+]

@@ -1,0 +1,100 @@
+[
+  {
+    "id": "fishman-karate",
+    "name": "Fishman Karate",
+    "rarity": "Rare",
+    "icon": "water",
+    "teacher": "Aqua Master",
+    "location": "Underwater Cave (1st Sea)",
+    "cost": 750000,
+    "requiredLevel": 350,
+    "description": "Strike water itself — every blow carries the ocean's force. Bonus damage underwater.",
+    "moves": [
+      { "key": "Z", "name": "Water Punch", "desc": "Compressed water bolt.", "cooldown": 4 },
+      { "key": "X", "name": "Tidal Cross", "desc": "X-shaped water slash.", "cooldown": 8 },
+      { "key": "C", "name": "Tsunami Kick", "desc": "Knockback kick that creates a small wave.", "cooldown": 11 },
+      { "key": "V", "name": "Crashing Sea", "desc": "Slam — damages everyone in a 30-stud radius.", "cooldown": 22 }
+    ]
+  },
+  {
+    "id": "electro",
+    "name": "Electro",
+    "rarity": "Legendary",
+    "icon": "lightning",
+    "teacher": "Lightning Lord",
+    "location": "Skylands (2nd Sea)",
+    "cost": 1500000,
+    "requiredLevel": 850,
+    "description": "Channel electricity through your strikes. Stuns and chains between targets.",
+    "moves": [
+      { "key": "Z", "name": "Volt Punch", "desc": "Single stunning punch.", "cooldown": 5 },
+      { "key": "X", "name": "Chain Bolt", "desc": "Chain lightning between up to 3 targets.", "cooldown": 9 },
+      { "key": "C", "name": "Conduit", "desc": "Self-buff: M1s shock for 10s.", "cooldown": 18 }
+    ]
+  },
+  {
+    "id": "dragon-claw",
+    "name": "Dragon Claw",
+    "rarity": "Mythical",
+    "icon": "beast",
+    "teacher": "Reclusive Sage",
+    "location": "Cliffs of the Forgotten (3rd Sea)",
+    "cost": 3000000,
+    "requiredLevel": 1800,
+    "description": "Each strike materializes a dragon's claw. Brutal close-range duelist style.",
+    "moves": [
+      { "key": "Z", "name": "Talon Rake", "desc": "Three-slash combo.", "cooldown": 4 },
+      { "key": "X", "name": "Roar", "desc": "Knockback cone.", "cooldown": 10 },
+      { "key": "C", "name": "Heaven's Crush", "desc": "Slam ground; pillars erupt.", "cooldown": 14 },
+      { "key": "V", "name": "Final Form", "desc": "Manifest the dragon's silhouette for 8s. +25% damage.", "cooldown": 40 }
+    ]
+  },
+  {
+    "id": "death-step",
+    "name": "Death Step",
+    "rarity": "Legendary",
+    "icon": "fist",
+    "teacher": "Iron Heel",
+    "location": "Marine HQ Basement (2nd Sea)",
+    "cost": 1800000,
+    "requiredLevel": 1100,
+    "description": "Enhanced kick-based style. Air dashes and explosive shockwaves.",
+    "moves": [
+      { "key": "Z", "name": "Storm Step", "desc": "Air-dash kicks.", "cooldown": 4 },
+      { "key": "X", "name": "Sky Walker", "desc": "Hover-jump over your cursor.", "cooldown": 8 },
+      { "key": "C", "name": "Crushing Heel", "desc": "Slam-down kick.", "cooldown": 12 }
+    ]
+  },
+  {
+    "id": "boxing",
+    "name": "Combat Boxing",
+    "rarity": "Common",
+    "icon": "fist",
+    "teacher": "Old Sailor",
+    "location": "Starter Island",
+    "cost": 25000,
+    "requiredLevel": 25,
+    "description": "Honest punches. Honest dodges. Surprising scaling for new players.",
+    "moves": [
+      { "key": "Z", "name": "Jab", "desc": "Quick punch.", "cooldown": 2 },
+      { "key": "X", "name": "Hook", "desc": "Sideways punch with knockback.", "cooldown": 5 },
+      { "key": "C", "name": "Dodge", "desc": "Roll backward with brief i-frames.", "cooldown": 8 }
+    ]
+  },
+  {
+    "id": "armament",
+    "name": "Armament Haki",
+    "rarity": "Mythical",
+    "icon": "haki",
+    "teacher": "Haki Mentor",
+    "location": "All Seas (escalating quests)",
+    "cost": 5000000,
+    "requiredLevel": 800,
+    "description": "Coat your body in willpower. Bypasses Logia intangibility entirely.",
+    "moves": [
+      { "key": "Z", "name": "Coated Strike", "desc": "M1 attacks pierce Logia for 8s.", "cooldown": 14 },
+      { "key": "X", "name": "Hardening", "desc": "+25% defense for 6s.", "cooldown": 18 },
+      { "key": "C", "name": "Hawk Pulse", "desc": "Cone-projectile of compressed haki.", "cooldown": 22 }
+    ]
+  }
+]
