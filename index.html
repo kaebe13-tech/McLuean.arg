@@ -19,32 +19,43 @@
   <main class="game">
     <div class="container">
 
+      <!-- Game banner -->
+      <section class="game-hero">
+        <div class="game-hero-bg"></div>
+        <div class="game-hero-content">
+          <span class="eyebrow">Idle / Incremental · Fan Game</span>
+          <h1 class="game-title">SAILOR PIECE <span class="accent">IDLE</span></h1>
+          <p>Strike. Earn Beli. Hire crew. Eat fruits. Sail the seas. Defeat bosses.</p>
+        </div>
+      </section>
+
       <!-- Resource bar -->
       <section class="game-topbar">
         <div class="resource beli">
-          <span class="label">Beli</span>
+          <span class="label">💰 Beli</span>
           <span class="value" id="ui-beli">0</span>
           <span class="rate" id="ui-bps">+0/s</span>
         </div>
         <div class="resource">
-          <span class="label">Lvl <span id="ui-level">1</span></span>
+          <span class="label">⭐ Level <span id="ui-level">1</span></span>
+          <span class="value" id="ui-level-big">Lvl 1</span>
           <div class="xp-bar"><div class="xp-fill" id="ui-xp-fill"></div></div>
-          <span class="rate" id="ui-xp">0 / 20</span>
+          <span class="rate" id="ui-xp">0 / 20 XP</span>
         </div>
         <div class="resource">
-          <span class="label">Strike Power</span>
+          <span class="label">⚔ Strike Power</span>
           <span class="value" id="ui-power">1</span>
           <span class="rate">per click · Space to hit</span>
         </div>
         <div class="resource">
-          <span class="label">Race</span>
+          <span class="label">🧬 Race</span>
           <span class="value" id="ui-race">—</span>
           <button class="link-btn" id="reroll-race">reroll</button>
         </div>
         <div class="resource">
-          <span class="label">Sailing</span>
+          <span class="label">⚓ Sailing</span>
           <span class="value" id="ui-island">—</span>
-          <span class="rate">change in Islands tab</span>
+          <span class="rate">switch in Islands tab</span>
         </div>
       </section>
 
@@ -53,6 +64,10 @@
 
         <!-- LEFT: shop -->
         <aside class="game-shop">
+          <div class="panel-header">
+            <span class="panel-eyebrow">⚒ Shop</span>
+            <span class="panel-title">Buy &amp; Equip</span>
+          </div>
           <div class="tabs" id="shop-tabs">
             <button class="tab active" data-tab="crew">Crew</button>
             <button class="tab" data-tab="fruits">Fruits</button>
@@ -70,10 +85,22 @@
         </aside>
 
         <!-- CENTER: arena -->
-        <div class="game-arena" id="arena"></div>
+        <section class="game-arena-wrap">
+          <div class="panel-header center">
+            <span class="panel-eyebrow">⚔ Combat</span>
+            <span class="panel-title">Strike to earn Beli</span>
+          </div>
+          <div class="game-arena" id="arena">
+            <div class="loading-spinner">Loading the seas...</div>
+          </div>
+        </section>
 
         <!-- RIGHT: info -->
         <aside class="game-info">
+          <div class="panel-header">
+            <span class="panel-eyebrow">📜 Loadout</span>
+            <span class="panel-title">Your Captain</span>
+          </div>
           <div class="tabs" id="info-tabs">
             <button class="tab active" data-tab="equip">Equipped</button>
             <button class="tab" data-tab="quests">Quests</button>
@@ -90,17 +117,32 @@
 
       <!-- Controls -->
       <section class="game-bottombar">
-        <span>Auto-saves every 5s · Press <kbd style="font-family:var(--font-mono);padding:1px 6px;border-radius:4px;background:rgba(255,255,255,0.06);border:1px solid var(--border-soft)">Space</kbd> to strike · <kbd style="font-family:var(--font-mono);padding:1px 6px;border-radius:4px;background:rgba(255,255,255,0.06);border:1px solid var(--border-soft)">/</kbd> to search the wiki</span>
+        <span>Auto-saves every 5s · Press <kbd>Space</kbd> to strike · <kbd>/</kbd> to search the wiki</span>
         <div class="actions">
           <a class="btn-sm" href="fruits.html">Wiki: Fruits</a>
           <a class="btn-sm" href="bosses.html">Wiki: Bosses</a>
-          <button class="btn-sm prestige" id="prestige-btn">Awaken (prestige)</button>
-          <button class="btn-sm danger" id="reset-btn">Hard reset</button>
+          <button class="btn-sm prestige" id="prestige-btn">⚡ Awaken (prestige)</button>
+          <button class="btn-sm danger" id="reset-btn">⟲ Hard reset</button>
         </div>
       </section>
 
+      <!-- Error catcher -->
+      <div id="boot-error" style="display:none"></div>
+
     </div>
   </main>
+
+  <script>
+    // Surface any boot error as visible text instead of a silent blank UI
+    window.addEventListener('error', e => {
+      const box = document.getElementById('boot-error');
+      if (box) {
+        box.style.display = 'block';
+        box.style.cssText = 'display:block;margin:24px auto;max-width:600px;padding:16px;background:rgba(251,113,133,0.1);border:1px solid #fb7185;border-radius:8px;color:#fda4af;font-family:monospace;font-size:13px';
+        box.textContent = 'Game failed to load: ' + (e.message || e.error?.message || 'unknown error') + ' (' + (e.filename || '') + ':' + (e.lineno || '?') + ')';
+      }
+    });
+  </script>
 
   <script type="module" src="assets/js/game.js"></script>
 </body>
