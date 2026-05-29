@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Absolute Pitch</title>
+<style>
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#080812;--bg2:#0f0f24;--card:rgba(15,15,36,0.55);--cardsolid:#12122a;--hover:#1a1a3e;--cyan:#00f0ff;--magenta:#ff00e5;--lime:#39ff14;--orange:#ff6600;--violet:#8b00ff;--gold:#ffd700;--coral:#ff6b6b;--text:#f0f4ff;--text2:#a8b4d0;--muted:#5a6580;--border:rgba(255,255,255,0.06);--glass:rgba(15,15,36,0.55);--glassbrd:rgba(255,255,255,0.08);--r:16px;--rs:10px}
+.light-mode{--bg:#f0f2f8;--bg2:#fff;--card:rgba(255,255,255,0.6);--cardsolid:#fff;--hover:#e8ecf4;--text:#0f0f24;--text2:#3a4560;--muted:#7a8599;--border:rgba(0,0,0,0.08);--glass:rgba(255,255,255,0.55);--glassbrd:rgba(0,0,0,0.06)}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;overflow-x:hidden;transition:background .4s,color .4s}
+body.compact .news-card{padding:1rem}body.compact .panel{padding:0.8rem}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:linear-gradient(var(--cyan),var(--magenta));border-radius:3px}
+
+/* MESH GRADIENT BG */
+.mesh-bg{position:fixed;inset:0;z-index:-2;overflow:hidden}
+.mesh-bg .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.4;animation:orbFloat 20s infinite ease-in-out}
+.mesh-bg .orb:nth-child(1){width:600px;height:600px;background:radial-gradient(circle,var(--cyan),transparent);top:-10%;left:-5%;animation-duration:25s}
+.mesh-bg .orb:nth-child(2){width:500px;height:500px;background:radial-gradient(circle,var(--magenta),transparent);top:50%;right:-10%;animation-duration:22s;animation-delay:-5s}
+.mesh-bg .orb:nth-child(3){width:400px;height:400px;background:radial-gradient(circle,var(--violet),transparent);bottom:-5%;left:30%;animation-duration:28s;animation-delay:-8s}
+.mesh-bg .orb:nth-child(4){width:350px;height:350px;background:radial-gradient(circle,var(--lime),transparent);top:20%;left:50%;animation-duration:30s;animation-delay:-12s;opacity:0.25}
+.mesh-bg .orb:nth-child(5){width:450px;height:450px;background:radial-gradient(circle,var(--gold),transparent);bottom:30%;right:20%;animation-duration:26s;animation-delay:-3s;opacity:0.2}
+.mesh-bg .orb:nth-child(6){width:300px;height:300px;background:radial-gradient(circle,var(--coral),transparent);top:60%;left:10%;animation-duration:24s;animation-delay:-7s;opacity:0.3}
+.mesh-bg .orb:nth-child(7){width:250px;height:250px;background:radial-gradient(circle,var(--orange),transparent);top:10%;right:30%;animation-duration:20s;animation-delay:-10s;opacity:0.25}
+.mesh-bg .orb:nth-child(8){width:320px;height:320px;background:radial-gradient(circle,var(--cyan),transparent);bottom:10%;right:5%;animation-duration:27s;animation-delay:-15s;opacity:0.2}
+.mesh-bg .orb:nth-child(9){width:280px;height:280px;background:radial-gradient(circle,var(--magenta),transparent);top:40%;left:-5%;animation-duration:23s;animation-delay:-2s;opacity:0.15}
+.mesh-bg .orb:nth-child(10){width:200px;height:200px;background:radial-gradient(circle,var(--lime),transparent);bottom:50%;right:40%;animation-duration:19s;animation-delay:-6s;opacity:0.2}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(50px,-30px) scale(1.1)}50%{transform:translate(-20px,50px) scale(0.9)}75%{transform:translate(-40px,-20px) scale(1.05)}}
+
+/* LOADER */
+.loader{position:fixed;inset:0;z-index:99999;background:var(--bg);display:flex;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s}
+.loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-inner{text-align:center}
+.loader-logo{font-size:2.5rem;font-weight:900;letter-spacing:4px;background:linear-gradient(135deg,var(--cyan),var(--magenta),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:pulse 1.5s ease-in-out infinite}
+.loader-bar{width:280px;height:4px;background:var(--bg2);border-radius:2px;margin:1.5rem auto;overflow:hidden}
+.loader-fill{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--magenta),var(--gold));border-radius:2px;animation:loadBar 2s ease forwards}
+.loader-text{color:var(--muted);font-size:0.8rem;letter-spacing:2px;text-transform:uppercase}
+@keyframes loadBar{to{width:100%}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.7}}
+
+/* HEADER */
+.header{position:sticky;top:0;z-index:1000;background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--glassbrd);padding:0 2rem;display:flex;align-items:center;gap:1rem;height:64px}
+.header::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--magenta),var(--gold),var(--lime),var(--violet));background-size:200% 100%;animation:headerLine 4s linear infinite}
+@keyframes headerLine{to{background-position:200% 0}}
+.logo{font-size:1.5rem;font-weight:900;letter-spacing:3px;white-space:nowrap;background:linear-gradient(135deg,var(--cyan),var(--magenta),var(--gold));background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:logoShift 4s ease infinite;text-shadow:0 0 40px rgba(0,240,255,0.3)}
+@keyframes logoShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.ticker{flex:1;overflow:hidden;position:relative;height:28px;margin:0 1rem}
+.ticker-track{display:flex;align-items:center;height:100%;animation:tickScroll 45s linear infinite;white-space:nowrap;gap:2.5rem}
+.ticker-item{display:inline-flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--text2)}
+.badge{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+@keyframes tickScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.header-right{display:flex;align-items:center;gap:0.6rem;flex-shrink:0}
+.hdr-btn{background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--glassbrd);color:var(--text2);padding:0.35rem 0.8rem;border-radius:var(--rs);cursor:pointer;font-size:0.7rem;transition:all .3s;font-weight:600}
+.hdr-btn:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 15px rgba(0,240,255,0.2)}
+.clock{font-size:0.72rem;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* GRID */
+.dashboard{display:grid;grid-template-columns:300px 1fr 380px;gap:1.5rem;padding:1.5rem 2rem;max-width:1700px;margin:0 auto}
+@media(max-width:1200px){.dashboard{grid-template-columns:1fr 1fr;}.right-col{grid-column:1/-1}}
+@media(max-width:768px){.dashboard{grid-template-columns:1fr;padding:1rem}.ticker{display:none}.header{padding:0 1rem}.logo{font-size:1.1rem;letter-spacing:1px}}
+
+/* GLASSMORPHISM PANELS */
+.panel{background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glassbrd);border-radius:var(--r);padding:1.25rem;transition:all .3s;position:relative;overflow:hidden}
+.panel::before{content:"";position:absolute;inset:0;border-radius:var(--r);padding:1px;background:linear-gradient(135deg,rgba(0,240,255,0.15),rgba(255,0,229,0.1),transparent,transparent);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.panel:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,240,255,0.08)}
+.panel-title{font-size:0.7rem;text-transform:uppercase;letter-spacing:2.5px;color:var(--cyan);margin-bottom:1rem;font-weight:700;display:flex;align-items:center;gap:0.5rem}
+.panel-title::before{content:"";width:3px;height:12px;background:linear-gradient(var(--cyan),var(--magenta));border-radius:2px}
+
+/* STANDINGS TABLE */
+.standings-tbl{width:100%;border-collapse:collapse;font-size:0.78rem}
+.standings-tbl th{text-align:left;color:var(--muted);font-weight:600;padding:0.4rem 0.3rem;border-bottom:1px solid var(--border);font-size:0.65rem;text-transform:uppercase;letter-spacing:1px}
+.standings-tbl td{padding:0.45rem 0.3rem;color:var(--text2);position:relative}
+.standings-tbl tr{transition:background .2s}
+.standings-tbl tr:hover{background:rgba(0,240,255,0.03)}
+.standings-tbl .pos{width:24px;text-align:center;font-weight:700;border-radius:4px}
+.standings-tbl .pts{text-align:right;font-weight:700;color:var(--text)}
+.standings-tbl .pts-bar{position:absolute;bottom:2px;left:0;height:2px;border-radius:1px;opacity:0.5;transition:width 1s ease}
+.gold-row td{color:var(--gold) !important;font-weight:700}
+.gold-row .pos{background:rgba(255,215,0,0.15)}
+.silver-row td{color:#c0c0c0 !important;font-weight:600}
+.silver-row .pos{background:rgba(192,192,192,0.12)}
+.bronze-row td{color:#cd7f32 !important;font-weight:600}
+.bronze-row .pos{background:rgba(205,127,50,0.12)}
+.champion-glow{box-shadow:inset 0 0 20px rgba(255,215,0,0.05);animation:champGlow 3s ease-in-out infinite}
+@keyframes champGlow{0%,100%{box-shadow:inset 0 0 20px rgba(255,215,0,0.03)}50%{box-shadow:inset 0 0 30px rgba(255,215,0,0.08)}}
+
+/* BAR CHARTS */
+.bar-chart{list-style:none;font-size:0.78rem}
+.bar-item{display:flex;align-items:center;gap:0.5rem;padding:0.4rem 0;border-bottom:1px solid var(--border)}
+.bar-item:last-child{border-bottom:none}
+.bar-name{width:110px;flex-shrink:0;color:var(--text2)}
+.bar-track{flex:1;height:6px;background:var(--bg2);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px;transition:width 1.5s cubic-bezier(0.4,0,0.2,1);width:0}
+.bar-val{width:28px;text-align:right;font-weight:700;color:var(--text);font-size:0.75rem}
+
+/* FORM GUIDE */
+.form-guide{display:flex;flex-direction:column;gap:0.5rem;font-size:0.75rem}
+.form-row{display:flex;align-items:center;gap:0.5rem}
+.form-team{width:80px;color:var(--text2);font-weight:600;flex-shrink:0}
+.form-dots{display:flex;gap:4px}
+.form-dot{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.6rem;font-weight:700;color:#fff}
+.form-dot.w{background:var(--lime)}
+.form-dot.d{background:var(--orange)}
+.form-dot.l{background:var(--coral)}
+
+/* NEWS CARDS */
+.news-card{background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glassbrd);border-radius:var(--r);padding:1.75rem;transition:all .3s;position:relative;overflow:hidden}
+.news-card::before{content:"";position:absolute;inset:0;border-radius:var(--r);padding:1px;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.news-card.gold-card::before{background:linear-gradient(135deg,var(--gold),var(--orange),transparent,transparent)}
+.news-card.green-card::before{background:linear-gradient(135deg,var(--lime),var(--cyan),transparent,transparent)}
+.news-card.pink-card::before{background:linear-gradient(135deg,var(--magenta),var(--violet),transparent,transparent)}
+.news-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.3)}
+.news-card.gold-card:hover{box-shadow:0 12px 40px rgba(255,215,0,0.1)}
+.news-card.green-card:hover{box-shadow:0 12px 40px rgba(57,255,20,0.08)}
+.news-card.pink-card:hover{box-shadow:0 12px 40px rgba(255,0,229,0.08)}
+.news-tag{display:inline-block;font-size:0.6rem;text-transform:uppercase;letter-spacing:2px;padding:0.3rem 0.8rem;border-radius:20px;margin-bottom:1rem;font-weight:700;border:1px solid}
+.tag-gold{background:rgba(255,215,0,0.1);color:var(--gold);border-color:rgba(255,215,0,0.2)}
+.tag-green{background:rgba(57,255,20,0.08);color:var(--lime);border-color:rgba(57,255,20,0.15)}
+.tag-pink{background:rgba(255,0,229,0.08);color:var(--magenta);border-color:rgba(255,0,229,0.15)}
+.news-card h2{font-size:1.4rem;font-weight:800;line-height:1.3;margin-bottom:0.8rem}
+.news-card.gold-card h2{background:linear-gradient(135deg,#fff,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.news-card.green-card h2{background:linear-gradient(135deg,#fff,var(--lime));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.news-card.pink-card h2{background:linear-gradient(135deg,#fff,var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.news-card p{color:var(--text2);font-size:0.88rem;line-height:1.7}
+.news-meta{margin-top:1rem;font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px}
+
+/* TRANSFER CAROUSEL */
+.carousel-wrap{overflow-x:auto;scroll-snap-type:x mandatory;display:flex;gap:1rem;padding:0.5rem 0;scrollbar-width:none}
+.carousel-wrap::-webkit-scrollbar{display:none}
+.transfer-card{min-width:240px;scroll-snap-align:start;background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--glassbrd);border-radius:var(--rs);padding:1rem;transition:all .3s;flex-shrink:0}
+.transfer-card:hover{border-color:var(--magenta);transform:scale(1.03)}
+.transfer-card h4{font-size:0.85rem;color:var(--text);margin-bottom:0.4rem;font-weight:700}
+.transfer-card p{font-size:0.72rem;color:var(--muted)}
+.transfer-card .price{color:var(--lime);font-weight:700;font-size:0.8rem;margin-top:0.3rem}
+
+/* MATCH SPOTLIGHT */
+.spotlight{background:var(--glass);backdrop-filter:blur(16px);border:1px solid var(--glassbrd);border-radius:var(--r);padding:1.5rem;text-align:center;position:relative;overflow:hidden}
+.spotlight::before{content:"";position:absolute;inset:0;border-radius:var(--r);padding:1px;background:linear-gradient(135deg,var(--cyan),var(--lime),transparent,transparent);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.spotlight-label{font-size:0.6rem;text-transform:uppercase;letter-spacing:3px;color:var(--gold);margin-bottom:0.8rem;font-weight:700}
+.spotlight-score{font-size:2rem;font-weight:900;margin:0.5rem 0}
+.spotlight-score .team{color:var(--text)}
+.spotlight-score .vs{color:var(--muted);margin:0 0.5rem;font-size:1.2rem}
+.spotlight-scorers{font-size:0.75rem;color:var(--text2);margin:0.8rem 0;line-height:1.8}
+.spotlight-info{font-size:0.7rem;color:var(--muted);margin-top:0.5rem}
+.poss-bar{display:flex;height:8px;border-radius:4px;overflow:hidden;margin-top:1rem}
+.poss-bar .home{background:linear-gradient(90deg,var(--coral),var(--orange))}
+.poss-bar .away{background:linear-gradient(90deg,var(--cyan),var(--violet))}
+.poss-labels{display:flex;justify-content:space-between;font-size:0.65rem;color:var(--muted);margin-top:0.4rem}
+
+/* GAME */
+.game-frame{background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glassbrd);border-radius:var(--r);padding:1.5rem;position:relative;overflow:hidden}
+.game-frame::before{content:"";position:absolute;inset:0;border-radius:var(--r);padding:1px;background:linear-gradient(135deg,var(--cyan),var(--violet),transparent,transparent);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.game-frame::after{content:"";position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 30%,rgba(0,240,255,0.03),transparent 50%);pointer-events:none}
+.game-title{text-align:center;margin-bottom:1.2rem}
+.game-title h3{font-size:1.3rem;font-weight:900;background:linear-gradient(135deg,var(--cyan),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-shadow:0 0 30px rgba(0,240,255,0.2)}
+.game-title p{font-size:0.72rem;color:var(--muted);margin-top:0.2rem}
+.game-start{text-align:center;padding:2rem 0}
+.ball-icon{width:60px;height:60px;border-radius:50%;border:3px solid var(--cyan);margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;animation:ballBounce 2s ease-in-out infinite;box-shadow:0 0 20px rgba(0,240,255,0.2)}
+.ball-icon::after{content:"";width:30px;height:30px;background:conic-gradient(var(--cyan),var(--magenta),var(--gold),var(--lime),var(--cyan));border-radius:50%;animation:ballSpin 3s linear infinite}
+@keyframes ballBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes ballSpin{to{transform:rotate(360deg)}}
+.difficulty-row{display:flex;gap:0.5rem;justify-content:center;margin:1rem 0}
+.diff-btn{padding:0.4rem 0.8rem;border:1px solid var(--border);border-radius:var(--rs);background:var(--bg2);color:var(--text2);font-size:0.7rem;cursor:pointer;transition:all .3s;font-weight:600}
+.diff-btn:hover,.diff-btn.active{border-color:var(--cyan);color:var(--cyan);background:rgba(0,240,255,0.05)}
+.play-btn{padding:0.7rem 2rem;background:linear-gradient(135deg,var(--cyan),var(--violet));color:#fff;border:none;border-radius:var(--rs);font-size:0.9rem;font-weight:700;cursor:pointer;transition:all .3s;margin-top:1rem;box-shadow:0 4px 20px rgba(0,240,255,0.3)}
+.play-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,240,255,0.4)}
+.game-stats{display:flex;justify-content:space-between;margin-bottom:1rem;padding:0.7rem;background:var(--bg2);border-radius:var(--rs);border:1px solid var(--border)}
+.stat-box{text-align:center}
+.stat-box .lbl{font-size:0.55rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted)}
+.stat-box .val{font-size:1.1rem;font-weight:800;color:var(--cyan)}
+.stat-box .val.hearts{color:var(--coral);font-size:1rem;letter-spacing:2px}
+.stat-box .val.fire{color:var(--orange)}
+.hint-card{background:var(--bg2);border-radius:var(--rs);padding:0.8rem;margin-bottom:1rem;border:1px solid var(--border)}
+.hint-row{display:flex;justify-content:space-between;padding:0.35rem 0;border-bottom:1px solid var(--border);font-size:0.75rem;transition:all .3s}
+.hint-row:last-child{border-bottom:none}
+.hint-lbl{color:var(--muted);text-transform:uppercase;font-size:0.6rem;letter-spacing:1px}
+.hint-val{color:var(--text);font-weight:600}
+.hint-val.locked{color:var(--muted);font-style:italic;cursor:pointer}
+.hint-val.locked:hover{color:var(--cyan)}
+.hint-row.revealed{animation:flipIn .4s ease}
+@keyframes flipIn{0%{transform:rotateX(90deg);opacity:0}100%{transform:rotateX(0);opacity:1}}
+.game-input{position:relative;margin-bottom:1rem}
+.game-input input{width:100%;padding:0.65rem 1rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rs);color:var(--text);font-size:0.85rem;outline:none;transition:all .3s}
+.game-input input:focus{border-color:var(--cyan);box-shadow:0 0 15px rgba(0,240,255,0.1)}
+.ac-list{position:absolute;top:100%;left:0;right:0;background:var(--cardsolid);border:1px solid var(--border);border-radius:var(--rs);max-height:150px;overflow-y:auto;z-index:100;display:none}
+.ac-list.show{display:block}
+.ac-item{padding:0.45rem 1rem;font-size:0.78rem;cursor:pointer;color:var(--text2);transition:all .15s}
+.ac-item:hover,.ac-item.active{background:var(--hover);color:var(--cyan)}
+.game-btns{display:flex;gap:0.5rem;flex-wrap:wrap}
+.gbtn{padding:0.5rem 1rem;border:1px solid var(--border);border-radius:var(--rs);background:var(--bg2);color:var(--text2);font-size:0.72rem;cursor:pointer;transition:all .3s;font-weight:600}
+.gbtn:hover:not(:disabled){border-color:var(--cyan);color:var(--cyan)}
+.gbtn:disabled{opacity:0.4;cursor:not-allowed}
+.gbtn-primary{background:linear-gradient(135deg,var(--cyan),var(--violet));color:#fff;border:none;font-weight:700}
+.gbtn-primary:hover{box-shadow:0 0 20px rgba(0,240,255,0.3);transform:translateY(-1px)}
+.game-msg{text-align:center;padding:1rem;border-radius:var(--rs);font-weight:700;font-size:0.85rem;margin-top:1rem;display:none}
+.game-msg.win{display:block;background:rgba(57,255,20,0.08);color:var(--lime);border:1px solid rgba(57,255,20,0.2);animation:glowG .6s ease}
+.game-msg.lose{display:block;background:rgba(255,107,107,0.08);color:var(--coral);border:1px solid rgba(255,107,107,0.2);animation:glowR .6s ease}
+@keyframes glowG{0%,100%{box-shadow:none}50%{box-shadow:0 0 30px rgba(57,255,20,0.3)}}
+@keyframes glowR{0%,100%{box-shadow:none}50%{box-shadow:0 0 30px rgba(255,107,107,0.3)}}
+.confetti{position:absolute;pointer-events:none;inset:0;overflow:hidden}
+.confetti span{position:absolute;width:8px;height:8px;border-radius:50%;animation:confettiBurst 1s ease forwards;opacity:0}
+@keyframes confettiBurst{0%{transform:translate(0,0) scale(0);opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(1);opacity:0}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.shake{animation:shake .4s ease}
+.flash-red{animation:flashRed .3s ease}
+@keyframes flashRed{0%,100%{background:var(--bg2)}50%{background:rgba(255,107,107,0.15)}}
+
+/* POLL */
+.poll-frame{background:var(--glass);backdrop-filter:blur(16px);border:1px solid var(--glassbrd);border-radius:var(--r);padding:1.5rem;position:relative;overflow:hidden}
+.poll-frame::before{content:"";position:absolute;inset:0;border-radius:var(--r);padding:1px;background:linear-gradient(135deg,var(--gold),var(--orange),transparent,transparent);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.poll-title{font-size:0.9rem;font-weight:700;margin-bottom:1rem;color:var(--text)}
+.poll-option{display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border:1px solid var(--border);border-radius:var(--rs);margin-bottom:0.5rem;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.poll-option:hover:not(.voted){border-color:var(--gold);background:rgba(255,215,0,0.03)}
+.poll-option.voted{cursor:default}
+.poll-option .poll-bar{position:absolute;left:0;top:0;bottom:0;border-radius:var(--rs);transition:width 1s cubic-bezier(0.4,0,0.2,1);width:0}
+.poll-option .poll-label{position:relative;z-index:1;font-size:0.8rem;font-weight:600;color:var(--text2)}
+.poll-option .poll-pct{position:relative;z-index:1;margin-left:auto;font-size:0.75rem;font-weight:700;color:var(--text);opacity:0;transition:opacity .5s}
+.poll-option.voted .poll-pct{opacity:1}
+.poll-votes{font-size:0.7rem;color:var(--muted);margin-top:0.8rem;text-align:center}
+
+/* FOOTER */
+.footer{border-top:2px solid;border-image:linear-gradient(90deg,var(--cyan),var(--magenta),var(--gold)) 1;padding:2rem;text-align:center;margin-top:2rem}
+.footer-socials{display:flex;justify-content:center;gap:0.8rem;margin-bottom:1rem}
+.social-dot{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:var(--muted);transition:all .3s;cursor:pointer}
+.social-dot:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 12px rgba(0,240,255,0.2);transform:scale(1.1)}
+.footer-text{font-size:0.7rem;color:var(--muted)}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--glass);backdrop-filter:blur(16px);border:1px solid var(--glassbrd);border-radius:var(--rs);padding:1rem 1.5rem;z-index:9999;transform:translateX(120%);transition:transform .4s cubic-bezier(0.4,0,0.2,1);max-width:320px;box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+.toast.show{transform:translateX(0)}
+.toast-title{font-size:0.65rem;text-transform:uppercase;letter-spacing:2px;color:var(--coral);font-weight:700;margin-bottom:0.3rem}
+.toast-body{font-size:0.8rem;color:var(--text2)}
+
+/* BACK TO TOP */
+.btt{position:fixed;bottom:2rem;left:2rem;width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--violet));border:none;color:#fff;font-size:1.2rem;cursor:pointer;opacity:0;visibility:hidden;transition:all .3s;box-shadow:0 4px 15px rgba(0,240,255,0.3);z-index:9998;display:flex;align-items:center;justify-content:center}
+.btt.show{opacity:1;visibility:visible}
+.btt:hover{transform:scale(1.1)}
+
+/* SCROLL ANIMATIONS */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+</style>
+</head>
+<body>
+<!-- ANIMATED MESH GRADIENT BG -->
+<div class="mesh-bg">
+<div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
+<div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
+</div>
+
+<!-- LOADER -->
+<div id="loader" class="loader">
+<div class="loader-inner">
+<div class="loader-logo">THE ABSOLUTE PITCH</div>
+<div class="loader-bar"><div class="loader-fill"></div></div>
+<div class="loader-text">Loading Dashboard...</div>
+</div>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+<div class="logo">THE ABSOLUTE PITCH</div>
+<div class="ticker">
+<div class="ticker-track" id="ticker">
+<span class="ticker-item"><span class="badge" style="background:var(--coral)"></span>Arsenal 2-1 Chelsea (FT)</span>
+<span class="ticker-item"><span class="badge" style="background:var(--cyan)"></span>Man City 3-0 Wolves (FT)</span>
+<span class="ticker-item"><span class="badge" style="background:var(--gold)"></span>Real Madrid 4-2 Barcelona (FT)</span>
+<span class="ticker-item"><span class="badge" style="background:var(--violet)"></span>Bayern 1-0 Dortmund (FT)</span>
+<span class="ticker-item"><span class="badge" style="background:var(--magenta)"></span>PSG 2-2 Marseille (FT)</span>
+<span class="ticker-item"><span class="badge" style="background:var(--lime)"></span>Liverpool 3-1 Newcastle (FT)</span>
+<span class="ticker-item"><span class="badge" style="background:var(--orange)"></span>Juventus 1-0 AC Milan (FT)</span>
+<span class="ticker-item"><span class="badge" style="background:var(--coral)"></span>Arsenal 2-1 Chelsea (FT)</span>
+<span class="ticker-item"><span class="badge" style="background:var(--cyan)"></span>Man City 3-0 Wolves (FT)</span>
+<span class="ticker-item"><span class="badge" style="background:var(--gold)"></span>Real Madrid 4-2 Barcelona (FT)</span>
+<span class="ticker-item"><span class="badge" style="background:var(--violet)"></span>Bayern 1-0 Dortmund (FT)</span>
+<span class="ticker-item"><span class="badge" style="background:var(--magenta)"></span>PSG 2-2 Marseille (FT)</span>
+<span class="ticker-item"><span class="badge" style="background:var(--lime)"></span>Liverpool 3-1 Newcastle (FT)</span>
+<span class="ticker-item"><span class="badge" style="background:var(--orange)"></span>Juventus 1-0 AC Milan (FT)</span>
+</div>
+</div>
+<div class="header-right">
+<span class="clock" id="clock"></span>
+<button class="hdr-btn" id="themeBtn">Dark/Light</button>
+<button class="hdr-btn" id="densityBtn">Compact</button>
+</div>
+</header>
+
+<!-- DASHBOARD GRID -->
+<main class="dashboard">
+<!-- LEFT COLUMN -->
+<div class="left-col">
+
+<!-- STANDINGS -->
+<div class="panel reveal">
+<div class="panel-title">Premier League 2025/26</div>
+<table class="standings-tbl">
+<thead><tr><th class="pos">#</th><th>Club</th><th class="pts">Pts</th></tr></thead>
+<tbody>
+<tr class="gold-row champion-glow"><td class="pos">1</td><td>&#127942; Arsenal</td><td class="pts">91</td></tr>
+<tr class="silver-row"><td class="pos">2</td><td>Man City</td><td class="pts">88</td></tr>
+<tr class="bronze-row"><td class="pos">3</td><td>Liverpool</td><td class="pts">82</td></tr>
+<tr><td class="pos">4</td><td>Newcastle</td><td class="pts">74</td></tr>
+<tr><td class="pos">5</td><td>Aston Villa</td><td class="pts">70</td></tr>
+<tr><td class="pos">6</td><td>Chelsea</td><td class="pts">67</td></tr>
+<tr><td class="pos">7</td><td>Tottenham</td><td class="pts">65</td></tr>
+<tr><td class="pos">8</td><td>Brighton</td><td class="pts">60</td></tr>
+<tr><td class="pos">9</td><td>Man United</td><td class="pts">57</td></tr>
+<tr><td class="pos">10</td><td>West Ham</td><td class="pts">54</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- TOP SCORERS -->
+<div class="panel reveal">
+<div class="panel-title">Top Scorers</div>
+<ul class="bar-chart" id="scorersChart">
+<li class="bar-item"><span class="bar-name">Haaland</span><div class="bar-track"><div class="bar-fill" data-width="100" style="background:linear-gradient(90deg,var(--cyan),var(--violet))"></div></div><span class="bar-val">29</span></li>
+<li class="bar-item"><span class="bar-name">Isak</span><div class="bar-track"><div class="bar-fill" data-width="83" style="background:linear-gradient(90deg,var(--lime),var(--cyan))"></div></div><span class="bar-val">24</span></li>
+<li class="bar-item"><span class="bar-name">Saka</span><div class="bar-track"><div class="bar-fill" data-width="72" style="background:linear-gradient(90deg,var(--coral),var(--orange))"></div></div><span class="bar-val">21</span></li>
+<li class="bar-item"><span class="bar-name">Salah</span><div class="bar-track"><div class="bar-fill" data-width="69" style="background:linear-gradient(90deg,var(--magenta),var(--coral))"></div></div><span class="bar-val">20</span></li>
+<li class="bar-item"><span class="bar-name">Watkins</span><div class="bar-track"><div class="bar-fill" data-width="62" style="background:linear-gradient(90deg,var(--gold),var(--orange))"></div></div><span class="bar-val">18</span></li>
+<li class="bar-item"><span class="bar-name">Palmer</span><div class="bar-track"><div class="bar-fill" data-width="59" style="background:linear-gradient(90deg,var(--violet),var(--magenta))"></div></div><span class="bar-val">17</span></li>
+<li class="bar-item"><span class="bar-name">Son</span><div class="bar-track"><div class="bar-fill" data-width="52" style="background:linear-gradient(90deg,var(--lime),var(--gold))"></div></div><span class="bar-val">15</span></li>
+<li class="bar-item"><span class="bar-name">Havertz</span><div class="bar-track"><div class="bar-fill" data-width="48" style="background:linear-gradient(90deg,var(--cyan),var(--lime))"></div></div><span class="bar-val">14</span></li>
+</ul>
+</div>
+
+<!-- TOP ASSISTS -->
+<div class="panel reveal">
+<div class="panel-title">Top Assists</div>
+<ul class="bar-chart">
+<li class="bar-item"><span class="bar-name">De Bruyne</span><div class="bar-track"><div class="bar-fill" data-width="100" style="background:linear-gradient(90deg,var(--cyan),var(--violet))"></div></div><span class="bar-val">18</span></li>
+<li class="bar-item"><span class="bar-name">Saka</span><div class="bar-track"><div class="bar-fill" data-width="78" style="background:linear-gradient(90deg,var(--coral),var(--orange))"></div></div><span class="bar-val">14</span></li>
+<li class="bar-item"><span class="bar-name">Odegaard</span><div class="bar-track"><div class="bar-fill" data-width="72" style="background:linear-gradient(90deg,var(--gold),var(--lime))"></div></div><span class="bar-val">13</span></li>
+<li class="bar-item"><span class="bar-name">Fernandes</span><div class="bar-track"><div class="bar-fill" data-width="67" style="background:linear-gradient(90deg,var(--magenta),var(--violet))"></div></div><span class="bar-val">12</span></li>
+<li class="bar-item"><span class="bar-name">Salah</span><div class="bar-track"><div class="bar-fill" data-width="61" style="background:linear-gradient(90deg,var(--lime),var(--cyan))"></div></div><span class="bar-val">11</span></li>
+</ul>
+</div>
+
+<!-- FORM GUIDE -->
+<div class="panel reveal">
+<div class="panel-title">Form Guide (Last 5)</div>
+<div class="form-guide">
+<div class="form-row"><span class="form-team">Arsenal</span><div class="form-dots"><span class="form-dot w">W</span><span class="form-dot w">W</span><span class="form-dot w">W</span><span class="form-dot d">D</span><span class="form-dot w">W</span></div></div>
+<div class="form-row"><span class="form-team">Man City</span><div class="form-dots"><span class="form-dot w">W</span><span class="form-dot l">L</span><span class="form-dot w">W</span><span class="form-dot w">W</span><span class="form-dot d">D</span></div></div>
+<div class="form-row"><span class="form-team">Liverpool</span><div class="form-dots"><span class="form-dot w">W</span><span class="form-dot w">W</span><span class="form-dot d">D</span><span class="form-dot w">W</span><span class="form-dot l">L</span></div></div>
+<div class="form-row"><span class="form-team">Newcastle</span><div class="form-dots"><span class="form-dot d">D</span><span class="form-dot w">W</span><span class="form-dot w">W</span><span class="form-dot l">L</span><span class="form-dot w">W</span></div></div>
+</div>
+</div>
+
+</div>
+
+<!-- CENTER COLUMN -->
+<div class="center-col">
+
+<!-- NEWS 1: World Cup -->
+<article class="news-card gold-card reveal">
+<span class="news-tag tag-gold">FIFA World Cup 2026</span>
+<h2>Nations Lock In Final 26-Man Squads as World Cup 2026 Approaches</h2>
+<p>With the 2026 FIFA World Cup across the United States, Canada, and Mexico now weeks away, federations are finalizing tournament rosters. Thomas Tuchel has confirmed his 26-man England squad in a packed press conference at Wembley, balancing experienced campaigners with emerging talent. The USMNT are preparing a high-profile roster reveal in New York City, with Mauricio Pochettino expected to lean on his European-based contingent. The expanded 48-team format promises the most dramatic tournament in history.</p>
+<div class="news-meta">2 hours ago &bull; World Football</div>
+</article>
+
+<!-- NEWS 2: Arsenal Champions -->
+<article class="news-card green-card reveal">
+<span class="news-tag tag-green">Domestic Champions</span>
+<h2>Arsenal Crowned Premier League Champions as Raya Claims Third Golden Glove</h2>
+<p>Arsenal have officially been crowned 2025/26 Premier League champions after a dramatic final-day victory secured the summit with 91 points, ending Manchester City's domestic dominance. Mikel Arteta's side combined defensive resilience with devastating attacking football. David Raya cemented his status as the league's premier goalkeeper by claiming his third consecutive Golden Glove with 21 clean sheets. The Emirates faithful celebrated long into the night as north London turned red and white.</p>
+<div class="news-meta">5 hours ago &bull; Premier League</div>
+</article>
+
+<!-- NEWS 3: Managerial -->
+<article class="news-card pink-card reveal">
+<span class="news-tag tag-pink">Managerial Movement</span>
+<h2>Guardiola Departs City After Historic Decade; Liverpool Bolster Staff</h2>
+<p>Pep Guardiola has confirmed his departure from Manchester City after an incredible decade yielding six Premier League titles, two Champions League trophies, and countless domestic cups. The Catalan leaves as the most decorated manager in English football history. Liverpool are strengthening Arne Slot's backroom team by bringing Feyenoord assistant Etienne Reijnen to Anfield, reuniting the Dutch tactical duo that thrived in Rotterdam.</p>
+<div class="news-meta">8 hours ago &bull; Transfers &amp; Appointments</div>
+</article>
+
+<!-- TRANSFER CAROUSEL -->
+<div class="panel reveal">
+<div class="panel-title">Transfer Rumors</div>
+<div class="carousel-wrap">
+<div class="transfer-card">
+<h4>Florian Wirtz &rarr; Real Madrid</h4>
+<p>Leverkusen star reportedly agrees personal terms</p>
+<div class="price">&euro;150M</div>
+</div>
+<div class="transfer-card">
+<h4>Victor Osimhen &rarr; Chelsea</h4>
+<p>Nigerian striker linked with Stamford Bridge return</p>
+<div class="price">&euro;90M</div>
+</div>
+<div class="transfer-card">
+<h4>Lamine Yamal Extension</h4>
+<p>Barcelona tie wonderkid down until 2030</p>
+<div class="price">&euro;1B clause</div>
+</div>
+<div class="transfer-card">
+<h4>Declan Rice New Deal</h4>
+<p>Arsenal offer midfielder improved contract</p>
+<div class="price">&pound;300K/week</div>
+</div>
+<div class="transfer-card">
+<h4>Kvaratskhelia at PSG</h4>
+<p>Georgian winger adjusting after Napoli exit</p>
+<div class="price">&euro;70M fee</div>
+</div>
+</div>
+</div>
+
+<!-- MATCH SPOTLIGHT -->
+<div class="spotlight reveal">
+<div class="spotlight-label">Match of the Week</div>
+<div class="spotlight-score"><span class="team">Arsenal</span><span class="vs">3 - 2</span><span class="team">Man City</span></div>
+<div class="spotlight-scorers">Saka 23' &bull; Havertz 56' &bull; Trossard 88' | Haaland 34' &bull; Foden 71'</div>
+<div class="spotlight-info">Title Decider &bull; Attendance: 60,704</div>
+<div class="poss-bar"><div class="home" style="width:54%"></div><div class="away" style="width:46%"></div></div>
+<div class="poss-labels"><span>Arsenal 54%</span><span>Man City 46%</span></div>
+</div>
+
+</div>
+
+<!-- RIGHT COLUMN -->
+<div class="right-col">
+
+<!-- SOCCER GUESSER GAME -->
+<div class="game-frame reveal" id="gameFrame">
+<div class="game-title"><h3>Soccer Guesser</h3><p>Can you identify the mystery player?</p></div>
+
+<!-- START SCREEN -->
+<div id="gameStart" class="game-start">
+<div class="ball-icon"></div>
+<div class="difficulty-row">
+<button class="diff-btn active" data-diff="easy">Easy</button>
+<button class="diff-btn" data-diff="medium">Medium</button>
+<button class="diff-btn" data-diff="hard">Hard</button>
+</div>
+<button class="play-btn" id="playBtn">Play</button>
+</div>
+
+<!-- GAME SCREEN (hidden initially) -->
+<div id="gameScreen" style="display:none">
+<div class="game-stats">
+<div class="stat-box"><div class="lbl">Streak</div><div class="val" id="gStreak">0</div></div>
+<div class="stat-box"><div class="lbl">High Score</div><div class="val" id="gHigh">0</div></div>
+<div class="stat-box"><div class="lbl">Lives</div><div class="val hearts" id="gLives"></div></div>
+</div>
+<div class="hint-card" id="hintCard"></div>
+<div class="game-input">
+<input type="text" id="guessInput" placeholder="Type player name..." autocomplete="off">
+<div class="ac-list" id="acList"></div>
+</div>
+<div class="game-btns">
+<button class="gbtn gbtn-primary" id="submitBtn">Submit Guess</button>
+<button class="gbtn" id="nextBtn" style="display:none">Next Player</button>
+<button class="gbtn" id="revealBtn">Reveal Hint</button>
+</div>
+<div class="game-msg" id="gameMsg"></div>
+<div class="confetti" id="confetti"></div>
+</div>
+</div>
+
+<!-- POLL -->
+<div class="poll-frame reveal">
+<div class="poll-title">&#9917; Who will win World Cup 2026?</div>
+<div id="pollOptions">
+<div class="poll-option" data-team="brazil" data-pct="24"><div class="poll-bar" style="background:linear-gradient(90deg,rgba(57,255,20,0.15),rgba(0,240,255,0.1))"></div><span class="poll-label">&#127463;&#127479; Brazil</span><span class="poll-pct">24%</span></div>
+<div class="poll-option" data-team="france" data-pct="28"><div class="poll-bar" style="background:linear-gradient(90deg,rgba(0,136,255,0.15),rgba(139,0,255,0.1))"></div><span class="poll-label">&#127467;&#127479; France</span><span class="poll-pct">28%</span></div>
+<div class="poll-option" data-team="england" data-pct="19"><div class="poll-bar" style="background:linear-gradient(90deg,rgba(255,107,107,0.15),rgba(255,255,255,0.05))"></div><span class="poll-label">&#127468;&#127463; England</span><span class="poll-pct">19%</span></div>
+<div class="poll-option" data-team="argentina" data-pct="22"><div class="poll-bar" style="background:linear-gradient(90deg,rgba(0,240,255,0.12),rgba(255,255,255,0.05))"></div><span class="poll-label">&#127462;&#127479; Argentina</span><span class="poll-pct">22%</span></div>
+<div class="poll-option" data-team="germany" data-pct="7"><div class="poll-bar" style="background:linear-gradient(90deg,rgba(255,215,0,0.12),rgba(0,0,0,0.05))"></div><span class="poll-label">&#127465;&#127466; Germany</span><span class="poll-pct">7%</span></div>
+</div>
+<div class="poll-votes" id="pollVotes">1,247 votes</div>
+</div>
+
+</div>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+<div class="footer-socials">
+<span class="social-dot">X</span>
+<span class="social-dot">IG</span>
+<span class="social-dot">YT</span>
+<span class="social-dot">TT</span>
+<span class="social-dot">FB</span>
+</div>
+<div class="footer-text">&copy; 2026 The Absolute Pitch. All rights reserved. Premium Sports Intelligence.</div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><div class="toast-title">Breaking News</div><div class="toast-body" id="toastBody"></div></div>
+
+<!-- BACK TO TOP -->
+<button class="btt" id="bttBtn">&#8593;</button>
+
+<script>
+// ========== PLAYER DATABASE ==========
+const players = [
+  {name:"Erling Haaland",position:"Forward",league:"Premier League",club:"Manchester City",nationality:"Norway",age:25,shirt:9,trait:"Scored back-to-back golden boots, hyper-physical striker with 29 goals this season."},
+  {name:"Kylian Mbappe",position:"Forward",league:"La Liga",club:"Real Madrid",nationality:"France",age:26,shirt:9,trait:"Fastest player in world football, left PSG as all-time top scorer."},
+  {name:"Jude Bellingham",position:"Midfielder",league:"La Liga",club:"Real Madrid",nationality:"England",age:22,shirt:5,trait:"Won La Liga and Champions League in debut season at Madrid."},
+  {name:"Mohamed Salah",position:"Forward",league:"Premier League",club:"Liverpool",nationality:"Egypt",age:33,shirt:11,trait:"All-time Premier League top scorer for Liverpool, iconic left foot."},
+  {name:"Harry Kane",position:"Forward",league:"Bundesliga",club:"Bayern Munich",nationality:"England",age:31,shirt:9,trait:"England all-time top scorer, broke Bundesliga record in debut season."},
+  {name:"Kevin De Bruyne",position:"Midfielder",league:"Premier League",club:"Manchester City",nationality:"Belgium",age:34,shirt:17,trait:"Premier League all-time assist leader, generational playmaker."},
+  {name:"Vinicius Junior",position:"Forward",league:"La Liga",club:"Real Madrid",nationality:"Brazil",age:25,shirt:7,trait:"Ballon d'Or winner, devastating dribbler with explosive pace."},
+  {name:"Bukayo Saka",position:"Forward",league:"Premier League",club:"Arsenal",nationality:"England",age:23,shirt:7,trait:"Arsenal's talisman, 21 goals and 14 assists in title-winning season."},
+  {name:"Rodri",position:"Midfielder",league:"Premier League",club:"Manchester City",nationality:"Spain",age:28,shirt:16,trait:"Ballon d'Or 2024 winner, midfield metronome and tactical genius."},
+  {name:"Lamine Yamal",position:"Forward",league:"La Liga",club:"Barcelona",nationality:"Spain",age:18,shirt:19,trait:"Youngest ever European Championship goal scorer, generational teenager."},
+  {name:"Florian Wirtz",position:"Midfielder",league:"Bundesliga",club:"Bayer Leverkusen",nationality:"Germany",age:22,shirt:10,trait:"Led Leverkusen to first-ever Bundesliga title unbeaten."},
+  {name:"Cole Palmer",position:"Forward",league:"Premier League",club:"Chelsea",nationality:"England",age:23,shirt:20,trait:"Cold Palmer - ice-cold penalty taker, 4 goals in one half vs Brighton."}
+];
+
+// ========== LOADER ==========
+window.addEventListener('load', () => {
+  setTimeout(() => { document.getElementById('loader').classList.add('hidden'); }, 2000);
+});
+
+// ========== CLOCK ==========
+function updateClock() {
+  const now = new Date();
+  document.getElementById('clock').textContent = now.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'}) + ' ' + now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+}
+updateClock(); setInterval(updateClock, 1000);
+
+// ========== THEME TOGGLE ==========
+document.getElementById('themeBtn').addEventListener('click', () => {
+  document.body.classList.toggle('light-mode');
+});
+
+// ========== DENSITY TOGGLE ==========
+document.getElementById('densityBtn').addEventListener('click', () => {
+  document.body.classList.toggle('compact');
+});
+
+// ========== SCROLL REVEAL ==========
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }});
+}, {threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ========== BAR CHART ANIMATION ==========
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      e.target.querySelectorAll('.bar-fill').forEach(bar => {
+        bar.style.width = bar.dataset.width + '%';
+      });
+      barObserver.unobserve(e.target);
+    }
+  });
+}, {threshold:0.2});
+document.querySelectorAll('.bar-chart').forEach(el => barObserver.observe(el));
+
+// ========== BACK TO TOP ==========
+const bttBtn = document.getElementById('bttBtn');
+window.addEventListener('scroll', () => {
+  bttBtn.classList.toggle('show', window.scrollY > 400);
+});
+bttBtn.addEventListener('click', () => { window.scrollTo({top:0,behavior:'smooth'}); });
+
+// ========== TOAST NOTIFICATIONS ==========
+const toastMessages = [
+  "Mbappe scores hat-trick in Real Madrid friendly",
+  "Arsenal confirm pre-season tour of USA and Japan",
+  "Haaland signs contract extension until 2030",
+  "Tuchel names surprise call-up for England World Cup squad",
+  "Barcelona complete Florian Wirtz medical ahead of transfer",
+  "Salah hints at 'one more year' at Liverpool in interview"
+];
+let toastIndex = 0;
+function showToast() {
+  const toast = document.getElementById('toast');
+  const body = document.getElementById('toastBody');
+  body.textContent = toastMessages[toastIndex % toastMessages.length];
+  toastIndex++;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 5000);
+}
+setTimeout(showToast, 8000);
+setInterval(showToast, 30000);
+
+// ========== POLL ==========
+let pollVoted = false;
+let pollCount = 1247;
+document.querySelectorAll('.poll-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    if(pollVoted) return;
+    pollVoted = true;
+    pollCount++;
+    document.getElementById('pollVotes').textContent = pollCount.toLocaleString() + ' votes';
+    document.querySelectorAll('.poll-option').forEach(o => {
+      o.classList.add('voted');
+      const pct = parseInt(o.dataset.pct);
+      o.querySelector('.poll-bar').style.width = pct + '%';
+    });
+  });
+});
+
+// ========== SOCCER GUESSER GAME ==========
+let difficulty = 'easy';
+let currentPlayer = null;
+let lives = 3;
+let streak = 0;
+let highScore = parseInt(localStorage.getItem('tapHighScore') || '0');
+let hintsRevealed = 0;
+let gameActive = false;
+const hintOrder = ['nationality','age','shirt','trait'];
+
+document.getElementById('gHigh').textContent = highScore;
+
+// Difficulty buttons
+document.querySelectorAll('.diff-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    difficulty = btn.dataset.diff;
+  });
+});
+
+// Play button
+document.getElementById('playBtn').addEventListener('click', startGame);
+
+function startGame() {
+  document.getElementById('gameStart').style.display = 'none';
+  document.getElementById('gameScreen').style.display = 'block';
+  lives = 3;
+  streak = 0;
+  hintsRevealed = 0;
+  updateLives();
+  updateStreak();
+  newRound();
+}
+
+function newRound() {
+  currentPlayer = players[Math.floor(Math.random() * players.length)];
+  hintsRevealed = 0;
+  gameActive = true;
+  document.getElementById('guessInput').value = '';
+  document.getElementById('guessInput').disabled = false;
+  document.getElementById('submitBtn').style.display = 'inline-block';
+  document.getElementById('nextBtn').style.display = 'none';
+  document.getElementById('revealBtn').style.display = 'inline-block';
+  document.getElementById('revealBtn').disabled = false;
+  document.getElementById('gameMsg').className = 'game-msg';
+  document.getElementById('gameMsg').textContent = '';
+  document.getElementById('confetti').innerHTML = '';
+  renderHints();
+}
+
+function renderHints() {
+  const card = document.getElementById('hintCard');
+  let html = '';
+  // Always show position
+  html += '<div class="hint-row"><span class="hint-lbl">Position</span><span class="hint-val">' + currentPlayer.position + '</span></div>';
+  // Easy: position + league + club; Medium: position + league; Hard: position only
+  if(difficulty === 'easy' || difficulty === 'medium') {
+    html += '<div class="hint-row"><span class="hint-lbl">League</span><span class="hint-val">' + currentPlayer.league + '</span></div>';
+  }
+  if(difficulty === 'easy') {
+    html += '<div class="hint-row"><span class="hint-lbl">Club</span><span class="hint-val">' + currentPlayer.club + '</span></div>';
+  }
+  // Progressive hints
+  for(let i = 0; i < 4; i++) {
+    const key = hintOrder[i];
+    const labels = {nationality:'Nationality',age:'Age',shirt:'Shirt #',trait:'Special Trait'};
+    if(i < hintsRevealed) {
+      const val = key === 'shirt' ? '#' + currentPlayer[key] : currentPlayer[key];
+      html += '<div class="hint-row revealed"><span class="hint-lbl">' + labels[key] + '</span><span class="hint-val">' + val + '</span></div>';
+    } else {
+      html += '<div class="hint-row"><span class="hint-lbl">' + labels[key] + '</span><span class="hint-val locked">???</span></div>';
+    }
+  }
+  card.innerHTML = html;
+}
+
+// Reveal hint
+document.getElementById('revealBtn').addEventListener('click', () => {
+  if(hintsRevealed >= 4 || !gameActive) return;
+  hintsRevealed++;
+  renderHints();
+  if(hintsRevealed >= 4) {
+    document.getElementById('revealBtn').disabled = true;
+  }
+});
+
+// Autocomplete
+const guessInput = document.getElementById('guessInput');
+const acList = document.getElementById('acList');
+
+guessInput.addEventListener('input', () => {
+  const val = guessInput.value.trim().toLowerCase();
+  acList.innerHTML = '';
+  if(val.length < 2) { acList.classList.remove('show'); return; }
+  const matches = players.filter(p => p.name.toLowerCase().includes(val));
+  if(!matches.length) { acList.classList.remove('show'); return; }
+  matches.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'ac-item';
+    div.textContent = p.name;
+    div.addEventListener('click', () => { guessInput.value = p.name; acList.classList.remove('show'); });
+    acList.appendChild(div);
+  });
+  acList.classList.add('show');
+});
+
+guessInput.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter') document.getElementById('submitBtn').click();
+});
+document.addEventListener('click', (e) => {
+  if(!e.target.closest('.game-input')) acList.classList.remove('show');
+});
+
+// Submit guess
+document.getElementById('submitBtn').addEventListener('click', () => {
+  if(!gameActive) return;
+  const guess = guessInput.value.trim().toLowerCase();
+  if(!guess) return;
+  if(guess === currentPlayer.name.toLowerCase()) {
+    // CORRECT
+    gameActive = false;
+    streak++;
+    updateStreak();
+    if(streak > highScore) { highScore = streak; localStorage.setItem('tapHighScore', highScore); document.getElementById('gHigh').textContent = highScore; }
+    document.getElementById('gameMsg').className = 'game-msg win';
+    document.getElementById('gameMsg').textContent = 'Correct! ' + currentPlayer.name + '!';
+    guessInput.disabled = true;
+    document.getElementById('submitBtn').style.display = 'none';
+    document.getElementById('nextBtn').style.display = 'inline-block';
+    document.getElementById('revealBtn').style.display = 'none';
+    fireConfetti();
+  } else {
+    // WRONG
+    lives--;
+    updateLives();
+    guessInput.value = '';
+    guessInput.classList.add('shake');
+    document.getElementById('gameFrame').classList.add('flash-red');
+    setTimeout(() => { guessInput.classList.remove('shake'); document.getElementById('gameFrame').classList.remove('flash-red'); }, 400);
+    if(lives <= 0) {
+      gameActive = false;
+      streak = 0;
+      updateStreak();
+      document.getElementById('gameMsg').className = 'game-msg lose';
+      document.getElementById('gameMsg').textContent = 'Game Over! It was ' + currentPlayer.name + '.';
+      guessInput.disabled = true;
+      document.getElementById('submitBtn').style.display = 'none';
+      document.getElementById('nextBtn').style.display = 'inline-block';
+      document.getElementById('revealBtn').style.display = 'none';
+      // Reveal all hints
+      hintsRevealed = 4;
+      renderHints();
+    }
+  }
+});
+
+// Next
+document.getElementById('nextBtn').addEventListener('click', () => {
+  if(lives <= 0) { lives = 3; updateLives(); }
+  newRound();
+});
+
+function updateLives() {
+  let h = '';
+  for(let i = 0; i < 3; i++) h += i < lives ? '\u2764\uFE0F' : '\uD83E\uDD0D';
+  document.getElementById('gLives').innerHTML = h;
+}
+
+function updateStreak() {
+  const el = document.getElementById('gStreak');
+  el.textContent = streak >= 3 ? '\uD83D\uDD25' + streak : streak;
+  el.className = streak >= 3 ? 'val fire' : 'val';
+}
+
+function fireConfetti() {
+  const container = document.getElementById('confetti');
+  const colors = ['var(--cyan)','var(--magenta)','var(--lime)','var(--gold)','var(--coral)','var(--violet)','var(--orange)'];
+  for(let i = 0; i < 30; i++) {
+    const span = document.createElement('span');
+    const angle = (Math.random() * 360) * Math.PI / 180;
+    const dist = 60 + Math.random() * 100;
+    span.style.cssText = `left:50%;top:50%;background:${colors[i%colors.length]};--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist}px;animation-delay:${Math.random()*0.3}s`;
+    container.appendChild(span);
+  }
+  setTimeout(() => { container.innerHTML = ''; }, 1200);
+}
+
+// ========== KEYBOARD SHORTCUTS ==========
+document.addEventListener('keydown', (e) => {
+  if(e.target.tagName === 'INPUT') return;
+  if(e.key === 'g' || e.key === 'G') {
+    const inp = document.getElementById('guessInput');
+    if(inp && !inp.disabled) inp.focus();
+  }
+  if(e.key === 't' || e.key === 'T') {
+    document.body.classList.toggle('light-mode');
+  }
+  if(e.key === 'n' || e.key === 'N') {
+    const cards = document.querySelectorAll('.news-card');
+    if(cards.length) {
+      const next = Array.from(cards).find(c => c.getBoundingClientRect().top > 100);
+      if(next) next.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  }
+});
+
+// Init lives display
+updateLives();
+</script>
+</body>
+</html>
